@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue_900"
-    android:padding="40dp"
-    >
+    android:padding="40dp">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,16 +80,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/boarding_button_background"
-        android:text="Login"
-        app:cornerRadius="16dp"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/teal_400"
-        android:textSize="20dp"
         android:padding="10dp"
+        android:text="Login"
         android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:backgroundTint="@color/teal_400"
+        app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
