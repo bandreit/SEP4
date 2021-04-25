@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue_900"
-    android:padding="40dp">
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="40dp">
 
-
+    <!--    Tab Layout -->
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/transparent"
@@ -17,8 +19,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tabIndicatorColor="@color/teal_400"
         app:tabMode="scrollable"
-        app:tabTextColor="@color/white_800"
-        app:tabSelectedTextColor="@color/white">
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/white_800">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -55,4 +57,44 @@
             android:layout_height="wrap_content"
             android:text="Deposit" />
     </com.google.android.material.tabs.TabLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/sensor_card_component" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/sensor_card_component" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/sensor_card_component" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <include layout="@layout/sensor_card_component" />
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
