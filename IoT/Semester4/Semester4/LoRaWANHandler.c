@@ -68,12 +68,14 @@ static void _lora_setup(void)
 	
 	do {
 		rc = lora_driver_join(LORA_OTAA);
-		printf("Join Network TriesLeft:%d >%s<\n", maxJoinTriesLeft, lora_driver_mapReturnCodeToText(rc));
+		
+		("Join Network TriesLeft:%d >%s<\n", maxJoinTriesLeft, lora_driver_mapReturnCodeToText(rc));
 
 		if ( rc != LORA_ACCEPTED)
 		{
 			// Make the red led pulse to tell something went wrong
 			status_leds_longPuls(led_ST1); // OPTIONAL
+			printf("huita");
 			// Wait 5 sec and lets try again
 			vTaskDelay(pdMS_TO_TICKS(5000UL));
 		}
@@ -87,6 +89,7 @@ static void _lora_setup(void)
 	{
 		// Connected to LoRaWAN :-)
 		// Make the green led steady
+		printf("zaibisi");
 		status_leds_ledOn(led_ST2); // OPTIONAL
 	}
 	else
@@ -117,19 +120,25 @@ void lora_handler_task( void *pvParameters )
 
 	lora_driver_flushBuffers(); // get rid of first version string from module after reset!
 
+	printf("inainte de setup");
 	_lora_setup();
+	printf("dupa setup");
 
 	_uplink_payload.len = 6;
 	_uplink_payload.portNo = 2;
 
 	TickType_t xLastWakeTime;
-	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
+	const TickType_t xFrequency = pdMS_TO_TICKS(3000000UL); // Upload message every 5 minutes (300000 ms)
+	printf("au trecut 30 secunde");
 	xLastWakeTime = xTaskGetTickCount();
+	printf("duoa getticketcount");
 	
 	for(;;)
 	{
+		printf("inainte de taskdelayuntull");
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 
+		printf("dupa taskdelayuntull");
 		// Some dummy payload
 		uint16_t hum = 12345; // Dummy humidity
 		int16_t temp = 675; // Dummy temp
