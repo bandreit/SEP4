@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_900"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp">
+
+    <ScrollView
+        android:layout_marginTop="93dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:layout_marginBottom="49dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/spinner_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+            <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="103dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/rectangle_box"
+                    android:foregroundGravity="left"
+                    android:gravity="center_horizontal"
+                    android:popupBackground="@drawable/rectangle_box"
+                    android:spinnerMode="dropdown" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginRight="3dp"
+                android:background="@drawable/ic_baseline_arrow_drop_down_24"/>
+            </RelativeLayout>
+            <ImageView
+                android:id="@+id/box"
+                android:layout_width="match_parent"
+                android:layout_height="211dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/rectangle_box"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_layout"/>
+
+            <RelativeLayout
+                android:id="@+id/measurements_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/box">
+
+
+                <ImageView
+                    android:id="@+id/box1"
+                    android:layout_width="150dp"
+                    android:layout_height="118dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/rectangle_box" />
+
+                <TextView
+                    android:id="@+id/co2_tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="50dp"
+                    android:text="CO2 LEVEL"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/co2_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/co2_tag"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="18dp"
+                    android:text="130"
+                    android:textColor="@color/white"
+                    android:textSize="40dp" />
+
+
+                <TextView
+                    android:id="@+id/textMeasure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="103dp"
+                    android:layout_toEndOf="@+id/co2_value"
+                    android:layout_toRightOf="@+id/co2_value"
+                    android:text="PPM"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:id="@+id/box2"
+                    android:layout_width="150dp"
+                    android:layout_height="118dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/rectangle_box" />
+
+                <TextView
+                    android:id="@+id/co2_tag1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/box2"
+                    android:layout_alignLeft="@+id/box2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="50dp"
+                    android:text="CO2 LEVEL"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/co2_value1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/co2_tag1"
+                    android:layout_alignStart="@+id/box2"
+                    android:layout_alignLeft="@+id/box2"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="18dp"
+                    android:text="130"
+                    android:textColor="@color/white"
+                    android:textSize="40dp" />
+
+
+                <TextView
+                    android:id="@+id/textMeasure1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="103dp"
+                    android:layout_toEndOf="@+id/co2_value1"
+                    android:layout_toRightOf="@+id/co2_value1"
+                    android:text="PPM"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/box3"
+                android:layout_width="match_parent"
+                android:layout_height="211dp"
+                android:background="@drawable/rectangle_box"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/measurements_layout"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/box3">
+
+            <ImageView
+                android:id="@+id/box4"
+                android:layout_width="match_parent"
+                android:layout_height="118dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/rectangle_box" />
+
+
+                <TextView
+                    android:id="@+id/co2_tag2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="50dp"
+                    android:text="CO2 LEVEL"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/co2_value2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/co2_tag2"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="2300"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="40dp" />
+
+
+                <TextView
+                    android:id="@+id/textMeasure2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="84dp"
+                    android:layout_toEndOf="@+id/co2_value2"
+                    android:layout_toRightOf="@+id/co2_value2"
+                    android:text="PPM"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/lastWeek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/co2_value2"
+                    android:text="(1969 ppm last week)"
+                    android:textColor="#B3FFFFFF"
+                    android:textSize="12dp" />
+
+
+                <ImageView
+                    android:id="@+id/status_vector"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/status_text"
+                    android:layout_marginTop="5dp"
+                    android:layout_toLeftOf="@+id/status_text"
+                    android:background="@drawable/ic_baseline_arrow_upward_24"
+                    android:layout_toStartOf="@+id/status_text" />
+
+                <TextView
+                    android:id="@+id/status_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_below="@id/textMeasure2"
+                    android:layout_marginTop="5dp"
+                    android:text="23.33%"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginRight="15dp"
+                    android:textColor="#00875A"
+                    android:textStyle="bold"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/GRAPH"
+                android:layout_width="189dp"
+                android:layout_height="51dp"
+                android:text="GRAPH HERE"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/box"
+                app:layout_constraintEnd_toEndOf="@+id/box"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/box" />
+
+            <TextView
+                android:id="@+id/GRAPH1"
+                android:layout_width="189dp"
+                android:layout_height="51dp"
+                android:text="GRAPH HERE"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/box3"
+                app:layout_constraintEnd_toEndOf="@+id/box3"
+                app:layout_constraintStart_toStartOf="@+id/box3"
+                app:layout_constraintTop_toBottomOf="@+id/measurements_layout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
