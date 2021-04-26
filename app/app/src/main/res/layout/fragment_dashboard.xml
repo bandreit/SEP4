@@ -1,19 +1,18 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/blue_900"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_900"
     android:paddingHorizontal="20dp"
     android:paddingVertical="40dp">
 
     <!--    Tab Layout -->
     <com.google.android.material.tabs.TabLayout
-        android:background="@color/transparent"
         android:id="@+id/tabLayout"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,38 +22,127 @@
         app:tabTextColor="@color/white_800">
 
         <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Deposit" />
 
         <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Deposit" />
 
         <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Deposit" />
 
         <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Deposit" />
 
         <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Deposit" />
 
         <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Deposit" />
 
         <com.google.android.material.tabs.TabItem
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Deposit" />
     </com.google.android.material.tabs.TabLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:columnCount="2"
+        android:useDefaultMargins="true"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_columnWeight="1"
+            android:background="@drawable/card_background"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/co2Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CO2 Level"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/co2Value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="130"
+                android:textColor="@color/white"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/co2Label" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PPM"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="4dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/co2Value"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/co2Value" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_columnWeight="1"
+            android:background="@drawable/card_background"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/temperatureLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Temperature"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/temperatureValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="20.0"
+                android:textColor="@color/white"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/temperatureLabel" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="°C"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="4dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/temperatureValue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/temperatureValue" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
