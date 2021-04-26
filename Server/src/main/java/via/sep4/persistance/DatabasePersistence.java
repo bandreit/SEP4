@@ -45,7 +45,7 @@ public class DatabasePersistence implements DatabaseAdaptor {
 
             String str = String.valueOf(array[2]);
             double value = Double.parseDouble(str);
-            Timestamp timestamp = Timestamp.valueOf(array[3]+"");
+            Timestamp timestamp = Timestamp.valueOf(array[3] + "");
 
             //create the sensor object
             Parameter sensorInfo = new Parameter(String.valueOf(array[0]), String.valueOf(array[1]), value, timestamp.toString());
@@ -55,12 +55,12 @@ public class DatabasePersistence implements DatabaseAdaptor {
     }
 
     @Override
-    public List<Parameter> getLastParam() throws SQLException {
+    public Parameter getLastParam() throws SQLException {
         List<Parameter> all = new ArrayList<>(getData());
         List<Parameter> last = new ArrayList<>();
         for (int i = 0; i < all.size(); i++) {
             last.add(all.get(i));
         }
-        return last;
+        return last.get(0);
     }
 }

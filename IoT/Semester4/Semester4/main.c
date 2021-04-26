@@ -15,6 +15,9 @@
 
 #include <stdio_driver.h>
 #include <serial.h>
+#include <hih8120.h>
+#include <sen14262.h>
+
 
  // Needed for LoRaWAN
 #include <lora_driver.h>
@@ -71,10 +74,26 @@ void task1( void *pvParameters )
 	// Initialise the xLastWakeTime variable with the current time.
 	xLastWakeTime = xTaskGetTickCount();
 
+	uint16_t temperature =0;
+	uint16_t humidity=0;
+	uint16_t lastSoundValue;
 	for(;;)
 	{
+		sen14262_initialise();
+		lastSoundValue = sen14262_envelope();
+		vTaskDelay(100);
+		
+		//get measurements
+		//
+		//temperature=hih8120_getTemperature();
+		//humidity=hih8120_getHumidity();
+		//xSemaphoreTake(xPrintfSemaphore,portMAX_DELAY);
+		printf("PROD:SOUND: %i\n", lastSoundValue);
+		//printf("PROD:Hum: %d\n", humidity);
+		//xSemaphoreGive(xPrintfSemaphore);
+
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-		puts("Task1"); // stdio functions are not reentrant - Should normally be protected by MUTEX
+		//puts("Task1"); // stdio functions are not reentrant - Should normally be protected by MUTEX
 		PORTA ^= _BV(PA0);
 	}
 }
@@ -91,7 +110,7 @@ void task2( void *pvParameters )
 	for(;;)
 	{
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-		puts("Task2"); // stdio functions are not reentrant - Should normally be protected by MUTEX
+		//puts("Task2"); // stdio functions are not reentrant - Should normally be protected by MUTEX
 		PORTA ^= _BV(PA7);
 	}
 }
@@ -105,7 +124,7 @@ void initialiseSystem()
 	// Make it possible to use stdio on COM port 0 (USB) on Arduino board - Setting 57600,8,N,1
 	stdio_initialise(ser_USART0);
 	// Let's create some tasks
-	//create_tasks_and_semaphores();
+	create_tasks_and_semaphores();
 
 	// vvvvvvvvvvvvvvvvv BELOW IS LoRaWAN initialisation vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 	// Status Leds driver
@@ -120,7 +139,7 @@ void initialiseSystem()
 int main(void)
 {
 	initialiseSystem(); // Must be done as the very first thing!!
-	printf("Program Started!!\n");
+	printf("Program Stttttarted!!\n");
 	vTaskStartScheduler(); // Initialise and run the freeRTOS scheduler. Execution should never return from here.
 
 	/* Replace with your application code */

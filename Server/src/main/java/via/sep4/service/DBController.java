@@ -16,7 +16,7 @@ public class DBController {
     DatabaseAdaptor db = new DatabasePersistence();
 
     @GetMapping("/parameters")
-    public List<Parameter> getSensorInfo() throws SQLException {
+    public Parameter getSensorInfo() throws SQLException {
         System.out.println("Data sent to client.");
         return db.getLastParam();
     }

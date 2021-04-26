@@ -120,25 +120,25 @@ void lora_handler_task( void *pvParameters )
 
 	lora_driver_flushBuffers(); // get rid of first version string from module after reset!
 
-	printf("inainte de setup");
+	//printf("inainte de setup");
 	_lora_setup();
-	printf("dupa setup");
+	//printf("dupa setup");
 
 	_uplink_payload.len = 6;
 	_uplink_payload.portNo = 2;
 
 	TickType_t xLastWakeTime;
 	const TickType_t xFrequency = pdMS_TO_TICKS(3000000UL); // Upload message every 5 minutes (300000 ms)
-	printf("au trecut 30 secunde");
+	//printf("au trecut 30 secunde");
 	xLastWakeTime = xTaskGetTickCount();
-	printf("duoa getticketcount");
+	//printf("duoa getticketcount");
 	
 	for(;;)
 	{
 		printf("inainte de taskdelayuntull");
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 
-		printf("dupa taskdelayuntull");
+		printf("dupa taskdelayuntull111");
 		// Some dummy payload
 		uint16_t hum = 12345; // Dummy humidity
 		int16_t temp = 675; // Dummy temp
