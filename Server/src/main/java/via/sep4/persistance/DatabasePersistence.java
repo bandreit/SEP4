@@ -1,27 +1,36 @@
 package via.sep4.persistance;
 
-import utility.persistence.MyDatabase;
-import via.sep4.Parameter;
-import via.sep4.utility.DatabaseQueries;
 
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import via.sep4.Parameter;
+
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabasePersistence implements DatabaseAdaptor {
-    private MyDatabase db;
 
-    private static final String DRIVER = "org.postgresql.Driver";
-    private static final String URL = "jdbc:postgresql://localhost:5432/postgres?currentSchema=sep4";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "1234";
+
+    private static final String URL = "jdbc:sqlserver://localhost\\SEP4;portNumber=1433";
+    private static final String USER = "admin";
+    private static final String PASSWORD = "admin";
+
+    private Connection conn;
 
     public DatabasePersistence() {
         try {
-            this.db = new MyDatabase(DRIVER, URL, USER, PASSWORD);
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+            if (conn != null) {
+                DatabaseMetaData dm = (DatabaseMetaData) conn.getMetaData();
+                System.out.println("Driver name: " + dm.getDriverName());
+                System.out.println("Driver version: " + dm.getDriverVersion());
+                System.out.println("Product name: " + dm.getDatabaseProductName());
+                System.out.println("Product version: " + dm.getDatabaseProductVersion());
+            }
+
             System.out.println("connecting...");
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("connection error");
         }
@@ -38,18 +47,19 @@ public class DatabasePersistence implements DatabaseAdaptor {
     @Override
     public List<Parameter> getData() throws SQLException {
         List<Parameter> list = new ArrayList<>();
-        ArrayList<Object[]> dataList = db.query(DatabaseQueries.GET_SENSOR_FROM_DW);
+        String sql = "select * from SEP4.dbo.Parameter";
 
-        for (int i = 0; i < dataList.size(); i++) {
-            Object[] array = dataList.get(i);
+        Statement statement = conn.createStatement();
+        ResultSet result = statement.executeQuery(sql);
 
-            String str = String.valueOf(array[2]);
-            double value = Double.parseDouble(str);
-            Timestamp timestamp = Timestamp.valueOf(array[3] + "");
+        while (result.next()){
+            int value = result.getInt("Data Value");
+            String name = result.getString("Data");
 
-            //create the sensor object
-            Parameter sensorInfo = new Parameter(String.valueOf(array[0]), String.valueOf(array[1]), value, timestamp.toString());
-            list.add(sensorInfo);
+           Parameter parameter = new Parameter("Sensor",name,value,"Time");
+           list.add(parameter);
+            System.out.println(parameter.toString());
+
         }
         return list;
     }

@@ -4,11 +4,16 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.WebSocket;
 import java.nio.ByteBuffer;
+import java.sql.PreparedStatement;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 public class WebsocketClient implements WebSocket.Listener {
     private WebSocket server = null;
+
+    public WebSocket getServer() {
+        return server;
+    }
 
     // Send down-link message to device
     // Must be in Json format according to https://github.com/ihavn/IoT_Semester_project/blob/master/LORA_NETWORK_SERVER.md
@@ -34,7 +39,7 @@ public class WebsocketClient implements WebSocket.Listener {
     }
 
     //onError()
-    public void onError​(WebSocket webSocket, Throwable error) {
+    public void onError(WebSocket webSocket, Throwable error) {
         System.out.println("A " + error.getCause() + " exception was thrown.");
         System.out.println("Message: " + error.getLocalizedMessage());
         webSocket.abort();
@@ -48,7 +53,7 @@ public class WebsocketClient implements WebSocket.Listener {
     }
 
     //onPing()
-    public CompletionStage<?> onPing​(WebSocket webSocket, ByteBuffer message) {
+    public CompletionStage<?> onPing(WebSocket webSocket, ByteBuffer message) {
         webSocket.request(1);
         System.out.println("Ping: Client ---> Server");
         System.out.println(message.asCharBuffer().toString());
@@ -56,7 +61,7 @@ public class WebsocketClient implements WebSocket.Listener {
     }
 
     //onPong()
-    public CompletionStage<?> onPong​(WebSocket webSocket, ByteBuffer message) {
+    public CompletionStage<?> onPong(WebSocket webSocket, ByteBuffer message) {
         webSocket.request(1);
         System.out.println("Pong: Client ---> Server");
         System.out.println(message.asCharBuffer().toString());
@@ -64,7 +69,7 @@ public class WebsocketClient implements WebSocket.Listener {
     }
 
     //onText()
-    public CompletionStage<?> onText​(WebSocket webSocket, CharSequence data, boolean last) {
+    public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
         String indented = (new JSONObject(data.toString())).toString(4);
         System.out.println(indented);
         webSocket.request(1);
