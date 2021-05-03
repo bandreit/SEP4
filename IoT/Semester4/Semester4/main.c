@@ -26,6 +26,7 @@
 // define two Tasks
 void task1( void *pvParameters );
 void task2( void *pvParameters );
+void initializeDriver();
 
 // define semaphore handle
 //SemaphoreHandle_t xTestSemaphore;
@@ -39,11 +40,19 @@ void create_tasks_and_semaphores(void)
 	// Semaphores are useful to stop a Task proceeding, where it should be paused to wait,
 	// because it is sharing a resource, such as the Serial port.
 	// Semaphores should only be used whilst the scheduler is running, but we can set it up here.
-	
-
+	printf("Task Initialized");
+	initializeDriver();	
 	xTaskCreate(
 	task1
 	,  "Task1"  // A name just for humans
+	,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
+	,  NULL
+	,  2  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+	,  NULL );
+	
+	xTaskCreate(
+	task2
+	,  "Task2"  // A name just for humans
 	,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
 	,  NULL
 	,  2  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
@@ -53,38 +62,28 @@ void create_tasks_and_semaphores(void)
 void initializeDriver()
 {	
 	//hih8120_destroy();
-	hih8120_create();
-	hih8120_driverReturnCode_t code = hih8120_initialise();
+	hih8120_driverReturnCode_t code;
+	
+	code = hih8120_initialise();
+	
+	
 	if ( HIH8120_OK == code )
 	{
 		printf("Temp and Humidity Driver initialized OK \n");
 	}
-	else if (code == HIH8120_DRIVER_NOT_INITIALISED)
-	{
-		printf("Driver not initialized \n");
-	}
-	else if(code==HIH8120_TWI_BUSY)
-	{
-		printf("TWI BUSY\n");
-	}
+	
 	else if (code==HIH8120_OUT_OF_HEAP) {
 		printf("Out Of Heap\n");
 	}
-	printf("ARRIVE HERE");
-	if ( HIH8120_OK != hih8120_wakeup() )
-	{
-		// Something went wrong
-		// Investigate the return code further
-	}
-	vTaskDelay(50);
-	if ( HIH8120_OK !=  hih8120_measure() )
-	{
-		// Something went wrong
-		// Investigate the return code further
-	}
-	vTaskDelay(1);
+
+	
+	
+	//vTaskDelay(1);
 	printf("Driver Created \n");
+	
+	
 }
+
 
 /*-----------------------------------------------------------*/
 void task1( void *pvParameters )
@@ -94,23 +93,38 @@ void task1( void *pvParameters )
 
 	// Initialise the xLastWakeTime variable with the current time.
 	//xLastWakeTime = xTaskGetTickCount();
-						
-	initializeDriver();
-	float temperature;
+	
+				
+	//initializeDriver();
+	uint16_t temperature;
 	//uint16_t humidity=0;
 	//uint16_t lastSoundValue;
 	for(;;)
 	{
 		
 		//temperature = hih8120_getTemperature();
-		vTaskDelay(100);
+		//printf("ARRIVE HERE");
+		if ( HIH8120_OK != hih8120_wakeup() )
+		{
+			// Something went wrong
+			// Investigate the return code further
+		}
+		
+		vTaskDelay(pdMS_TO_TICKS(50));
+		
+		if ( HIH8120_OK !=  hih8120_measure() )
+		{
+			// Something went wrong
+			// Investigate the return code further
+		}
+		vTaskDelay(pdMS_TO_TICKS(1));
 		
 		//get measurements
 		//
-		temperature=hih8120_getTemperature();
+		temperature=hih8120_getTemperature_x10();
 		//humidity=hih8120_getHumidity();
 		//xSemaphoreTake(xPrintfSemaphore,portMAX_DELAY);
-		printf("temperature : %f\n", temperature);
+		printf("temperature : %d\n", temperature);
 		//printf("PROD:Hum: %d\n", humidity);
 		//xSemaphoreGive(xPrintfSemaphore);
 
