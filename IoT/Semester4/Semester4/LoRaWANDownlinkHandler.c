@@ -4,6 +4,8 @@
  * Created: 09.05.2021 15:09:54
  *  Author: andy2
  */ 
+
+/*
  
  #include "LoRaWANDownlinkHandler.h"
 
@@ -59,3 +61,4 @@
 	 , lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	 , NULL );
  }
+ */

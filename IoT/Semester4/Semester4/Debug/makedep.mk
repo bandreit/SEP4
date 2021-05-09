@@ -28,7 +28,13 @@ FreeRTOS\src\timers.c
 
 FreeRTOS\src\variantHooks.c
 
+LoRaWANDownlinkHandler.c
+
+LoRaWANUplinkHandler.c
+
 sensorDataPackageHandler.c
+
+Setup.c
 
 TempAndHum.c
 

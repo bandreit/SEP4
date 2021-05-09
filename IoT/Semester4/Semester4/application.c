@@ -1,8 +1,4 @@
-/*
- * application.c
- *
- *  Author: IoT
- */ 
+
 
 #include "application.h"
 
@@ -17,13 +13,10 @@
 #include <lora_driver.h>
 
 #include "sensorDataPackageHandler.h"
-#include "co2.h"
-#include "temperatureAndHumidity.h"
-#include "ventilator.h"
-#include "rc_servo.h"
+#include "CO2.h"
+#include "TempAndHum.h"
+#include "Setup.h"
 
-#define BIT_CO2 (1 << 0)
-#define BIT_HUMIDITY_TEMPERATURE (1 << 1)
 
 MessageBufferHandle_t uplinkMessageBuffer;
 EventGroupHandle_t measureEvenGroup;
@@ -43,11 +36,7 @@ void application_task(void *pvParameters)
 		
 		if((dataReadyEventBits & (BIT_CO2 | BIT_HUMIDITY_TEMPERATURE))==(BIT_CO2 | BIT_HUMIDITY_TEMPERATURE))
 		{
-			sensorDataPackageHandler_setPackage_lenght((uint8_t) 20);
-			sensorDataPackageHandler_setCO2_value(co2_getCo2());
-			sensorDataPackageHandler_setHumidity_value(temperatureAndHumidity_getHumidity());
-			sensorDataPackageHandler_setTemp_value(temperatureAndHumidity_getTemperature);
-			sensorDataPackageHandler_setVentilator_servo();
+			printf("Data Ready");
 		}
 		
 		uplink_payload=sensorDataPackageHandler_getLoRaPayload((uint8_t) 1);

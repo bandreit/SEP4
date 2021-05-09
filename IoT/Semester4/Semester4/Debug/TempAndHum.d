@@ -24,7 +24,9 @@ TempAndHum.d TempAndHum.o: .././TempAndHum.c \
  ../drivers/hih8120.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  ../FreeRTOS/src/task.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h \
- .././TempAndHum.h
+ .././TempAndHum.h .././Setup.h ../FreeRTOS/src/queue.h \
+ ../FreeRTOS/src/event_groups.h ../FreeRTOS/src/timers.h \
+ ../FreeRTOS/src/message_buffer.h ../FreeRTOS/src/stream_buffer.h
 
 ../FreeRTOS/src/ATMEGA_FreeRTOS.h:
 
@@ -87,3 +89,15 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../FreeRTOS/src/queue.h:
 
 .././TempAndHum.h:
+
+.././Setup.h:
+
+../FreeRTOS/src/queue.h:
+
+../FreeRTOS/src/event_groups.h:
+
+../FreeRTOS/src/timers.h:
+
+../FreeRTOS/src/message_buffer.h:
+
+../FreeRTOS/src/stream_buffer.h:

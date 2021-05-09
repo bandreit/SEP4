@@ -9,10 +9,11 @@
 #include <mh_z19.h>
 
 
-mh_z19_returnCode_t rc;
+
+extern mh_z19_returnCode_t rc;
 
 void initializeCO2Driver();
 void measureCO2();
 void CO2Task();
 void myCo2CallBack(uint16_t ppm);
-void createCO2Task();
+void createCO2Task(void *pvpParameter);
