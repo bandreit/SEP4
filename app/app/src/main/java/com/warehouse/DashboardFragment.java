@@ -10,8 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -20,36 +24,39 @@ import com.warehouse.formaters.DayFormatter;
 import java.util.ArrayList;
 
 public class DashboardFragment extends Fragment {
-    LineChart temperatureLineChart;
+    LineChart temperatureChart;
+    BarChart co2Chart;
     View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        setupTemperatureLineChart();
+
+        setupTemperatureChart();
+        setupCO2Chart();
 
         return view;
     }
 
 
-    private void setupTemperatureLineChart() {
-        temperatureLineChart = view.findViewById(R.id.temperatureChart);
+    private void setupTemperatureChart() {
+        temperatureChart = view.findViewById(R.id.temperatureChart);
 
-        temperatureLineChart.setMinimumHeight(500);
+        temperatureChart.setMinimumHeight(500);
 
-        temperatureLineChart.getXAxis().setTextColor(Color.WHITE);
-        temperatureLineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-        temperatureLineChart.getXAxis().setDrawGridLines(false);
-        temperatureLineChart.getXAxis().setLabelRotationAngle(45);
-        temperatureLineChart.getXAxis().setValueFormatter(new DayFormatter());
+        temperatureChart.getXAxis().setTextColor(Color.WHITE);
+        temperatureChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        temperatureChart.getXAxis().setDrawGridLines(false);
+        temperatureChart.getXAxis().setLabelRotationAngle(45);
+        temperatureChart.getXAxis().setValueFormatter(new DayFormatter());
 
-        temperatureLineChart.getAxisLeft().setTextColor(Color.WHITE);
+        temperatureChart.getAxisLeft().setTextColor(Color.WHITE);
 
-        temperatureLineChart.getAxisRight().setEnabled(false);
+        temperatureChart.getAxisRight().setEnabled(false);
 
-        temperatureLineChart.getLegend().setEnabled(false);
-        temperatureLineChart.getDescription().setEnabled(false);
+        temperatureChart.getLegend().setEnabled(false);
+        temperatureChart.getDescription().setEnabled(false);
 
         loadTemperatureChartData();
     }
@@ -75,7 +82,54 @@ public class DashboardFragment extends Fragment {
         LineData data = new LineData(dataSet);
 
 
-        temperatureLineChart.setData(data);
-        temperatureLineChart.invalidate();
+        temperatureChart.setData(data);
+        temperatureChart.invalidate();
+    }
+
+
+    private void setupCO2Chart() {
+        co2Chart = view.findViewById(R.id.co2Chart);
+
+        co2Chart.setMinimumHeight(500);
+
+        co2Chart.getXAxis().setTextColor(Color.WHITE);
+        co2Chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        co2Chart.getXAxis().setDrawGridLines(false);
+        co2Chart.getXAxis().setLabelRotationAngle(45);
+        co2Chart.getXAxis().setValueFormatter(new DayFormatter());
+
+        co2Chart.getAxisLeft().setTextColor(Color.WHITE);
+
+        co2Chart.getAxisRight().setEnabled(false);
+
+        co2Chart.getLegend().setEnabled(false);
+        co2Chart.getDescription().setEnabled(false);
+
+        loadCO2ChartData();
+    }
+
+    private void loadCO2ChartData() {
+        // Data
+        ArrayList<BarEntry> entries = new ArrayList<>();
+
+        entries.add(new BarEntry(1, 470));
+        entries.add(new BarEntry(2, 80));
+        entries.add(new BarEntry(3, 2300));
+        entries.add(new BarEntry(4, 1200));
+        entries.add(new BarEntry(5, 5400));
+        entries.add(new BarEntry(6, 9100));
+        entries.add(new BarEntry(7, 2500));
+
+
+        // Data set
+        BarDataSet dataSet = new BarDataSet(entries, "Temperature");
+
+
+        // configure chart
+        BarData data = new BarData(dataSet);
+
+
+        co2Chart.setData(data);
+        co2Chart.invalidate();
     }
 }
