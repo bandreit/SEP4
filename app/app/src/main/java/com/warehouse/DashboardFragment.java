@@ -27,13 +27,13 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        setupLineChart();
+        setupTemperatureLineChart();
 
         return view;
     }
 
 
-    private void setupLineChart() {
+    private void setupTemperatureLineChart() {
         temperatureLineChart = view.findViewById(R.id.temperatureChart);
 
         temperatureLineChart.setMinimumHeight(500);
@@ -51,10 +51,10 @@ public class DashboardFragment extends Fragment {
         temperatureLineChart.getLegend().setEnabled(false);
         temperatureLineChart.getDescription().setEnabled(false);
 
-        loadPieChartData();
+        loadTemperatureChartData();
     }
 
-    private void loadPieChartData() {
+    private void loadTemperatureChartData() {
         // Data
         ArrayList<Entry> entries = new ArrayList<>();
 
@@ -68,7 +68,7 @@ public class DashboardFragment extends Fragment {
 
 
         // Data set
-        LineDataSet dataSet = new LineDataSet(entries, "Test Label");
+        LineDataSet dataSet = new LineDataSet(entries, "Temperature");
 
 
         // configure chart
