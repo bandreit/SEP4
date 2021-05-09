@@ -25,20 +25,21 @@ import java.util.ArrayList;
 
 public class DashboardFragment extends Fragment {
     LineChart temperatureChart;
+    LineChart humidityChart;
     BarChart co2Chart;
     View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         setupTemperatureChart();
+        setupHumidityChart();
         setupCO2Chart();
 
         return view;
     }
-
 
     private void setupTemperatureChart() {
         temperatureChart = view.findViewById(R.id.temperatureChart);
@@ -76,6 +77,7 @@ public class DashboardFragment extends Fragment {
 
         // Data set
         LineDataSet dataSet = new LineDataSet(entries, "Temperature");
+        dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
 
         // configure chart
@@ -84,6 +86,52 @@ public class DashboardFragment extends Fragment {
 
         temperatureChart.setData(data);
         temperatureChart.invalidate();
+    }
+
+    private void setupHumidityChart() {
+        humidityChart = view.findViewById(R.id.humidityChart);
+
+        humidityChart.setMinimumHeight(500);
+
+        humidityChart.getXAxis().setTextColor(Color.WHITE);
+        humidityChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        humidityChart.getXAxis().setDrawGridLines(false);
+        humidityChart.getXAxis().setLabelRotationAngle(45);
+        humidityChart.getXAxis().setValueFormatter(new DayFormatter());
+
+        humidityChart.getAxisLeft().setTextColor(Color.WHITE);
+
+        humidityChart.getAxisRight().setEnabled(false);
+
+        humidityChart.getLegend().setEnabled(false);
+        humidityChart.getDescription().setEnabled(false);
+
+        loadHumidityChartData();
+    }
+
+    private void loadHumidityChartData() {
+        // Data
+        ArrayList<Entry> entries = new ArrayList<>();
+
+        entries.add(new Entry(1, 470));
+        entries.add(new Entry(2, 80));
+        entries.add(new Entry(3, 2300));
+        entries.add(new Entry(4, 1200));
+        entries.add(new Entry(5, 5400));
+        entries.add(new Entry(6, 9100));
+        entries.add(new Entry(7, 2500));
+
+
+        // Data set
+        LineDataSet dataSet = new LineDataSet(entries, "Temperature");
+
+
+        // configure chart
+        LineData data = new LineData(dataSet);
+
+
+        humidityChart.setData(data);
+        humidityChart.invalidate();
     }
 
 
