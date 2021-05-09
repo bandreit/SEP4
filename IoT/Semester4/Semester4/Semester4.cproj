@@ -147,6 +147,18 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="application.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="application.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="CO2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="CO2.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="drivers\display_7seg.h">
       <SubType>compile</SubType>
     </Compile>
@@ -283,6 +295,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="FreeRTOS\src\variantHooks.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="sensorDataPackageHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="sensorDataPackageHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TempAndHum.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TempAndHum.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
