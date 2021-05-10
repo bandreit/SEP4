@@ -3,7 +3,7 @@
 #include <mh_z19.h>
 #include <stdio.h>
 #include "Setup.h"
-
+#include <event_groups.h>
 void myCo2CallBack(uint16_t ppm);
 
 mh_z19_returnCode_t rc;
@@ -28,36 +28,41 @@ void CO2Task()
 	while(1)
 	{
 
-		measureCO2();
-		//printf("Measured\n");
-		vTaskDelay(30);
 
+EventBits_t dataEventBits = xEventGroupWaitBits
+(dataEventGroup,BIT_HUMIDITY_TEMPERATURE,pdFALSE,pdTRUE,portMAX_DELAY);
+		if((dataEventBits & BIT_HUMIDITY_TEMPERATURE)==BIT_HUMIDITY_TEMPERATURE)
+		{
+			measureCO2();
+		//printf("Measured\n");
+		vTaskDelay(pdMS_TO_TICKS(200));
+		xEventGroupSetBits(dataEventGroup,BIT_CO2);
+		}
+		else
+		{
+			printf("Not Measured\n");
+			vTaskDelay(300);
+		}
+
+		
 		
 		
 	}
 }
 void myCo2CallBack(uint16_t ppm)
 {
-		EventBits_t dataEventBits = xEventGroupWaitBits
-		(dataEventGroup,BIT_HUMIDITY_TEMPERATURE,pdFALSE,pdTRUE,portMAX_DELAY);
-		//printf("Now it is in callBack\n");
-		if(dataEventBits==2)
-		{
-		printf("CO2 level: %d/n",ppm);
+	printf("CO2 Value: %d",ppm);
 		xQueueSend(sensorDataQueue,&ppm,portMAX_DELAY);
-		}
-		xEventGroupSetBits(dataEventGroup,BIT_CO2);
-
 }
 void createCO2Task(void *pvpParameter)
 {
-			
+			initializeCO2Driver();
 			xTaskCreate(
 			CO2Task
 			,  "CO2Task"  // A name just for humans
 			,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
 			,  NULL
-			,  1  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+			,  tskIDLE_PRIORITY + 1  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 			,  NULL );
 			
 }

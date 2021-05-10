@@ -52,10 +52,16 @@ void TempAndHumTask(void* pvpParameter)
 			Humidity = hih8120_getHumidityPercent_x10();
 			printf("Temperature: %d\n",Temp);
 			printf("Humidity: %d\n",Humidity);
-			xQueueSend(sensorDataQueue,&Temp,portMAX_DELAY);
-			xQueueSend(sensorDataQueue,&Humidity,portMAX_DELAY);
-			xSemaphoreGive(tempHumSemaphore);
+			//xQueueSend(sensorDataQueue,&Temp,portMAX_DELAY);
+			//xQueueSend(sensorDataQueue,&Humidity,portMAX_DELAY);
 			xEventGroupSetBits(dataEventGroup,BIT_HUMIDITY_TEMPERATURE);
+			xSemaphoreGive(tempHumSemaphore);
+			printf("Temp mesured\n");
+			vTaskDelay(300);
+		}
+		else
+		{
+			//printf("Temp not measured\n");
 		}
 		
 		
@@ -64,12 +70,13 @@ void TempAndHumTask(void* pvpParameter)
 
 void createTempAndHumTask(void* pvpParameter)
 {
+	initializeTempAndHumDriver();
 		xTaskCreate(
 		TempAndHumTask
 		,  "TempAndHumTask"  // A name just for humans
 		,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
 		,  NULL
-		,  2  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+		,  tskIDLE_PRIORITY + 1  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 		,  NULL );
 }
 
