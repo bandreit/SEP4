@@ -46,7 +46,7 @@
     <com_atmel_avrdbg_tool_atmelice>
       <ToolOptions>
         <InterfaceProperties>
-          <JtagDbgClock>1355808</JtagDbgClock>
+          <JtagDbgClock>200000</JtagDbgClock>
         </InterfaceProperties>
         <InterfaceName>JTAG</InterfaceName>
       </ToolOptions>
@@ -55,7 +55,7 @@
       <ToolName>Atmel-ICE</ToolName>
     </com_atmel_avrdbg_tool_atmelice>
     <avrtoolinterface>JTAG</avrtoolinterface>
-    <avrtoolinterfaceclock>1355808</avrtoolinterfaceclock>
+    <avrtoolinterfaceclock>200000</avrtoolinterfaceclock>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -147,6 +147,18 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="application.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="application.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="CO2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="CO2.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="drivers\display_7seg.h">
       <SubType>compile</SubType>
     </Compile>
@@ -283,6 +295,36 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="FreeRTOS\src\variantHooks.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LoRaWANDownlinkHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LoRaWANDownlinkHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LoRaWANUplinkHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="LoRaWANUplinkHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="sensorDataPackageHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="sensorDataPackageHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Setup.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Setup.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TempAndHum.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TempAndHum.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
