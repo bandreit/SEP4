@@ -45,9 +45,10 @@ void TempAndHumTask(void* pvpParameter)
 	{
 		uint16_t Temp = 0;
 		uint16_t Humidity = 0;
-		measureTempAndHum();
+		
 		if(xSemaphoreTake(tempHumSemaphore,portMAX_DELAY)==pdTRUE)
 		{
+			measureTempAndHum();
 			Temp = hih8120_getTemperature_x10();
 			Humidity = hih8120_getHumidityPercent_x10();
 			printf("Temperature: %d\n",Temp);
@@ -55,7 +56,7 @@ void TempAndHumTask(void* pvpParameter)
 			//xQueueSend(sensorDataQueue,&Temp,portMAX_DELAY);
 			//xQueueSend(sensorDataQueue,&Humidity,portMAX_DELAY);
 			xEventGroupSetBits(dataEventGroup,BIT_HUMIDITY_TEMPERATURE);
-			xSemaphoreGive(tempHumSemaphore);
+			//xSemaphoreGive(tempHumSemaphore);
 			printf("Temp mesured\n");
 			vTaskDelay(300);
 		}
@@ -64,6 +65,7 @@ void TempAndHumTask(void* pvpParameter)
 			//printf("Temp not measured\n");
 		}
 		
+		vTaskDelay(300);
 		
 	}
 }

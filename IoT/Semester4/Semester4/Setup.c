@@ -16,6 +16,7 @@
 void initializeTempAndHumiditySemaphore()
 {
 	tempHumSemaphore = xSemaphoreCreateBinary();
+	xSemaphoreGive(tempHumSemaphore);
 }
 
 void initializeQueue()

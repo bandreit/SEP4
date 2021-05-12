@@ -44,9 +44,10 @@ void initializeUsedData()
 /*-----------------------------------------------------------*/
 void create_tasks_and_semaphores(void)
 {		
-	createApplicationTask();
+	createApplicationTask();	
 		createTempAndHumTask();
-		createCO2Task();	
+		createCO2Task();
+		
 }
 
 void createApplicationTask()
@@ -66,19 +67,21 @@ void ApplicationTask()
 	for (;;)
 	{
 		
-		EventBits_t eventBits = xEventGroupWaitBits(dataEventGroup,BIT_HUMIDITY_TEMPERATURE|BIT_CO2,pdTRUE,pdTRUE,xTicksToWait);
+	//	printf("Before EventBits\n");
+		EventBits_t eventBits = xEventGroupWaitBits(dataEventGroup,BIT_HUMIDITY_TEMPERATURE|BIT_CO2,pdTRUE,pdTRUE,portMAX_DELAY);
+	//	printf("After\n");
 		if((eventBits &(BIT_CO2 | BIT_HUMIDITY_TEMPERATURE))==(BIT_CO2|BIT_HUMIDITY_TEMPERATURE))
 		{
 			printf("All Data Colected;");
-			xEventGroupClearBits(dataEventGroup,BIT_HUMIDITY_TEMPERATURE|BIT_CO2);
-			vTaskDelay(pdMS_TO_TICKS(300000UL));
+////			xEventGroupClearBits(dataEventGroup,BIT_HUMIDITY_TEMPERATURE|BIT_CO2);
+			vTaskDelay(pdMS_TO_TICKS(1000));
 			
 		}
 		else{
-			
-			xSemaphoreGive(tempHumSemaphore);
-			
+			printf("GIVE TEMP SEMP\n");
+			//xSemaphoreGive(tempHumSemaphore);
 		}
+		vTaskDelay(pdMS_TO_TICKS(1000));
 		
 	}
 }
@@ -95,7 +98,7 @@ void initialiseSystem()
 	stdio_initialise(ser_USART0);
 	// Let's create some tasks
 //	initializeDriver()
-printf("Data Initialized");
+printf("Data Initialized\n");
 	initializeUsedData();
 	create_tasks_and_semaphores();
 	// vvvvvvvvvvvvvvvvv BELOW IS LoRaWAN initialisation vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
