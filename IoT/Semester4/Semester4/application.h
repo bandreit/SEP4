@@ -12,10 +12,8 @@
 #include <event_groups.h>
 #include <semphr.h>
 
-void application_create(UBaseType_t application_task_priority,
-						MessageBufferHandle_t messageBuffer,
-						EventGroupHandle_t eventGroupMeasure,
-						EventGroupHandle_t eventGroupData,
-						SemaphoreHandle_t semaphore);
+void createApplicationTask();
+void ApplicationTask(void *pvParameters);
+void setPackageHandler();
 						
 #endif

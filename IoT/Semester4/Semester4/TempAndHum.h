@@ -4,4 +4,4 @@
 void initializeTempAndHumDriver();
 void measureTempAndHum();
 void TempAndHumTask(void* pvpParameter);
-void createTempAndHumTask(void* pvpParameter);
+void createTempAndHumTask();

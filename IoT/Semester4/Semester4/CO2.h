@@ -16,4 +16,4 @@ void initializeCO2Driver();
 void measureCO2();
 void CO2Task();
 void myCo2CallBack(uint16_t ppm);
-void createCO2Task(void *pvpParameter);
+void createCO2Task();

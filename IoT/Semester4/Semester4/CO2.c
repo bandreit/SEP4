@@ -12,7 +12,7 @@ void initializeCO2Driver()
 {
 	// The parameter is the USART port the MH-Z19 sensor is connected to - in this case USART3
 	mh_z19_initialise(ser_USART3);
-	mh_z19_injectCallBack(myCo2CallBack);
+	
 	
 }
 void measureCO2()
@@ -32,32 +32,31 @@ void CO2Task()
 EventBits_t dataEventBits = xEventGroupWaitBits
 (dataEventGroup,BIT_HUMIDITY_TEMPERATURE,pdFALSE,pdTRUE,portMAX_DELAY);
 
+
 		if((dataEventBits & BIT_HUMIDITY_TEMPERATURE)==BIT_HUMIDITY_TEMPERATURE)
 		{
-		printf("Measured\n");
+			printf("Measured\n");
 			measureCO2();
 		
 		}
-		else
-		{
-			printf("Not Measured\n");
-			vTaskDelay(300);
-		}
-		vTaskDelay(300);
+		vTaskDelay(30);
 			
 	}
 }
 void myCo2CallBack(uint16_t ppm)
 {
-		printf("CO2 Value: %d",ppm);
+		printf("CO2 Value: %d\n",ppm);
 		xQueueSend(sensorDataQueue,&ppm,portMAX_DELAY);
 		xEventGroupSetBits(dataEventGroup,BIT_CO2);
 		xSemaphoreGive(tempHumSemaphore);
+		
+		
 
 }
-void createCO2Task(void *pvpParameter)
+void createCO2Task()
 {
 			initializeCO2Driver();
+			mh_z19_injectCallBack(myCo2CallBack);
 			xTaskCreate(
 			CO2Task
 			,  "CO2Task"  // A name just for humans

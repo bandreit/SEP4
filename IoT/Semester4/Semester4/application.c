@@ -1,65 +1,63 @@
-
-
-#include "application.h"
-
 #include <stdio.h>
 
 #include <ATMEGA_FreeRTOS.h>
 #include <task.h>
 #include <event_groups.h>
-#include <message_buffer.h>
-#include <semphr.h>
-
-#include <lora_driver.h>
+#include <queue.h>
 
 #include "sensorDataPackageHandler.h"
-#include "CO2.h"
-#include "TempAndHum.h"
 #include "Setup.h"
+#include "application.h"
 
 
-MessageBufferHandle_t uplinkMessageBuffer;
-EventGroupHandle_t measureEvenGroup;
-EventGroupHandle_t dataEventGroup;
-SemaphoreHandle_t tempHumSemaphore;
 
-void application_task(void *pvParameters)
+void setPackageHandler()
 {
-	size_t bytesSent;
-	EventBits_t dataReadyEventBits;
-	lora_driver_payload_t uplink_payload;
-	
-	for(;;)
+	uint16_t data[3];
+	for(int i=0;i<3;i++)
 	{
-		xEventGroupSetBits(measureEvenGroup, BIT_CO2 | BIT_HUMIDITY_TEMPERATURE);
-		dataReadyEventBits=xEventGroupWaitBits(dataEventGroup, BIT_CO2 | BIT_HUMIDITY_TEMPERATURE, pdTRUE, pdTRUE, portMAX_DELAY);
-		
-		if((dataReadyEventBits & (BIT_CO2 | BIT_HUMIDITY_TEMPERATURE))==(BIT_CO2 | BIT_HUMIDITY_TEMPERATURE))
-		{
-			printf("Data Ready");
-		}
-		
-		uplink_payload=sensorDataPackageHandler_getLoRaPayload((uint8_t) 1);
-		vTaskDelay(pdMS_TO_TICKS(50));
-		bytesSent=xMessageBufferSend(uplinkMessageBuffer, (void*) &uplink_payload, sizeof(uplink_payload), portMAX_DELAY); 
+		if(xQueueReceive(sensorDataQueue,&data[i],portMAX_DELAY)==pdPASS)
+			{
+				printf("Parameter : %d\n",data[i]);
+			}
 	}
+	
+	sensorDataPackageHandler_setTemp_value(data[0]);
+	sensorDataPackageHandler_setHumidity_value(data[1]);
+	sensorDataPackageHandler_setCO2_value(data[2]);
+	xQueueReset(sensorDataQueue);
 	
 }
 
-void application_create(UBaseType_t application_task_priority, MessageBufferHandle_t messageBuffer, EventGroupHandle_t eventGroupMeasure, EventGroupHandle_t eventGroupData, SemaphoreHandle_t semaphore)
+void ApplicationTask(void *pvParameters)
 {
-	uplinkMessageBuffer=messageBuffer;
-	measureEvenGroup=eventGroupMeasure;
-	dataEventGroup=eventGroupData;
-	tempHumSemaphore=semaphore;
+	for (;;)
+	{
+		
+		EventBits_t eventBits = xEventGroupWaitBits(dataEventGroup,BIT_HUMIDITY_TEMPERATURE|BIT_CO2,pdTRUE,pdTRUE,portMAX_DELAY);
+		if((eventBits &(BIT_CO2 | BIT_HUMIDITY_TEMPERATURE))==(BIT_CO2|BIT_HUMIDITY_TEMPERATURE))
+		{
+			printf("ALL DATA COLLECTED\n");
+			setPackageHandler();
+			//vTaskDelay(pdMS_TO_TICKS(1000));
+			
+		}
+		vTaskDelay(pdMS_TO_TICKS(50));
+		
+	}
+}
+
+void createApplicationTask()
+{
+
 	
 	xTaskCreate(
-	application_task,
-	"Application Task",
-	configMINIMAL_STACK_SIZE,
-	NULL,
-	application_task_priority,
-	NULL
-	);
+	ApplicationTask
+	,  "AppTask"  // A name just for humans
+	,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
+	,  NULL
+	,  tskIDLE_PRIORITY + 1  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+	,  NULL );
+	
 }
 
