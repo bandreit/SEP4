@@ -35,7 +35,7 @@ EventBits_t dataEventBits = xEventGroupWaitBits
 
 		if((dataEventBits & BIT_HUMIDITY_TEMPERATURE)==BIT_HUMIDITY_TEMPERATURE)
 		{
-			printf("Measured\n");
+			//printf("Measured\n");
 			measureCO2();
 		
 		}
@@ -45,7 +45,7 @@ EventBits_t dataEventBits = xEventGroupWaitBits
 }
 void myCo2CallBack(uint16_t ppm)
 {
-		printf("CO2 Value: %d\n",ppm);
+		//printf("CO2 Value: %d\n",ppm);
 		xQueueSend(sensorDataQueue,&ppm,portMAX_DELAY);
 		xEventGroupSetBits(dataEventGroup,BIT_CO2);
 		xSemaphoreGive(tempHumSemaphore);

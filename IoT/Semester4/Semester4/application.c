@@ -18,7 +18,7 @@ void setPackageHandler()
 	{
 		if(xQueueReceive(sensorDataQueue,&data[i],portMAX_DELAY)==pdPASS)
 			{
-				printf("Parameter : %d\n",data[i]);
+				//printf("Parameter : %d\n",data[i]);
 			}
 	}
 	
@@ -37,7 +37,7 @@ void ApplicationTask(void *pvParameters)
 		EventBits_t eventBits = xEventGroupWaitBits(dataEventGroup,BIT_HUMIDITY_TEMPERATURE|BIT_CO2,pdTRUE,pdTRUE,portMAX_DELAY);
 		if((eventBits &(BIT_CO2 | BIT_HUMIDITY_TEMPERATURE))==(BIT_CO2|BIT_HUMIDITY_TEMPERATURE))
 		{
-			printf("ALL DATA COLLECTED\n");
+			//printf("ALL DATA COLLECTED\n");
 			setPackageHandler();
 			//vTaskDelay(pdMS_TO_TICKS(1000));
 			

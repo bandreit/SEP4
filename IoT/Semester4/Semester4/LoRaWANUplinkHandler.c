@@ -4,9 +4,10 @@
  * Created: 09.05.2021 12:54:40
  *  Author: andy2
  */ 
-/*
 
  #include "LoRaWANUplinkHandler.h"
+  #include "Setup.h"
+  #include "sensorDataPackageHandler.h"
 
  #include <stddef.h>
  #include <stdio.h>
@@ -22,7 +23,7 @@
  #define LORA_appEUI "BDF222A4C4217BC4"
  #define LORA_appKEY "266F209D5D1F15A2AF87F013DC002926"
 
- MessageBufferHandle_t uplinkMessageBuffer;
+ static char _out_buf[100];
 
  static void _lora_setup(void)
  {
@@ -60,7 +61,7 @@
 	 do {
 		 rc = lora_driver_join(LORA_OTAA);
 		 
-		 ("Join Network TriesLeft:%d >%s<\n", maxJoinTriesLeft, lora_driver_mapReturnCodeToText(rc));
+		 printf("Join Network TriesLeft:%d >%s<\n", maxJoinTriesLeft, lora_driver_mapReturnCodeToText(rc));
 
 		 if ( rc != LORA_ACCEPTED)
 		 {
@@ -109,19 +110,28 @@
 	lora_driver_flushBuffers(); // get rid of first version string from module after reset!
 
 	_lora_setup();
+	
+	printf("a facut setup\n");	
 
 	TickType_t xLastWakeTime;
-	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
+	const TickType_t xFrequency = pdMS_TO_TICKS(30000UL); // Upload message every 5 minutes (300000 ms)
 	xLastWakeTime = xTaskGetTickCount();
 
-	size_t bytesReceivedApplication;
+	//size_t bytesReceivedApplication;
+
+	sensorDataPackageHandler_setPackage_lenght(6);
+	lora_driver_payload_t _uplink_payload = sensorDataPackageHandler_getLoRaPayload(2);
+	
+	printf("a luat data de la package handler \n");
 	
 	for(;;)
 	{
+		printf("inainte de delay\n");
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-		bytesReceivedApplication = xMessageBufferReceive(uplinkMessageBuffer, (void*)&_uplink_payload, sizeof(_uplink_payload), portMAX_DELAY);
+		printf("dupa delay, dar inainte sa trimita\n");
+		printf("%d payload\n",_uplink_payload.len);
 
-		if( bytesReceivedApplication > 0 )
+		if( _uplink_payload.bytes > 0 )
 		{
 			status_leds_shortPuls(led_ST4);  // OPTIONAL
 			printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
@@ -129,10 +139,8 @@
 	}
  }
 
- void lora_uplink_handler_create(UBaseType_t lora_handler_task_priority, MessageBufferHandle_t messageBufferFromApplication)
+ void lora_uplink_handler_create(UBaseType_t lora_handler_task_priority)
  {
-	 uplinkMessageBuffer = messageBufferFromApplication;
-	 
 	 xTaskCreate(
 	 lora_uplink_handler_task,
 	 "LRHandUplink"  // A name just for humans
@@ -141,4 +149,3 @@
 	, lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	, NULL );
  }
- */

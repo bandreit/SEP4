@@ -20,6 +20,7 @@
 #include "application.h"
 #include "TempAndHum.h"
 #include "CO2.h"
+#include "LoRaWANUplinkHandler.h"
 
  // Needed for LoRaWAN
 #include <lora_driver.h>
@@ -31,6 +32,7 @@ void initializeUsedData()
 	initializeEventGroup();
 	initializeQueue();
 	initializeTempAndHumiditySemaphore();
+	initializeUplinkMessageBuffer();
 }
 /*-----------------------------------------------------------*/
 void create_tasks(void)
@@ -50,6 +52,9 @@ void initialiseSystem()
 	stdio_initialise(ser_USART0);
 	initializeUsedData();
 	create_tasks();
+
+	lora_driver_initialise(1, NULL);
+	lora_uplink_handler_create(2);
 }
 
 /*-----------------------------------------------------------*/
