@@ -1,3 +1,5 @@
+package Service;
+
 import java.util.ArrayList;
 
 public class UpLinkDataMessage {
@@ -127,7 +129,7 @@ public class UpLinkDataMessage {
 
     @Override
     public String toString() {
-        return "UpLinkDataMessage{" +
+        return "Service.UpLinkDataMessage{" +
                 "cmd='" + cmd + '\'' +
                 ", EUI='" + EUI + '\'' +
                 ", ts=" + ts +

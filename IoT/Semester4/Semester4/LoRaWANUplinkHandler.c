@@ -120,12 +120,12 @@
 	//size_t bytesReceivedApplication;
 
 	sensorDataPackageHandler_setPackage_lenght(6);
-	lora_driver_payload_t _uplink_payload = sensorDataPackageHandler_getLoRaPayload(2);
-	
-	printf("a luat data de la package handler \n");
 	
 	for(;;)
 	{
+		lora_driver_payload_t _uplink_payload = sensorDataPackageHandler_getLoRaPayload(2);
+		printf("a luat data de la package handler \n");
+
 		printf("inainte de delay\n");
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
 		printf("dupa delay, dar inainte sa trimita\n");
@@ -134,6 +134,12 @@
 		if( _uplink_payload.bytes > 0 )
 		{
 			status_leds_shortPuls(led_ST4);  // OPTIONAL
+			printf("0 -> %x\n", _uplink_payload.bytes[0]);
+			printf("1 -> %x\n", _uplink_payload.bytes[1]);
+			printf("2 -> %x\n", _uplink_payload.bytes[2]);
+			printf("3 -> %x\n", _uplink_payload.bytes[3]);
+			printf("4 -> %x\n", _uplink_payload.bytes[4]);
+			printf("5 -> %x\n", _uplink_payload.bytes[5]);
 			printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
 		}
 	}

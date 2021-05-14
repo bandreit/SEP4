@@ -1,3 +1,5 @@
+package sensor;
+
 import java.sql.Timestamp;
 
 public class Sensor {
@@ -47,7 +49,7 @@ public class Sensor {
 
     @Override
     public String toString() {
-        return "Sensor{" +
+        return "sensor.Sensor{" +
                 "sensorType=" + sensorType +
                 ", unitType='" + unitType + '\'' +
                 ", value=" + value +
