@@ -1,23 +1,23 @@
 package network;
 
 public class NetworkPackage {
-    private NetworkType type;
+    private final NetworkType type;
+    private Object object;
 
-    /**
-     * Constructor
-     * @param type
-     */
-    public NetworkPackage(NetworkType type)
-    {
+    public NetworkPackage(NetworkType type, Object object) {
         this.type = type;
+        this.object = object;
     }
 
-    /**
-     * Returns a type
-     * @return a enum type
-     */
-    public NetworkType getType()
-    {
+    public NetworkType getType() {
         return type;
+    }
+
+    public Object getObject() {
+        return object;
+    }
+
+    public void setObject(Object object) {
+        this.object = object;
     }
 }

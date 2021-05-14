@@ -2,11 +2,12 @@ package via.sep4.mediator;
 
 
 import com.google.gson.Gson;
+import via.sep4.model.Sensor;
 import via.sep4.network.NetworkPackage;
-import via.sep4.network.SensorData;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ClientHandler implements Runnable {
     private Socket socket;
@@ -45,11 +46,10 @@ public class ClientHandler implements Runnable {
                 NetworkPackage incoming = gson.fromJson(message, NetworkPackage.class);
 
                 switch (incoming.getType()) {
-                    case TEST:
-                        SensorData incomingSensorData = gson.fromJson(message, SensorData.class);
-                        String data = (String) incomingSensorData.getObject();
+                    case SensorList:
+                        ArrayList<Sensor> incomingSensorData = (ArrayList<Sensor>) incoming.getObject();
 
-                        System.out.println("Privet in server : " + data);
+                        System.out.println("Privet in server : " + incomingSensorData);
                         break;
 
                     default:
