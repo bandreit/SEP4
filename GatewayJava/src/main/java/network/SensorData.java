@@ -17,8 +17,12 @@ public class SensorData extends NetworkPackage{
      * Returns a shift
      * @return shift
      */
-    public Object getShift() {
+    public Object getObject() {
         return object;
+    }
+
+    public void setObject(Object object) {
+        this.object = object;
     }
 
     /**

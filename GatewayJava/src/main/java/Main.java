@@ -14,11 +14,13 @@ public class Main {
         Gson gson = new Gson();
 
         try {
+            System.out.println("Connecting to server...");
             ConnectionHandler handler = ConnectionManager.getInstance();
 
             String privet = "Privet ";
             SensorData data = new SensorData(NetworkType.TEST, privet);
             String gsonToServer = gson.toJson(data);
+            System.out.println("Connected, message sent: " + gsonToServer);
             handler.sendToServer(gsonToServer);
 
         } catch (IOException e) {
