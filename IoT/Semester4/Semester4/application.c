@@ -18,7 +18,7 @@ void setPackageHandler()
 	{
 		if(xQueueReceive(sensorDataQueue,&data[i],portMAX_DELAY)==pdPASS)
 			{
-				//printf("Parameter : %d\n",data[i]);
+				//printf("Parameter[%i] : %d\n", i , data[i]);
 			}
 	}
 	
