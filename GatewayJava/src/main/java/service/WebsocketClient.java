@@ -1,4 +1,4 @@
-package Service;
+package service;
 
 import com.google.gson.Gson;
 import org.json.JSONObject;
@@ -81,7 +81,7 @@ public class WebsocketClient implements WebSocket.Listener {
 //        System.out.println(indented);
         UpLinkDataMessage upLinkDataMessage = gson.fromJson(data.toString(), UpLinkDataMessage.class);
         if (upLinkDataMessage.getCmd().equals("rx"))
-            sensorConvertingService.convert(upLinkDataMessage);
+            sensorConvertingService.convertAndSend(upLinkDataMessage);
         webSocket.request(1);
         return new CompletableFuture().completedFuture("onText() completed.").thenAccept(System.out::println);
     }

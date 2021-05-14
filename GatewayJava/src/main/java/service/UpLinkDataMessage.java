@@ -1,6 +1,4 @@
-package Service;
-
-import java.util.ArrayList;
+package service;
 
 public class UpLinkDataMessage {
     private String cmd;

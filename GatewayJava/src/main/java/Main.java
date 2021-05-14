@@ -1,4 +1,10 @@
-import Service.WebsocketClient;
+import service.WebsocketClient;
+import com.google.gson.Gson;
+import mediator.ConnectionHandler;
+import mediator.ConnectionManager;
+import network.NetworkType;
+
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
