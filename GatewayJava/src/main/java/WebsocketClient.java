@@ -1,5 +1,7 @@
 
+import com.google.gson.Gson;
 import org.json.JSONObject;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.WebSocket;
@@ -10,6 +12,8 @@ import java.util.concurrent.CompletionStage;
 
 public class WebsocketClient implements WebSocket.Listener {
     private WebSocket server = null;
+    private SensorConvertingService sensorConvertingService;
+    private Gson gson;
 
     public WebSocket getServer() {
         return server;
@@ -29,6 +33,8 @@ public class WebsocketClient implements WebSocket.Listener {
                 .buildAsync(URI.create(url), this);
 
         server = ws.join();
+        sensorConvertingService = new SensorConvertingService();
+        gson = new Gson();
     }
 
     //onOpen()
@@ -72,6 +78,8 @@ public class WebsocketClient implements WebSocket.Listener {
     public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
         String indented = (new JSONObject(data.toString())).toString(4);
         System.out.println(indented);
+        UpLinkDataMessage upLinkDataMessage = gson.fromJson(data.toString(), UpLinkDataMessage.class);
+        sensorConvertingService.convert(upLinkDataMessage);
         webSocket.request(1);
         return new CompletableFuture().completedFuture("onText() completed.").thenAccept(System.out::println);
     }
