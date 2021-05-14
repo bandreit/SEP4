@@ -77,7 +77,7 @@ public class WebsocketClient implements WebSocket.Listener {
     //onText()
     public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
         String indented = (new JSONObject(data.toString())).toString(4);
-        System.out.println(indented);
+//        System.out.println(indented);
         UpLinkDataMessage upLinkDataMessage = gson.fromJson(data.toString(), UpLinkDataMessage.class);
         sensorConvertingService.convert(upLinkDataMessage);
         webSocket.request(1);
