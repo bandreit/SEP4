@@ -1,4 +1,4 @@
-package network;
+package via.sep4.network;
 
 public class SensorData extends NetworkPackage{
 

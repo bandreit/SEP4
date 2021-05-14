@@ -73,6 +73,7 @@ public class ConnectionManager implements ConnectionHandler {
         outputStream.write(toSendLenBytes);
         outputStream.write(toSendBytes);
     }
+
     /**
      * Receives bytes via Socket connection
      *
