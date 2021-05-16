@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "794595867267",
+    "project_id": "warehouseapplication-ae1b6",
+    "storage_bucket": "warehouseapplication-ae1b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794595867267:android:d2ebe4cebe88f0c63479b6",
+        "android_client_info": {
+          "package_name": "com.warehouse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794595867267-e61o3c20o80rq92dfnvse0ksecs8fvd7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.warehouse",
+            "certificate_hash": "03963e4b384c2cd735c81b1ef0c563aa5e9be772"
+          }
+        },
+        {
+          "client_id": "794595867267-mjr6arok8qfg6t10elpqsoumn5ie5de5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAUMoDlXikrFMDBXikeJgOgOx6DbtGuAQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794595867267-mjr6arok8qfg6t10elpqsoumn5ie5de5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

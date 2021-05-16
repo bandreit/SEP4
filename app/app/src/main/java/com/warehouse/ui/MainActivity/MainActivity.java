@@ -11,18 +11,18 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.warehouse.R;
-import com.warehouse.ui.login.LoginActivity;
+import com.warehouse.ui.LoginActivity.LoginActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    private MainViewModel mainViewModel;
+    private MainActivityViewModel mainActivityViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        mainViewModel.init();
+        mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        mainActivityViewModel.init();
 
         setContentView(R.layout.activity_main);
         startAppActivity();
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkIfSignedIn() {
-        mainViewModel.getCurrentUser().observe(this, user -> {
+        mainActivityViewModel.getUser().observe(this, user -> {
             if(user == null) {
                 startLoginActivity();
             } else {
