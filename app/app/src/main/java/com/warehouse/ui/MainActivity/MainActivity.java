@@ -1,35 +1,49 @@
 package com.warehouse.ui.MainActivity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.warehouse.ui.dashboard.DashboardFragment;
-import com.warehouse.ui.home.HomeFragment;
 import com.warehouse.R;
+import com.warehouse.ui.login.LoginActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    private MainActivityViewModel mainActivityViewModel;
+    private MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-        mainActivityViewModel.init();
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        mainViewModel.init();
 
         setContentView(R.layout.activity_main);
         startAppActivity();
+
+        checkIfSignedIn();
+    }
+
+    public void checkIfSignedIn() {
+        mainViewModel.getCurrentUser().observe(this, user -> {
+            if(user == null) {
+                startLoginActivity();
+            } else {
+                startAppActivity();
+            }
+        });
+    }
+
+    private void startLoginActivity() {
+        startActivity(new Intent(this, LoginActivity.class));
+
+        finish();
     }
 
     public void startAppActivity() {
