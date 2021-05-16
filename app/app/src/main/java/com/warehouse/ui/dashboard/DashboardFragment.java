@@ -1,4 +1,4 @@
-package com.warehouse;
+package com.warehouse.ui.dashboard;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.warehouse.R;
 import com.warehouse.formaters.DayFormatter;
 
 import java.util.ArrayList;

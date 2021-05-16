@@ -1,4 +1,4 @@
-package com.warehouse;
+package com.warehouse.ui.MainActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.warehouse.ui.dashboard.DashboardFragment;
+import com.warehouse.ui.home.HomeFragment;
+import com.warehouse.R;
 
 
 public class MainActivity extends AppCompatActivity {

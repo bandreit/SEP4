@@ -1,4 +1,4 @@
-package com.warehouse.api;
+package com.warehouse.data.Sensor;
 
 public class Sensor {
     private String sensorName;
