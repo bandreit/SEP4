@@ -1,28 +1,31 @@
-package via.sep4;
+package via.sep4.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import via.sep4.model.SensorType;
+
+import java.sql.Timestamp;
 
 public class Parameter {
-    private String sensorName;
+    private SensorType sensorType;
     private String unitType;
     private double value;
-    private String timestamp;
+    private Timestamp timestamp;
 
     @JsonCreator
-    public Parameter(@JsonProperty("sensorName") String sensorName, @JsonProperty("unitType") String unitType, @JsonProperty("value") double value, @JsonProperty("timestamp") String timestamp) {
-        this.sensorName = sensorName;
+    public Parameter(@JsonProperty("sensorName") SensorType sensorType, @JsonProperty("unitType") String unitType, @JsonProperty("unitType") double value, @JsonProperty("sensorTimeStamp") Timestamp timestamp) {
+        this.sensorType = sensorType;
         this.unitType = unitType;
         this.value = value;
         this.timestamp = timestamp;
     }
 
-    public String getSensorName() {
-        return sensorName;
+    public SensorType  getSensorName() {
+        return sensorType;
     }
 
-    public void setSensorName(String sensorName) {
-        this.sensorName = sensorName;
+    public void setSensorName(SensorType  sensorType) {
+        this.sensorType = sensorType;
     }
 
     public String getUnitType() {
@@ -41,18 +44,18 @@ public class Parameter {
         this.value = value;
     }
 
-    public String getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 
     @Override
     public String toString() {
         return "Sensor{" +
-                "sensorName='" + sensorName + '\'' +
+                "sensorName='" + sensorType + '\'' +
                 ", unitType='" + unitType + '\'' +
                 ", value= " + value +
                 ", timestamp= " + timestamp +
