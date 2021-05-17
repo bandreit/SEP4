@@ -1,15 +1,13 @@
 package via.sep4.persistance;
 
-
-import via.sep4.Parameter;
-
+import via.sep4.model.Parameter;
+import via.sep4.model.SensorType;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabasePersistence implements DatabaseAdaptor {
-
 
     private static final String URL = "jdbc:sqlserver://localhost\\SEP4;portNumber=1433";
     private static final String USER = "admin";
@@ -52,14 +50,14 @@ public class DatabasePersistence implements DatabaseAdaptor {
         Statement statement = conn.createStatement();
         ResultSet result = statement.executeQuery(sql);
 
-        while (result.next()){
-            int value = result.getInt("Data Value");
-            String name = result.getString("Data");
-
-           Parameter parameter = new Parameter("Sensor",name,value,"Time");
-           list.add(parameter);
+        while (result.next()) {
+            String value = result.getString("unitType");
+            String name = result.getString("sensorName");
+            Double sensorValue = result.getDouble("sensorValue");
+            Timestamp timestamp = result.getTimestamp("sensorTimeStamp");
+            Parameter parameter = new Parameter(SensorType.valueOf(name), value, sensorValue, timestamp);
+            list.add(parameter);
             System.out.println(parameter.toString());
-
         }
         return list;
     }
