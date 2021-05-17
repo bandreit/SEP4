@@ -47,7 +47,6 @@ public class DashboardFragment extends Fragment {
 
         temperatureChart.setMinimumHeight(500);
 
-        temperatureChart.setBackgroundColor(Color.BLUE);
         temperatureChart.getXAxis().setTextColor(Color.WHITE);
         temperatureChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         temperatureChart.getXAxis().setDrawGridLines(false);
