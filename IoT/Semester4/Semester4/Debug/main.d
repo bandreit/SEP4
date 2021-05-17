@@ -26,8 +26,8 @@ main.d main.o: .././main.c \
  ../FreeRTOS/src/timers.h .././Setup.h ../FreeRTOS/src/queue.h \
  ../FreeRTOS/src/message_buffer.h ../FreeRTOS/src/stream_buffer.h \
  .././application.h .././TempAndHum.h .././CO2.h ../drivers/mh_z19.h \
- .././LoRaWANUplinkHandler.h ../drivers/lora_driver.h \
- ../drivers/status_leds.h
+ .././LoRaWANUplinkHandler.h .././LoRaWANDownlinkHandler.h \
+ .././configuration.h ../drivers/lora_driver.h ../drivers/status_leds.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -112,6 +112,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../drivers/mh_z19.h:
 
 .././LoRaWANUplinkHandler.h:
+
+.././LoRaWANDownlinkHandler.h:
+
+.././configuration.h:
 
 ../drivers/lora_driver.h:
 

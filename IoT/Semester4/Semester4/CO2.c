@@ -27,12 +27,9 @@ void CO2Task()
 {
 	while(1)
 	{
-
-//printf("CO2 Task\n");
-EventBits_t dataEventBits = xEventGroupWaitBits
-(dataEventGroup,BIT_HUMIDITY_TEMPERATURE,pdFALSE,pdTRUE,portMAX_DELAY);
-
-
+		EventBits_t dataEventBits = xEventGroupWaitBits
+		(dataEventGroup,BIT_HUMIDITY_TEMPERATURE,pdFALSE,pdTRUE,portMAX_DELAY);
+		
 		if((dataEventBits & BIT_HUMIDITY_TEMPERATURE)==BIT_HUMIDITY_TEMPERATURE)
 		{
 			//printf("Measured\n");

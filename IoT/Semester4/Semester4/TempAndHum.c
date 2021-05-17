@@ -51,13 +51,12 @@ void TempAndHumTask(void* pvpParameter)
 			measureTempAndHum();
 			Temp = hih8120_getTemperature_x10();
 			Humidity = hih8120_getHumidityPercent_x10();
-			//printf("Temperature: %d\n",Temp);
-			//printf("Humidity: %d\n",Humidity);
+
 			xQueueSend(sensorDataQueue,&Temp,portMAX_DELAY);
 			xQueueSend(sensorDataQueue,&Humidity,portMAX_DELAY);
-			//printf("TEMP DATA SENT\n");
+
 			xEventGroupSetBits(dataEventGroup,BIT_HUMIDITY_TEMPERATURE);
-			//printf("BIT SET\n");
+
 		}
 		vTaskDelay(10);
 		
