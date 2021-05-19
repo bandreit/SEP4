@@ -53,8 +53,8 @@ void initialiseSystem()
 	initializeUsedData();
 	create_tasks();
 
-	lora_driver_initialise(1, NULL);
-	lora_uplink_handler_create(2);
+	//lora_driver_initialise(1, NULL);
+	//lora_uplink_handler_create(2);
 }
 
 /*-----------------------------------------------------------*/
