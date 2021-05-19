@@ -35,11 +35,13 @@ void ApplicationTask(void *pvParameters)
 	{
 		
 		EventBits_t eventBits = xEventGroupWaitBits(dataEventGroup,BIT_HUMIDITY_TEMPERATURE|BIT_CO2,pdTRUE,pdTRUE,portMAX_DELAY);
+		
 		if((eventBits &(BIT_CO2 | BIT_HUMIDITY_TEMPERATURE))==(BIT_CO2|BIT_HUMIDITY_TEMPERATURE))
 		{
-			//printf("ALL DATA COLLECTED\n");
+			printf("ALL DATA COLLECTED\n");
 			setPackageHandler();
-			//vTaskDelay(pdMS_TO_TICKS(1000));
+			vTaskDelay(pdMS_TO_TICKS(120000));
+			xSemaphoreGive(tempHumSemaphore);
 			
 		}
 		vTaskDelay(pdMS_TO_TICKS(50));

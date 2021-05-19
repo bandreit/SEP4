@@ -40,6 +40,8 @@ Setup.c
 
 TempAndHum.c
 
+ventilation.c
+
 LoRaWANHandler.c
 
 main.c

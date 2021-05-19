@@ -1,11 +1,12 @@
 #pragma once
 #include <semphr.h>
+#include <stdint.h>
 
 extern SemaphoreHandle_t configSemaphore;
-extern int* ventilationLevel;
+extern uint8_t ventilationLevel;
 
 void initializeConfiguration();
 
 void setVentilationLevel();
 
-int* getVentilationLevel();
+uint8_t getVentilationLevel();

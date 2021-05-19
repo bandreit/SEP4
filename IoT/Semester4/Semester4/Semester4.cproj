@@ -333,6 +333,9 @@
     <Compile Include="TempAndHum.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="ventilation.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="ventilation.h">
       <SubType>compile</SubType>
     </Compile>

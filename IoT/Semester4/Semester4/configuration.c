@@ -1,16 +1,17 @@
 
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
+#include <stdint.h>
 
 #include "configuration.h"
 
 SemaphoreHandle_t configSemaphore;
-int* ventilationLevel;
+uint8_t ventilationLevel;
 
 
 void initializeConfiguration()
 {
-	ventilationLevel = NULL;
+	ventilationLevel = 0;
 	configSemaphore = xSemaphoreCreateBinary();
 }
 
@@ -23,7 +24,7 @@ void setVentilationLevel(int level)
 	}
 }
 
-int* getVentilationLevel()
+uint8_t getVentilationLevel()
 {
 		if(xSemaphoreTake(configSemaphore,portMAX_DELAY)==pdTRUE)
 		{	
