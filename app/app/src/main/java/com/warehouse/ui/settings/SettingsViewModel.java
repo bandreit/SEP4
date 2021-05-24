@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.warehouse.data.User.UserRepository;
 
 public class SettingsViewModel extends AndroidViewModel {
@@ -20,7 +21,7 @@ public class SettingsViewModel extends AndroidViewModel {
         notification = new MutableLiveData<Boolean>();
         theme = new MutableLiveData<Boolean>();
 
-        userRepository = UserRepository.getInstance(application);
+        this.userRepository = UserRepository.getInstance(application);
     }
     public LiveData<Boolean> getNotification() {
         return notification;
