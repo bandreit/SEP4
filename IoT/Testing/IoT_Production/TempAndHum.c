@@ -14,8 +14,8 @@
 
 void tempAndHum_run()
 {
-	uint16_t Temp = 0;
-	uint16_t Humidity = 0;
+	uint16_t Temp = 236;
+	uint16_t Humidity = 445 ;
 
 	if (xSemaphoreTake(tempHumSemaphore, portMAX_DELAY) == pdTRUE)
 	{
