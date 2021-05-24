@@ -7,6 +7,6 @@ extern uint8_t ventilationLevel;
 
 void initializeConfiguration();
 
-void setVentilationLevel();
+void setVentilationLevel(uint8_t level);
 
 uint8_t getVentilationLevel();

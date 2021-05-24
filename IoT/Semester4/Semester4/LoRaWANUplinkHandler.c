@@ -140,7 +140,7 @@
 			printf("3 -> %x\n", _uplink_payload.bytes[3]);
 			printf("4 -> %x\n", _uplink_payload.bytes[4]);
 			printf("5 -> %x\n", _uplink_payload.bytes[5]);
-			printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
+			//printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
 		}
 	}
  }
@@ -154,4 +154,6 @@
 	, NULL
 	, tskIDLE_PRIORITY + lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	, NULL );
+
+	
  }

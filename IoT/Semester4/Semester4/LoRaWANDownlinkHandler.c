@@ -5,6 +5,7 @@
 #include <message_buffer.h>
 #include <task.h>
 #include <lora_driver.h>
+#include <stdio.h>
 #include "LoRaWANDownlinkHandler.h"
 #include "Setup.h"
 #include "configuration.h"
@@ -16,6 +17,7 @@ void lora_downLink_task()
 {
 	for(;;)
 	{
+		printf("Message buffer downlink wait\n");
 		xMessageBufferReceive(downlinkMessageBuffer, &lora_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
 		printf("DOWN LINK: from port: %d with %d bytes received!",lora_downlink_payload.portNo, lora_downlink_payload.len); // Just for Debug
 		if (2 == lora_downlink_payload.len) // Check that we have got the expected 4 bytes
@@ -23,8 +25,10 @@ void lora_downLink_task()
 			level =  (lora_downlink_payload.bytes[0] << 8) + lora_downlink_payload.bytes[1];
 			setVentilationLevel(ventilationLevel);
 		}
+
+		vTaskDelay(100);
 	}
-	vTaskDelay(30);
+
 }
 
 

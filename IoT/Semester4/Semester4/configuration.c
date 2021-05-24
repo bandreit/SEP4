@@ -15,11 +15,11 @@ void initializeConfiguration()
 	configSemaphore = xSemaphoreCreateBinary();
 }
 
-void setVentilationLevel(int level)
+void setVentilationLevel(uint8_t level)
 {
 	if(xSemaphoreTake(configSemaphore,portMAX_DELAY)==pdTRUE)
 	{
-		ventilationLevel = &level;
+		ventilationLevel = level;
 		xSemaphoreGive(configSemaphore);
 	}
 }

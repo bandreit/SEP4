@@ -48,7 +48,6 @@ public class ClientHandler implements Runnable {
                 switch (incoming.getType()) {
                     case SensorList:
                         ArrayList<Sensor> incomingSensorData = (ArrayList<Sensor>) incoming.getObject();
-
                         System.out.println("Privet in server : " + incomingSensorData);
                         break;
 
