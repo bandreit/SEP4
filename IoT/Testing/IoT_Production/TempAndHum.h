@@ -1,5 +1,4 @@
 #pragma once
 
-
-void tempAndHum_run();
 void TempAndHumTask(void* pvpParameter);
+void tempAndHum_run();

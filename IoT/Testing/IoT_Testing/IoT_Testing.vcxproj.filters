@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="TempAndHumTesting.cpp" />
+    <ClCompile Include="..\IoT_Production\TempAndHum.c" />
+    <ClCompile Include="FreeRTOS_MOCK_FFF.cpp" />
+    <ClCompile Include="SetupTesting.cpp" />
+    <ClCompile Include="..\IoT_Production\Setup.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="FreeRTOS">
+      <UniqueIdentifier>{779832d1-f0a2-469e-ac72-95d65b29cf89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FreeRTOS\Source">
+      <UniqueIdentifier>{f1a64d3e-d118-419a-bfe5-9212514a1e35}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FreeRTOS.h">
+      <Filter>FreeRTOS\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="event_groups.h">
+      <Filter>FreeRTOS\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="queue.h">
+      <Filter>FreeRTOS\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="semphr.h">
+      <Filter>FreeRTOS\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="task.h">
+      <Filter>FreeRTOS\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="timers.h">
+      <Filter>FreeRTOS\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="message_buffer.h">
+      <Filter>FreeRTOS\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS_MOCK_FFF.h" />
+  </ItemGroup>
+</Project>
