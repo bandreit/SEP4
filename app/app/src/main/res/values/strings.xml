@@ -9,4 +9,9 @@
     <string name="title_theme">Dark theme</string>
     <string name="title_allow_notifications">Allow notifications</string>
     <string name="title_logout">Log Out</string>
+    <string name="configure">Configure</string>
+    <string-array name="rangeSliderValues">
+        <item>5</item>
+        <item>20</item>
+    </string-array>
 </resources>
