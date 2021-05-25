@@ -15,7 +15,6 @@ extern "C"
 #include "queue.h"
 }
 
-
 class SetupTesting : public::testing::Test
 {
 protected:

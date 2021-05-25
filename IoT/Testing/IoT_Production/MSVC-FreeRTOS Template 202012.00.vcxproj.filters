@@ -24,12 +24,18 @@
     <ClInclude Include="Setup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CO2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TempAndHum.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Setup.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CO2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

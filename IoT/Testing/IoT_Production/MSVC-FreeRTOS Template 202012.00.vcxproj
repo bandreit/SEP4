@@ -141,11 +141,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CO2.h" />
     <ClInclude Include="FreeRTOSConfig.h" />
     <ClInclude Include="Setup.h" />
     <ClInclude Include="TempAndHum.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CO2.c" />
     <ClCompile Include="Setup.c" />
     <ClCompile Include="TempAndHum.c" />
   </ItemGroup>

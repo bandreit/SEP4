@@ -36,8 +36,10 @@
     <IncludePath>$(ProjectDir)\.;F:\UNIVERSITY\SEM4\SEP\SEP4\IoT\Testing\IoT_Production;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="..\IoT_Production\CO2.c" />
     <ClCompile Include="..\IoT_Production\Setup.c" />
     <ClCompile Include="..\IoT_Production\TempAndHum.c" />
+    <ClCompile Include="CO2Testing.cpp" />
     <ClCompile Include="FreeRTOS_MOCK_FFF.cpp" />
     <ClCompile Include="SetupTesting.cpp" />
     <ClCompile Include="TempAndHumTesting.cpp" />
