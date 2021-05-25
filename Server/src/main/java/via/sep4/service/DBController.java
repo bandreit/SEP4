@@ -3,7 +3,7 @@ package via.sep4.service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import via.sep4.Parameter;
+import via.sep4.model.Parameter;
 import via.sep4.persistance.DatabaseAdaptor;
 import via.sep4.persistance.DatabasePersistence;
 
