@@ -13,7 +13,9 @@ public class ParameterController {
     }
     @GetMapping("/parameters")
     List<Parameter> all() {
-        return repository.findAll();
+        List<Parameter> thelist = repository.findAll();
+        System.out.println("This is the id of the list 1 object " + thelist.get(0).getId());
+        return thelist;
     }
 
 
