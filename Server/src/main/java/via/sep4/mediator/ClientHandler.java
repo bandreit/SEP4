@@ -48,11 +48,9 @@ public class ClientHandler implements Runnable {
                 switch (incoming.getType()) {
                     case SensorList:
                         ArrayList<Sensor> incomingSensorData = (ArrayList<Sensor>) incoming.getObject();
-
                         // put it inside the database DatabasePersitance or smth
                         System.out.println("Privet in server : " + incomingSensorData);
                         break;
-
                     default:
                         sendData("ERROR");
                         break;

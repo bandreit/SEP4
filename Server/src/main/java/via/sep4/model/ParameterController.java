@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("/SEP4")
 @RestController
 public class ParameterController {
     private final ParameterRepository repository;
@@ -11,11 +12,10 @@ public class ParameterController {
     ParameterController(ParameterRepository repository) {
         this.repository = repository;
     }
+
     @GetMapping("/parameters")
     List<Parameter> all() {
-        List<Parameter> thelist = repository.findAll();
-        System.out.println("This is the id of the list 1 object " + thelist.get(0).getId());
-        return thelist;
+       return repository.findAll();
     }
 
 

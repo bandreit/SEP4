@@ -1,6 +1,7 @@
 package via.sep4.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -8,7 +9,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity(name = "Parameter")
-@Table(name = "dbo.Parameter")
+@Table(name = "parameter")
 public class Parameter {
     @Column(updatable = false)
     private SensorType sensorType;
@@ -18,40 +19,22 @@ public class Parameter {
     private double value;
     @Column(updatable = false)
     private Timestamp timestamp;
-    @Column(updatable = true)
     private double minTemp;
-    @Column(updatable = true)
     private double minCo2;
-    @Column(updatable = true)
     private double minHum;
-    @Column(updatable = true)
     private double maxTemp;
-    @Column(updatable = true)
     private double maxCo2;
-    @Column(updatable = true)
     private double maxHum;
-    @Column(updatable = true)
     private double currentTemp;
-    @Column(updatable = true)
     private double currentCo2;
-    @Column(updatable = true)
     private double currentHum;
 
     @Id
-    @GeneratedValue(generator = "sequence-generator")
-    @GenericGenerator(
-            name = "sequence-generator",
-            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "employee_sequence"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
-                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
-            }
-    )
     @Column(updatable = false)
-    private long id;
+    private int id;
+
     @JsonCreator
-    public Parameter(@JsonProperty("sensorName") SensorType sensorType, @JsonProperty("unitType") String unitType, @JsonProperty("unitType") double value, @JsonProperty("sensorTimeStamp") Timestamp timestamp) {
+    public Parameter(@JsonProperty("sensorName") SensorType sensorType, @JsonProperty("unitType") String unitType, @JsonProperty("value") double value, @JsonProperty("sensorTimeStamp") Timestamp timestamp) {
         this.sensorType = sensorType;
         this.unitType = unitType;
         this.value = value;
@@ -186,12 +169,12 @@ public class Parameter {
                 '}';
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     @Id
-    public long getId() {
+    public int getId() {
         return id;
     }
 }
