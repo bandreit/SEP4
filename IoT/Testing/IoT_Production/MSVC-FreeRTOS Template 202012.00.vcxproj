@@ -141,13 +141,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="application.h" />
     <ClInclude Include="CO2.h" />
     <ClInclude Include="FreeRTOSConfig.h" />
+    <ClInclude Include="sensorDataPackageHandler.h" />
     <ClInclude Include="Setup.h" />
     <ClInclude Include="TempAndHum.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="application.c" />
     <ClCompile Include="CO2.c" />
+    <ClCompile Include="sensorDataPackageHandler.c" />
     <ClCompile Include="Setup.c" />
     <ClCompile Include="TempAndHum.c" />
   </ItemGroup>

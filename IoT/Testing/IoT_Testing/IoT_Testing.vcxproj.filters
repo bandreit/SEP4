@@ -8,6 +8,8 @@
     <ClCompile Include="..\IoT_Production\Setup.c" />
     <ClCompile Include="..\IoT_Production\CO2.c" />
     <ClCompile Include="CO2Testing.cpp" />
+    <ClCompile Include="..\IoT_Production\application.c" />
+    <ClCompile Include="ApplicationTesting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -27,6 +27,12 @@
     <ClInclude Include="CO2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sensorDataPackageHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TempAndHum.c">
@@ -36,6 +42,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CO2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="application.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sensorDataPackageHandler.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
