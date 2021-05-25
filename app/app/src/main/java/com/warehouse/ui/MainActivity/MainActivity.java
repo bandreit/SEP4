@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-        mainActivityViewModel.init();
 
         setContentView(R.layout.activity_main);
         startAppActivity();
@@ -41,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 startLoginActivity();
             } else {
                 startAppActivity();
+
+                mainActivityViewModel.init();
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.warehouse.ui.home;
+package com.warehouse.ui.home_sensors;
 
 import android.app.Application;
 
@@ -8,14 +8,13 @@ import androidx.lifecycle.LiveData;
 
 import com.warehouse.data.Room.Room;
 import com.warehouse.data.Room.RoomRepository;
-import com.warehouse.data.User.UserRepository;
 
 import java.util.List;
 
-public class HomeViewModel extends AndroidViewModel {
+public class HomeSensorsViewModel extends AndroidViewModel {
     private RoomRepository roomRepository;
 
-    public HomeViewModel(@NonNull Application application) {
+    public HomeSensorsViewModel(@NonNull Application application) {
         super(application);
 
         this.roomRepository = RoomRepository.getInstance(application);
