@@ -8,6 +8,15 @@ public class Sensor {
     private Double maxValue;
     private Double currentValue;
 
+    public Sensor(String id, String name, String measurementUnit, Double minValue, Double maxValue, Double currentValue) {
+        this.id = id;
+        this.name = name;
+        this.measurementUnit = measurementUnit;
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+        this.currentValue = currentValue;
+    }
+
     public String getId() {
         return id;
     }
@@ -46,5 +55,13 @@ public class Sensor {
 
     public void setMaxValue(Double maxValue) {
         this.maxValue = maxValue;
+    }
+
+    public Double getCurrentValue() {
+        return currentValue;
+    }
+
+    public void setCurrentValue(Double currentValue) {
+        this.currentValue = currentValue;
     }
 }

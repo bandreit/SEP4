@@ -27,7 +27,7 @@ public class RoomsViewPagerAdapter extends FragmentStatePagerAdapter {
         Fragment fragment = new HomeSensorsFragment();
         Bundle args = new Bundle();
 
-        args.putInt(HomeSensorsFragment.ARG_OBJECT, position + 1);
+        args.putString(HomeSensorsFragment.ARG_ROOM_ID, tabList.get(position).getId());
         fragment.setArguments(args);
 
         return fragment;
