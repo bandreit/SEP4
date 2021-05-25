@@ -8,13 +8,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.warehouse.data.Room.Room;
 import com.warehouse.ui.home_sensors.HomeSensorsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoomsViewPagerAdapter extends FragmentStatePagerAdapter {
-    private List<RoomTab> tabList = new ArrayList<>();
+    private List<Room> tabList = new ArrayList<>();
 
     public RoomsViewPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
@@ -43,25 +44,8 @@ public class RoomsViewPagerAdapter extends FragmentStatePagerAdapter {
         return tabList.get(position).getName();
     }
 
-    public void addTab(RoomTab tab) {
-        tabList.add(tab);
-    }
-
-    public static class RoomTab {
-        public RoomTab(String id, String name) {
-            this.id = id;
-            this.name = name;
-        }
-
-        private String id;
-        private String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public String getId() {
-            return id;
-        }
+    public void setTabList(List<Room> tabList) {
+        this.tabList = tabList;
+        this.notifyDataSetChanged();
     }
 }

@@ -42,7 +42,7 @@ public class RoomRepository {
             @Override
             public void onResponse(Call<RoomsResponse> call, Response<RoomsResponse> response) {
                 if(response.isSuccessful()) {
-                    System.out.println("====== Success");
+                    rooms.postValue(response.body().getData());
                 } else {
                     System.out.println("Failure ======");
 

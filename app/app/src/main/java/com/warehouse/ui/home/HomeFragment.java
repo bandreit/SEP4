@@ -10,16 +10,31 @@ import android.view.ViewParent;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.warehouse.R;
 import com.warehouse.adapters.RoomsViewPagerAdapter;
+import com.warehouse.data.Room.Room;
+import com.warehouse.ui.MainActivity.MainActivityViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
+    HomeViewModel homeViewModel;
     TabLayout roomsTabLayout;
     ViewPager roomsViewPager;
     View root;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+    }
 
     @Nullable
     @Override
@@ -42,10 +57,12 @@ public class HomeFragment extends Fragment {
 
         RoomsViewPagerAdapter adapter = new RoomsViewPagerAdapter(getChildFragmentManager());
 
-        adapter.addTab(new RoomsViewPagerAdapter.RoomTab("tab_1", "Tab 1"));
-        adapter.addTab(new RoomsViewPagerAdapter.RoomTab("tab_2", "Tab 2"));
-        adapter.addTab(new RoomsViewPagerAdapter.RoomTab("tab_3", "Tab 3"));
-
+        homeViewModel.getRooms().observe(getViewLifecycleOwner(), new Observer<List<Room>>() {
+            @Override
+            public void onChanged(List<Room> rooms) {
+                adapter.setTabList(rooms);
+            }
+        });
 
         roomsViewPager.setAdapter(adapter);
         roomsTabLayout.setupWithViewPager(roomsViewPager);
