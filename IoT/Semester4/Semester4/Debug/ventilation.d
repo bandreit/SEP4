@@ -18,11 +18,11 @@ ventilation.d ventilation.o: .././ventilation.c \
  ../FreeRTOS/src/FreeRTOSVariant.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h \
  ../FreeRTOS/src/ATMEGA_FreeRTOS.h ../FreeRTOS/src/task.h \
- ../FreeRTOS/src/list.h ../FreeRTOS/src/task.h ../drivers/rc_servo.h \
- .././configuration.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h \
+ ../FreeRTOS/src/list.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
- .././ventilation.h
+ ../FreeRTOS/src/task.h ../drivers/rc_servo.h .././configuration.h \
+ ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h .././ventilation.h
 
 ../FreeRTOS/src/ATMEGA_FreeRTOS.h:
 
@@ -70,6 +70,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../FreeRTOS/src/list.h:
 
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h:
+
 ../FreeRTOS/src/task.h:
 
 ../drivers/rc_servo.h:
@@ -79,9 +83,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../FreeRTOS/src/semphr.h:
 
 ../FreeRTOS/src/queue.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h:
 
 .././ventilation.h:

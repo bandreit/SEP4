@@ -3,7 +3,7 @@ package service;
 public class DownLinkDataMessage {
     private final String cmd = "tx";
     private final String EUI = "0004A30B002523BC";
-    private final int port = 2;
+    private final int port = 1;
     private boolean confirmed;
     private String data;
 

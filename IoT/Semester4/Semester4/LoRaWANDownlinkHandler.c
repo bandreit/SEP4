@@ -17,7 +17,8 @@ void lora_downLink_task()
 {
 	for(;;)
 	{
-		printf("Message buffer downlink wait\n");
+		printf("WAITING..... \n");
+		printf("BBAGAIN WAITING..... \n");
 		xMessageBufferReceive(downlinkMessageBuffer, &lora_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
 		printf("DOWN LINK: from port: %d with %d bytes received!",lora_downlink_payload.portNo, lora_downlink_payload.len); // Just for Debug
 		if (2 == lora_downlink_payload.len) // Check that we have got the expected 4 bytes

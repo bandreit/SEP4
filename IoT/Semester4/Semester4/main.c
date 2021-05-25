@@ -23,6 +23,7 @@
 #include "LoRaWANUplinkHandler.h"
 #include "LoRaWANDownlinkHandler.h"
 #include "ventilation.h"
+#include "configuration.h"
 
  // Needed for LoRaWAN
 #include <lora_driver.h>
@@ -34,6 +35,7 @@ void initializeUsedData()
 	initializeEventGroup();
 	initializeQueue();
 	initializeTempAndHumiditySemaphore();
+	initializeConfiguration();
 	initializeUplinkMessageBuffer();
 	initializeDownlinkMessageBuffer();
 }
@@ -56,7 +58,7 @@ void initialiseSystem()
 	initializeUsedData();
 	create_tasks();
 
-	lora_driver_initialise(1, downlinkMessageBuffer);
+	lora_driver_initialise(ser_USART1, downlinkMessageBuffer);
 	lora_uplink_handler_create(2);
 	printf("Before craete downlink\n");
 	lora_downlink_handler_create(3);
