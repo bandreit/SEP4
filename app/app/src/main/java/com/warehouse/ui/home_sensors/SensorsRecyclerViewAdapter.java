@@ -17,8 +17,7 @@ import java.util.List;
 public class SensorsRecyclerViewAdapter extends RecyclerView.Adapter<SensorsRecyclerViewAdapter.ViewHolder> {
     List<Sensor> sensors = new ArrayList<>();
 
-    public SensorsRecyclerViewAdapter(List<Sensor> sensors) {
-        this.sensors = sensors;
+    public SensorsRecyclerViewAdapter() {
     }
 
     public void setSensors(List<Sensor> sensors) {
