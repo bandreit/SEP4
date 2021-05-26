@@ -56,7 +56,7 @@ void initialiseSystem()
 	initializeUsedData();
 	create_tasks();
 
-	lora_driver_initialise(ser_USART1, NULL);
+	lora_driver_initialise(ser_USART1, downlinkMessageBuffer);
 	lora_uplink_handler_create(4);
 	printf("Before craete downlink\n");
 	lora_downlink_handler_create(3);
