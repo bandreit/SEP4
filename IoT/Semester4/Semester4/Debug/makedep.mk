@@ -6,6 +6,8 @@ application.c
 
 CO2.c
 
+configuration.c
+
 FreeRTOS\FreeRTOSTraceDriver\FreeRTOSTraceDriver.c
 
 FreeRTOS\src\croutine.c
@@ -37,6 +39,8 @@ sensorDataPackageHandler.c
 Setup.c
 
 TempAndHum.c
+
+ventilation.c
 
 LoRaWANHandler.c
 

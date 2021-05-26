@@ -11,6 +11,7 @@
 
 
  extern SemaphoreHandle_t tempHumSemaphore;
+ extern SemaphoreHandle_t ventilationSemaphore;
  extern QueueHandle_t sensorDataQueue;
  extern EventGroupHandle_t dataEventGroup;
  extern MessageBufferHandle_t uplinkMessageBuffer;
@@ -18,6 +19,8 @@
  
 
 void initializeTempAndHumiditySemaphore();
+
+void initializeVentilationSemaphore();
 
 void initializeQueue();
 

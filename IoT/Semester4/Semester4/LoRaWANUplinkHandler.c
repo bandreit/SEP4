@@ -114,7 +114,7 @@
 	printf("a facut setup\n");	
 
 	TickType_t xLastWakeTime;
-	const TickType_t xFrequency = pdMS_TO_TICKS(30000UL); // Upload message every 5 minutes (300000 ms)
+	const TickType_t xFrequency = pdMS_TO_TICKS(60000UL); // Upload message every 5 minutes (300000 ms)
 	xLastWakeTime = xTaskGetTickCount();
 
 	//size_t bytesReceivedApplication;
@@ -124,11 +124,11 @@
 	for(;;)
 	{
 		lora_driver_payload_t _uplink_payload = sensorDataPackageHandler_getLoRaPayload(2);
-		printf("a luat data de la package handler \n");
+		printf("took data from package handler \n");
 
-		printf("inainte de delay\n");
+		printf("before delay\n");
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-		printf("dupa delay, dar inainte sa trimita\n");
+		printf("after delay, but before sending \n");
 		printf("%d payload\n",_uplink_payload.len);
 
 		if( _uplink_payload.bytes > 0 )
@@ -140,8 +140,9 @@
 			printf("3 -> %x\n", _uplink_payload.bytes[3]);
 			printf("4 -> %x\n", _uplink_payload.bytes[4]);
 			printf("5 -> %x\n", _uplink_payload.bytes[5]);
-			printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
+			printf("Uploaded Message ------------------>%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
 		}
+		vTaskDelay(100);
 	}
  }
 
@@ -152,6 +153,9 @@
 	 "LRHandUplink"  // A name just for humans
 	, configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
 	, NULL
-	, lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+	, tskIDLE_PRIORITY + lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	, NULL );
+
+
+	
  }

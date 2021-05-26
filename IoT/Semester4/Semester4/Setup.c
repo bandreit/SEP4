@@ -5,9 +5,11 @@
 #include <event_groups.h>
 #include <message_buffer.h>
 #include "Setup.h"
+#include "lora_driver.h"
 
 
   SemaphoreHandle_t tempHumSemaphore;
+  SemaphoreHandle_t ventilationSemaphore;
   QueueHandle_t sensorDataQueue;
   EventGroupHandle_t dataEventGroup;
   MessageBufferHandle_t uplinkMessageBuffer;
@@ -17,6 +19,12 @@ void initializeTempAndHumiditySemaphore()
 {
 	tempHumSemaphore = xSemaphoreCreateBinary();
 	xSemaphoreGive(tempHumSemaphore);
+}
+
+void initializeVentilationSemaphore()
+{
+	ventilationSemaphore = xSemaphoreCreateBinary();
+	xSemaphoreGive(ventilationSemaphore);
 }
 
 void initializeQueue()
@@ -36,7 +44,7 @@ void initializeUplinkMessageBuffer()
 
 void initializeDownlinkMessageBuffer()
 {
-	downlinkMessageBuffer = xMessageBufferCreate(100);
+	downlinkMessageBuffer = xMessageBufferCreate(sizeof(lora_driver_payload_t) * 2);
 }
 
 
