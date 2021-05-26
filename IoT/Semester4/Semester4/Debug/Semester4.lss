@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000bf0  00000000  00000000  00007060  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000e5ce  00000000  00000000  00007c50  2**0
+  6 .debug_info   0000e5e1  00000000  00000000  00007c50  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00003ae7  00000000  00000000  0001621e  2**0
+  7 .debug_abbrev 00003aff  00000000  00000000  00016231  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00007241  00000000  00000000  00019d05  2**0
+  8 .debug_line   00007231  00000000  00000000  00019d30  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00002940  00000000  00000000  00020f48  2**2
+  9 .debug_frame  00002940  00000000  00000000  00020f64  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000044ae  00000000  00000000  00023888  2**0
+ 10 .debug_str    000044ae  00000000  00000000  000238a4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000c65f  00000000  00000000  00027d36  2**0
+ 11 .debug_loc    0000c65f  00000000  00000000  00027d52  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000af0  00000000  00000000  00034395  2**0
+ 12 .debug_ranges 00000af0  00000000  00000000  000343b1  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -9026,14 +9026,14 @@ void initializeTempAndHumDriver()
 	if ( HIH8120_OK == returnCode )
     3ee8:	81 11       	cpse	r24, r1
     3eea:	05 c0       	rjmp	.+10     	; 0x3ef6 <initializeTempAndHumDriver+0x10>
-		{
-			printf("Temp and Hum Driver Initialized ok\n");
+	{
+		printf("Temp and Hum Driver Initialized ok\n");
     3eec:	87 e2       	ldi	r24, 0x27	; 39
     3eee:	95 e0       	ldi	r25, 0x05	; 5
     3ef0:	0c 94 ea 30 	jmp	0x61d4	; 0x61d4 <puts>
     3ef4:	08 95       	ret
-		}
-		
+	}
+	
 	else {
 		printf("TEMP AND HUM OUT OF HEAP \n");
     3ef6:	8a e4       	ldi	r24, 0x4A	; 74
@@ -9042,7 +9042,7 @@ void initializeTempAndHumDriver()
     3efe:	08 95       	ret
 
 00003f00 <measureTempAndHum>:
-		}
+	}
 }
 void measureTempAndHum()
 {
@@ -9086,6 +9086,7 @@ void measureTempAndHum()
 00003f36 <TempAndHumTask>:
 	
 }
+
 void TempAndHumTask(void* pvpParameter)
 {
     3f36:	cf 93       	push	r28
@@ -13264,8 +13265,8 @@ int main(void)
     5f66:	30 91 03 02 	lds	r19, 0x0203	; 0x800203 <__malloc_heap_start+0x1>
     5f6a:	30 93 a4 18 	sts	0x18A4, r19	; 0x8018a4 <__brkval+0x1>
     5f6e:	20 93 a3 18 	sts	0x18A3, r18	; 0x8018a3 <__brkval>
-    5f72:	20 91 00 02 	lds	r18, 0x0200	; 0x800200 <__DATA_REGION_ORIGIN__>
-    5f76:	30 91 01 02 	lds	r19, 0x0201	; 0x800201 <__DATA_REGION_ORIGIN__+0x1>
+    5f72:	20 91 00 02 	lds	r18, 0x0200	; 0x800200 <__data_start>
+    5f76:	30 91 01 02 	lds	r19, 0x0201	; 0x800201 <__data_start+0x1>
     5f7a:	21 15       	cp	r18, r1
     5f7c:	31 05       	cpc	r19, r1
     5f7e:	41 f4       	brne	.+16     	; 0x5f90 <malloc+0xea>
