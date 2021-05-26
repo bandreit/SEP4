@@ -1,42 +1,27 @@
 
-#include <ATMEGA_FreeRTOS.h>
+#include <FreeRTOS.h>
 #include <stdio.h>
-#include <hih8120.h>
 #include <stdint.h>
 #include <task.h>
 #include <semphr.h>
 #include "TempAndHum.h"
 #include "Setup.h"
 
-void initializeTempAndHumDriver()
-{
-	hih8120_driverReturnCode_t returnCode = hih8120_initialise();
+static SemaphoreHandle_t tempHumSemaphore;
 
-	if ( HIH8120_OK == returnCode )
-		{
-			printf("Temp and Hum Driver Initialized ok\n");
-		}
-		
-	else {
-		printf("TEMP AND HUM OUT OF HEAP \n");
-		}
-}
-void measureTempAndHum()
+
+void tempAndHum_run()
 {
-	if ( HIH8120_OK != hih8120_wakeup() )
+	uint16_t Temp = 0;
+	uint16_t Humidity = 0;
+
+	if (xSemaphoreTake(tempHumSemaphore, portMAX_DELAY) == pdTRUE)
 	{
-		printf("TEMP AND HUM WAKE UP WENT WRONG\n");
+		xQueueSend(sensorDataQueue, &Temp, portMAX_DELAY);
+		xQueueSend(sensorDataQueue, &Humidity, portMAX_DELAY);
+		xEventGroupSetBits(dataEventGroup, BIT_HUMIDITY_TEMPERATURE);
 	}
-	
-	vTaskDelay(pdMS_TO_TICKS(50));
-	
-	if ( HIH8120_OK !=  hih8120_measure() )
-	{
-		printf("TEMP AND HUM MEASURING UP WENT WRONG\n");
-	}
-	
-	vTaskDelay(pdMS_TO_TICKS(20));
-	
+	vTaskDelay(10);
 }
 void TempAndHumTask(void* pvpParameter)
 {
