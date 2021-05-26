@@ -35,6 +35,7 @@ void initializeUsedData()
 	initializeEventGroup();
 	initializeQueue();
 	initializeTempAndHumiditySemaphore();
+	initializeVentilationSemaphore();
 	initializeConfiguration();
 	initializeUplinkMessageBuffer();
 	initializeDownlinkMessageBuffer();
@@ -48,9 +49,6 @@ void create_tasks(void)
 }
 
 
-
-
-
 /*-----------------------------------------------------------*/
 void initialiseSystem()
 {
@@ -58,12 +56,12 @@ void initialiseSystem()
 	initializeUsedData();
 	create_tasks();
 
-	lora_driver_initialise(ser_USART1, downlinkMessageBuffer);
-	lora_uplink_handler_create(2);
+	lora_driver_initialise(ser_USART1, NULL);
+	lora_uplink_handler_create(4);
 	printf("Before craete downlink\n");
 	lora_downlink_handler_create(3);
 	printf("Before venitolation\n");
-	//createVentilationTask();
+	createVentilationTask();
 	printf("After ventilation\n");
 	
 }

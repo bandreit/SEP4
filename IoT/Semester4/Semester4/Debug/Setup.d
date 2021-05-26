@@ -20,7 +20,9 @@ Setup.d Setup.o: .././Setup.c ../FreeRTOS/src/ATMEGA_FreeRTOS.h \
  ../FreeRTOS/src/list.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h \
  ../FreeRTOS/src/queue.h ../FreeRTOS/src/event_groups.h \
  ../FreeRTOS/src/timers.h ../FreeRTOS/src/message_buffer.h \
- ../FreeRTOS/src/stream_buffer.h .././Setup.h
+ ../FreeRTOS/src/stream_buffer.h .././Setup.h ../drivers/lora_driver.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
+ ../drivers/serial.h
 
 ../FreeRTOS/src/ATMEGA_FreeRTOS.h:
 
@@ -83,3 +85,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../FreeRTOS/src/stream_buffer.h:
 
 .././Setup.h:
+
+../drivers/lora_driver.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
+
+../drivers/serial.h:

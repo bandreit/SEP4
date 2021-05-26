@@ -40,9 +40,9 @@ void ApplicationTask(void *pvParameters)
 		{
 			printf("ALL DATA COLLECTED\n");
 			setPackageHandler();
-			vTaskDelay(pdMS_TO_TICKS(120000));
+			vTaskDelay(pdMS_TO_TICKS(3000));
 			xSemaphoreGive(tempHumSemaphore);
-			
+
 		}
 		vTaskDelay(pdMS_TO_TICKS(50));
 		
@@ -51,7 +51,6 @@ void ApplicationTask(void *pvParameters)
 
 void createApplicationTask()
 {
-
 	
 	xTaskCreate(
 	ApplicationTask

@@ -11,7 +11,7 @@ uint8_t ventilationLevel;
 
 void initializeConfiguration()
 {
-	ventilationLevel = 0;
+	ventilationLevel = -100;
 	configSemaphore = xSemaphoreCreateBinary();
 	xSemaphoreGive(configSemaphore);
 }

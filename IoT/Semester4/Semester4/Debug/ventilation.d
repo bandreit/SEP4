@@ -21,8 +21,11 @@ ventilation.d ventilation.o: .././ventilation.c \
  ../FreeRTOS/src/list.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
- ../FreeRTOS/src/task.h ../drivers/rc_servo.h .././configuration.h \
- ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h .././ventilation.h
+ ../FreeRTOS/src/task.h ../drivers/rc_servo.h .././Setup.h \
+ ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h ../FreeRTOS/src/queue.h \
+ ../FreeRTOS/src/event_groups.h ../FreeRTOS/src/timers.h \
+ ../FreeRTOS/src/message_buffer.h ../FreeRTOS/src/stream_buffer.h \
+ .././configuration.h .././ventilation.h
 
 ../FreeRTOS/src/ATMEGA_FreeRTOS.h:
 
@@ -78,10 +81,22 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../drivers/rc_servo.h:
 
-.././configuration.h:
+.././Setup.h:
 
 ../FreeRTOS/src/semphr.h:
 
 ../FreeRTOS/src/queue.h:
+
+../FreeRTOS/src/queue.h:
+
+../FreeRTOS/src/event_groups.h:
+
+../FreeRTOS/src/timers.h:
+
+../FreeRTOS/src/message_buffer.h:
+
+../FreeRTOS/src/stream_buffer.h:
+
+.././configuration.h:
 
 .././ventilation.h:

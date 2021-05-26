@@ -24,10 +24,10 @@ LoRaWANDownlinkHandler.d LoRaWANDownlinkHandler.o: \
  ../FreeRTOS/src/stream_buffer.h ../FreeRTOS/src/task.h \
  ../drivers/lora_driver.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
- ../drivers/serial.h .././LoRaWANDownlinkHandler.h .././Setup.h \
- ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h ../FreeRTOS/src/queue.h \
- ../FreeRTOS/src/event_groups.h ../FreeRTOS/src/timers.h \
- .././configuration.h
+ ../drivers/serial.h ../drivers/rc_servo.h .././LoRaWANDownlinkHandler.h \
+ .././Setup.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h \
+ ../FreeRTOS/src/queue.h ../FreeRTOS/src/event_groups.h \
+ ../FreeRTOS/src/timers.h .././configuration.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -90,6 +90,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
 
 ../drivers/serial.h:
+
+../drivers/rc_servo.h:
 
 .././LoRaWANDownlinkHandler.h:
 
