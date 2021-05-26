@@ -1,15 +1,5 @@
-/*
- * sensorDataPackageHandler.c
- *
- *  Author: IoT
- */ 
+
 #include "sensorDataPackageHandler.h"
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdint.h>
-
-#include <lora_driver.h>
 
 uint16_t co2_value;
 uint16_t hum_value;

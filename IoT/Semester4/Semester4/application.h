@@ -1,19 +1,18 @@
-/*
- * application.h
- *
- *  Author: IoT
- */ 
 
-#ifndef APPLICATION_H
-#define APPLICATION_H
+#pragma once
+
+#include <stdio.h>
 
 #include <ATMEGA_FreeRTOS.h>
-#include <message_buffer.h>
+#include <task.h>
 #include <event_groups.h>
-#include <semphr.h>
+#include <queue.h>
 
-void createApplicationTask();
+#include "sensorDataPackageHandler.h"
+#include "Setup.h"
+
+void createApplicationTask(UBaseType_t Taskpriority);
 void ApplicationTask(void *pvParameters);
 void setPackageHandler();
 						
-#endif
+

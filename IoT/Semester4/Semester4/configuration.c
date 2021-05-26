@@ -1,13 +1,8 @@
 
-#include <ATMEGA_FreeRTOS.h>
-#include <semphr.h>
-#include <stdint.h>
-
 #include "configuration.h"
 
 SemaphoreHandle_t configSemaphore;
 uint8_t ventilationLevel;
-
 
 void initializeConfiguration()
 {

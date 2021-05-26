@@ -1,23 +1,5 @@
-/*
- * LoRaWANUplinkHandler.c
- *
- * Created: 09.05.2021 12:54:40
- *  Author: andy2
- */ 
 
  #include "LoRaWANUplinkHandler.h"
-  #include "Setup.h"
-  #include "sensorDataPackageHandler.h"
-
- #include <stddef.h>
- #include <stdio.h>
-
- #include <ATMEGA_FreeRTOS.h>
- #include <message_buffer.h>
- #include <task.h>
-
- #include <lora_driver.h>
- #include <status_leds.h>
 
  // Parameters for OTAA join - We have got these in a mail from IHA
  #define LORA_appEUI "BDF222A4C4217BC4"
@@ -111,27 +93,21 @@
 
 	_lora_setup();
 	
-	printf("a facut setup\n");	
-
 	TickType_t xLastWakeTime;
 	const TickType_t xFrequency = pdMS_TO_TICKS(60000UL); // Upload message every 5 minutes (300000 ms)
 	xLastWakeTime = xTaskGetTickCount();
 
-	//size_t bytesReceivedApplication;
 
 	sensorDataPackageHandler_setPackage_lenght(6);
 	
 	for(;;)
 	{
 		lora_driver_payload_t _uplink_payload = sensorDataPackageHandler_getLoRaPayload(2);
-		printf("took data from package handler \n");
 
-		printf("before delay\n");
 		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-		printf("after delay, but before sending \n");
 		printf("%d payload\n",_uplink_payload.len);
 
-		if( _uplink_payload.bytes > 0 )
+		if( _uplink_payload.len > 5 )
 		{
 			status_leds_shortPuls(led_ST4);  // OPTIONAL
 			printf("0 -> %x\n", _uplink_payload.bytes[0]);

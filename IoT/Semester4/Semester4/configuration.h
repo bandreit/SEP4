@@ -1,6 +1,9 @@
 #pragma once
-#include <semphr.h>
+
 #include <stdint.h>
+
+#include <ATMEGA_FreeRTOS.h>
+#include <semphr.h>
 
 extern SemaphoreHandle_t configSemaphore;
 extern uint8_t ventilationLevel;
