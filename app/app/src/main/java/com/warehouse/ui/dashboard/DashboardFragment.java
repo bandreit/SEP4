@@ -74,7 +74,6 @@ public class DashboardFragment extends Fragment {
     private void setupFilter() {
         spinner = view.findViewById (R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext (), R.array.filter_dashboard, R.layout.spinner_item);
-        adapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(adapter);
     }
 
