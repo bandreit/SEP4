@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +33,7 @@ public class DashboardFragment extends Fragment {
     LineChart humidityChart;
     BarChart co2Chart;
     View view;
+    Spinner spinner;
 
     @Nullable
     @Override
@@ -38,8 +43,39 @@ public class DashboardFragment extends Fragment {
         setupTemperatureChart();
         setupHumidityChart();
         setupCO2Chart();
+        setupFilter();
+
+        spinner.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener ( ) {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 0){
+                    Toast.makeText (getContext (),String.valueOf (position),Toast.LENGTH_SHORT).show ();
+                }
+                if(position == 1){
+                    Toast.makeText (getContext (),String.valueOf (position),Toast.LENGTH_SHORT).show ();
+                }
+                if(position == 2){
+                    Toast.makeText (getContext (),String.valueOf (position),Toast.LENGTH_SHORT).show ();
+                }
+                if(position == 3){
+                    Toast.makeText (getContext (),String.valueOf (position),Toast.LENGTH_SHORT).show ();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         return view;
+    }
+
+    private void setupFilter() {
+        spinner = view.findViewById (R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext (), R.array.filter_dashboard, R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_item);
+        spinner.setAdapter(adapter);
     }
 
     private void setupTemperatureChart() {
