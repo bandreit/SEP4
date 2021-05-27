@@ -1,6 +1,6 @@
 package via.sep4.persistance;
 
-import via.sep4.Parameter;
+import via.sep4.model.Parameter;
 
 import java.sql.SQLException;
 import java.util.List;
