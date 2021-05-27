@@ -32,15 +32,19 @@ public class LoadDatabase {
             roomRepository.save(room);
             roomRepository.save(room1);
 
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = dateFormat.parse("23/09/2007");
-            long time = date.getTime();
-            Timestamp timestamp = new Timestamp(time);
-            SensorType sensorType = SensorType.valueOf("TEMPERATURE");
-            Sensor sensor1 = new Sensor(sensorType, "Celcius", 43, timestamp, room);
-            Sensor sensor2 = new Sensor(sensorType, "Celcius", 99, timestamp, room1);
+
+            Sensor sensor1 = new Sensor(SensorType.TEMPERATURE, "°C", room);
+            Sensor sensor2 = new Sensor(SensorType.HUMIDITY, "%", room);
+            Sensor sensor3 = new Sensor(SensorType.CO2, "PPM", room);
+            Sensor sensor4 = new Sensor(SensorType.TEMPERATURE, "°C", room1);
+            Sensor sensor5 = new Sensor(SensorType.HUMIDITY, "%", room1);
+            Sensor sensor6 = new Sensor(SensorType.CO2, "PPM", room1);
             sensorRepository.save(sensor1);
             sensorRepository.save(sensor2);
+            sensorRepository.save(sensor3);
+            sensorRepository.save(sensor4);
+            sensorRepository.save(sensor5);
+            sensorRepository.save(sensor6);
         };
     }
 }
