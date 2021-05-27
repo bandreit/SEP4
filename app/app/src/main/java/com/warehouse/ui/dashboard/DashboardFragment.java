@@ -87,11 +87,8 @@ public class DashboardFragment extends Fragment {
         temperatureChart.getXAxis().setDrawGridLines(false);
         temperatureChart.getXAxis().setLabelRotationAngle(45);
         temperatureChart.getXAxis().setValueFormatter(new DayFormatter());
-
         temperatureChart.getAxisLeft().setTextColor(Color.WHITE);
-
         temperatureChart.getAxisRight().setEnabled(false);
-
         temperatureChart.getLegend().setEnabled(false);
         temperatureChart.getDescription().setEnabled(false);
 
