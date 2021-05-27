@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_900"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="40dp">
+
+
+    <!-- Temperature chart   -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/filterContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roomsTabLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/card_background">
+
+        <Spinner
+            android:id="@+id/spinner"
+            style="@android:style/Widget.Holo.TextView.SpinnerItem"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:padding="5dp"
+            android:popupBackground="@drawable/card_background"
+            android:spinnerMode="dropdown"
+            android:textAlignment="gravity" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Temperature chart   -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/temperatureChartContainer"
+        app:layout_constraintTop_toBottomOf="@+id/filterContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/card_background"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/temperatureChartLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temperature variation"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/temperatureChart"
+            app:layout_constraintTop_toBottomOf="@id/temperatureChartLabel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Humidity and Temperature Cards   -->
+    <GridLayout
+        android:id="@+id/co2TemperatureContainer"
+        app:layout_constraintTop_toBottomOf="@+id/temperatureChartContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:columnCount="2"
+        android:useDefaultMargins="true">
+        <!-- Humidity -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_columnWeight="1"
+            android:background="@drawable/card_background"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/humidityLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Humidity"
+                android:textColor="@color/white"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/humidityValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/humidityLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="30"
+                android:textColor="@color/white"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+            <TextView
+                app:layout_constraintBaseline_toBaselineOf="@+id/humidityValue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/humidityValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="%"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Temperature -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_columnWeight="1"
+            android:background="@drawable/card_background"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/temperatureLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Temperature"
+                android:textColor="@color/white"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/temperatureValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/temperatureLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="20.0"
+                android:textColor="@color/white"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+            <TextView
+                app:layout_constraintBaseline_toBaselineOf="@+id/temperatureValue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/temperatureValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="°C"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </GridLayout>
+
+    <!-- CO2 Chart   -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/co2ChartContainer"
+        app:layout_constraintTop_toBottomOf="@+id/co2TemperatureContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/card_background"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/co2ChartLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CO2 Variation"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/co2Chart"
+            app:layout_constraintTop_toBottomOf="@id/co2ChartLabel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    CO2 Level Card    -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/co2LevelCardContainer"
+        app:layout_constraintTop_toBottomOf="@id/co2ChartContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/card_background"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/co2Label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CO2 Level"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/co2Value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/co2Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="130"
+            android:textColor="@color/white"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+        <TextView
+            app:layout_constraintBaseline_toBaselineOf="@+id/co2Value"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/co2Value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="PPM"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Humidity chart   -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/humidityChartContainer"
+        app:layout_constraintTop_toBottomOf="@+id/co2LevelCardContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/card_background"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/humidityChartLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Humidity variation"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/humidityChart"
+            app:layout_constraintTop_toBottomOf="@id/humidityChartLabel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
