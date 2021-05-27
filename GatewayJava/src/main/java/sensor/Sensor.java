@@ -1,16 +1,21 @@
 package sensor;
 
+import java.sql.Timestamp;
+
 public class Sensor {
     private SensorType sensorType;
     private String unitType;
     private double value;
-    private long timestamp;
+    private long longTimestamp;
+    private Timestamp timestamp;
 
-    public Sensor(SensorType sensorType, String unitType, double value, long timestamp) {
+
+    public Sensor(SensorType sensorType, String unitType, double value, long longTimestamp) {
         this.sensorType = sensorType;
         this.unitType = unitType;
         this.value = value;
-        this.timestamp = timestamp;
+        this.longTimestamp = longTimestamp;
+        timestamp = new Timestamp(longTimestamp);
     }
 
     public SensorType getSensorType() {
@@ -37,20 +42,29 @@ public class Sensor {
         this.value = value;
     }
 
-    public long getTimestamp() {
+    public long getLongTimestamp() {
+        return longTimestamp;
+    }
+
+    public void setLongTimestamp(long longTimestamp) {
+        this.longTimestamp = longTimestamp;
+    }
+
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 
     @Override
     public String toString() {
-        return "sensor.Sensor{" +
+        return "Sensor{" +
                 "sensorType=" + sensorType +
                 ", unitType='" + unitType + '\'' +
                 ", value=" + value +
+                ", longTimestamp=" + longTimestamp +
                 ", timestamp=" + timestamp +
                 '}';
     }

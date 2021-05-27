@@ -4,6 +4,7 @@ package via.sep4.mediator;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import via.sep4.model.Room.Room;
+import via.sep4.model.Room.RoomRepository;
 import via.sep4.model.Sensor.Sensor;
 import via.sep4.model.Sensor.SensorRepository;
 import via.sep4.network.NetworkPackage;
@@ -11,14 +12,22 @@ import via.sep4.network.NetworkPackage;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
 
 public class ClientHandler implements Runnable {
     private Socket socket;
     private InputStream inputStream;
     private OutputStream outputStream;
     private Gson gson;
+    private Random rn = new Random();
+
     @Autowired
-    private SensorRepository repository;
+    private SensorRepository sensorRepository;
+    @Autowired
+    private RoomRepository roomRepository;
+    private static String[] names = {"Freezer", "Main"};
 
     /**
      * Instantiates a new Client handler.
@@ -55,11 +64,20 @@ public class ClientHandler implements Runnable {
                     case SensorList:
                         ArrayList<Sensor> incomingSensorData = (ArrayList<Sensor>) incoming.getObject();
                         System.out.println("Privet in server : " + incomingSensorData);
-                        for (Sensor sensor : incomingSensorData) {
-                            Room room = new Room("Freezer");
-                            sensor.setRoom(room);
-                            repository.save(sensor);
-                        }
+
+//                        int randomNum = rn.nextInt(2);
+//                        Room room = new Room(names[randomNum]);
+//                        Optional<Room> existingRoom = Optional.ofNullable(roomRepository.findOne(room.getRoomname()));
+//                        if (existingRoom.isEmpty()) {
+//                            room.setSensors((Set<Sensor>) incomingSensorData);
+//                        }
+//
+//                        for (Sensor sensor : incomingSensorData) {
+//
+//
+//                            sensor.setRoom(room);
+//                            repository.save(sensor);
+//                        }
                         break;
                     default:
                         sendData("ERROR");

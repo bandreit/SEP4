@@ -1,14 +1,13 @@
 package via.sep4.model.Sensor;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import via.sep4.model.Room.Room;
+import via.sep4.model.SensorHistory.SensorHistory;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "sensor")
@@ -18,34 +17,26 @@ public class Sensor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sensorID;
 
-
     @Column(updatable = false, name = "sensortype")
     private SensorType sensorType;
     @Column(updatable = false, name = "unittype")
     private String unitType;
-    @Column(updatable = false, name = "sensorvalue")
-    private double sensorValue;
-    @Column(updatable = false, name = "sensortimestamp")
-    private Timestamp sensorTimeStamp;
+    private double currentValue;
     @Column(name = "minvalue")
     private int minValue;
     @Column(name = "maxvalue")
     private int maxValue;
-    @Column(name = "currentvalue")
-    private int currentValue;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "roomid", nullable = false)
     private Room room;
 
+    @OneToMany(mappedBy = "sensor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<SensorHistory> history;
 
-    @JsonCreator
-    public Sensor(SensorType sensorType, String unitType, double value, Timestamp timestamp, Room room) {
+    public Sensor(SensorType sensorType, String unitType, Room room) {
         this.sensorType = sensorType;
         this.unitType = unitType;
-        this.sensorValue = value;
-        this.sensorTimeStamp = timestamp;
-        this.currentValue = 0;
         this.maxValue = 0;
         this.minValue = 0;
         this.room = room;
@@ -79,11 +70,11 @@ public class Sensor {
         this.maxValue = maxValue;
     }
 
-    public int getCurrentValue() {
+    public double getCurrentValue() {
         return currentValue;
     }
 
-    public void setCurrentValue(int currentValue) {
+    public void setCurrentValue(double currentValue) {
         this.currentValue = currentValue;
     }
 
@@ -103,20 +94,46 @@ public class Sensor {
         this.unitType = unitType;
     }
 
-    public double getValue() {
-        return sensorValue;
+
+    public Long getSensorID() {
+        return sensorID;
     }
 
-    public void setValue(double value) {
-        this.sensorValue = value;
+    public void setSensorID(Long sensorID) {
+        this.sensorID = sensorID;
     }
 
-    public Timestamp getTimestamp() {
-        return sensorTimeStamp;
+    public SensorType getSensorType() {
+        return sensorType;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.sensorTimeStamp = timestamp;
+    public void setSensorType(SensorType sensorType) {
+        this.sensorType = sensorType;
+    }
+
+    public int getMinValue() {
+        return minValue;
+    }
+
+    public void setMinValue(int minValue) {
+        this.minValue = minValue;
+    }
+
+    public int getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    @JsonManagedReference
+    public Set<SensorHistory> getHistory() {
+        return history;
+    }
+
+    public void setHistory(Set<SensorHistory> history) {
+        this.history = history;
     }
 
     @Override
@@ -124,8 +141,7 @@ public class Sensor {
         return "Sensor{" +
                 "name ='" + sensorType + '\'' +
                 ", unitType='" + unitType + '\'' +
-                ", value= " + sensorValue +
-                ", timestamp= " + sensorTimeStamp +
+                ", value= " + currentValue +
                 '}';
     }
 
