@@ -1,49 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="16dp"
+    android:background="@color/blue_500"
+    android:paddingHorizontal="18dp"
+    android:paddingBottom="20dp"
+
     >
 
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:gravity="center_horizontal"-->
+<!--    android:orientation="vertical"-->
+<!--    android:padding="16dp"-->
+<!--    android:background="@color/blue_500"-->
+<!--    >-->
+
+
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:text="@string/configure"
+        android:textColor="@color/white"
         android:textSize="25sp"
-        android:textColor="@color/black"/>
-    <Button
-        android:layout_margin="10dp"
-        android:id="@+id/algo_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textParameter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share this Algorithm" />
+        android:layout_marginTop="32dp"
+        android:text="Humidity"
+        android:textColor="@color/white"
+        android:textSize="21sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
-        android:layout_margin="10dp"
-        android:id="@+id/course_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Share this Course" />
-
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/droplet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.321"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <com.google.android.material.slider.RangeSlider
 
-         android:id="@+id/range_slider"
+        android:id="@+id/range_slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:stepSize="1"
         android:value="5"
         android:valueFrom="0"
         android:valueTo="100"
-        app:values="@array/rangeSliderValues"
         app:haloColor="@color/blue_900"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:thumbColor="@color/teal_400"
-
-
-    >
+        app:trackColor="@color/white"
+        app:values="@array/rangeSliderValues">
 
     </com.google.android.material.slider.RangeSlider>
-</LinearLayout>
+    <!--</LinearLayout>-->
+</androidx.constraintlayout.widget.ConstraintLayout>
