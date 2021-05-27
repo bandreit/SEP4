@@ -16,3 +16,9 @@ typedef int8_t  BaseType_t;
 
 typedef size_t StackType_t;
 typedef size_t StaticTask_t;
+
+typedef struct lora_driver_payload {
+	uint8_t portNo; /**< Port_no the data is received on, or to transmit to */
+	uint8_t len; /**< Length of the payload (no of bytes) */
+	uint8_t bytes[20]; /**< Array to hold the payload to be sent, or that has been received */
+} lora_driver_payload_t;

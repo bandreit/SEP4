@@ -35,16 +35,23 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(ProjectDir)\.;F:\UNIVERSITY\SEM4\SEP\SEP4\IoT\Testing\IoT_Production;$(IncludePath)</IncludePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)\.;C:\Users\andy2\Desktop\SEP4\IoT\Testing\IoT_Production;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="..\IoT_Production\application.c" />
     <ClCompile Include="..\IoT_Production\CO2.c" />
+    <ClCompile Include="..\IoT_Production\LoRaWANDownlinkHandler.c" />
     <ClCompile Include="..\IoT_Production\Setup.c" />
     <ClCompile Include="..\IoT_Production\TempAndHum.c" />
+    <ClCompile Include="..\IoT_Production\ventilation.c" />
     <ClCompile Include="ApplicationTesting.cpp" />
     <ClCompile Include="CO2Testing.cpp" />
     <ClCompile Include="FreeRTOS_MOCK_FFF.cpp" />
+    <ClCompile Include="LoRaWANDownlinkHandlerTesting.cpp" />
     <ClCompile Include="SetupTesting.cpp" />
     <ClCompile Include="TempAndHumTesting.cpp" />
+    <ClCompile Include="VentilationTesting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -81,7 +88,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>X64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>

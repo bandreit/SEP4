@@ -29,6 +29,7 @@ void ventilationTask(void* pvpParameter)
 	
 		if(xSemaphoreTake(ventilationSemaphore,portMAX_DELAY)==pdTRUE)
 		{
+			printf("setting the ventilation level.....\n");
 			rc_servo_setPosition(1, getVentilationLevel());
 		}
 		vTaskDelay(pdMS_TO_TICKS(100));

@@ -22,6 +22,7 @@ protected:
 	{
 		RESET_FAKE(xMessageBufferCreate);
 		RESET_FAKE(xSemaphoreCreateBinary);
+		RESET_FAKE(xSemaphoreGive);
 		RESET_FAKE(xQueueCreate);
 		RESET_FAKE(xEventGroupCreate);
 		FFF_RESET_HISTORY();
@@ -54,7 +55,7 @@ TEST_F(SetupTesting, Initialise_DownLinkMessageBuffer) {
 	initializeDownlinkMessageBuffer();
 
 	ASSERT_EQ(1, xMessageBufferCreate_fake.call_count);
-	ASSERT_EQ(100, xMessageBufferCreate_fake.arg0_val);
+	ASSERT_EQ(44, xMessageBufferCreate_fake.arg0_val);
 }
 
 TEST_F(SetupTesting, Initialise_UpLinkMessageBuffer) {

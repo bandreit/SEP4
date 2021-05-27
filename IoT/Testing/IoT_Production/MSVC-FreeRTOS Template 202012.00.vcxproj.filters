@@ -33,6 +33,18 @@
     <ClInclude Include="sensorDataPackageHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ventilation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoRaWANDownlinkHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoRaWANUplinkHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="configuration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TempAndHum.c">
@@ -48,6 +60,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sensorDataPackageHandler.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoRaWANDownlinkHandler.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoRaWANUplinkHandler.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ventilation.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="configuration.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

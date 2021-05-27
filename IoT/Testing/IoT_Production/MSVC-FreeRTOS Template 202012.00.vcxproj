@@ -143,17 +143,25 @@
   <ItemGroup>
     <ClInclude Include="application.h" />
     <ClInclude Include="CO2.h" />
+    <ClInclude Include="configuration.h" />
     <ClInclude Include="FreeRTOSConfig.h" />
+    <ClInclude Include="LoRaWANDownlinkHandler.h" />
+    <ClInclude Include="LoRaWANUplinkHandler.h" />
     <ClInclude Include="sensorDataPackageHandler.h" />
     <ClInclude Include="Setup.h" />
     <ClInclude Include="TempAndHum.h" />
+    <ClInclude Include="ventilation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application.c" />
     <ClCompile Include="CO2.c" />
+    <ClCompile Include="configuration.c" />
+    <ClCompile Include="LoRaWANDownlinkHandler.c" />
+    <ClCompile Include="LoRaWANUplinkHandler.c" />
     <ClCompile Include="sensorDataPackageHandler.c" />
     <ClCompile Include="Setup.c" />
     <ClCompile Include="TempAndHum.c" />
+    <ClCompile Include="ventilation.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
