@@ -2,7 +2,9 @@ package via.sep4.mediator;
 
 
 import com.google.gson.Gson;
-import via.sep4.model.Sensor;
+import org.springframework.beans.factory.annotation.Autowired;
+import via.sep4.model.Sensor.Sensor;
+import via.sep4.model.Sensor.SensorRepository;
 import via.sep4.network.NetworkPackage;
 
 import java.io.*;
@@ -14,6 +16,8 @@ public class ClientHandler implements Runnable {
     private InputStream inputStream;
     private OutputStream outputStream;
     private Gson gson;
+    @Autowired
+    private SensorRepository repository;
 
     /**
      * Instantiates a new Client handler.
@@ -36,6 +40,7 @@ public class ClientHandler implements Runnable {
      */
     @Override
     public void run() {
+
         while (true) {
             try {
                 //reading message from the client
@@ -48,8 +53,8 @@ public class ClientHandler implements Runnable {
                 switch (incoming.getType()) {
                     case SensorList:
                         ArrayList<Sensor> incomingSensorData = (ArrayList<Sensor>) incoming.getObject();
-                        // put it inside the database DatabasePersitance or smth
                         System.out.println("Privet in server : " + incomingSensorData);
+                        //here to add to the database
                         break;
                     default:
                         sendData("ERROR");

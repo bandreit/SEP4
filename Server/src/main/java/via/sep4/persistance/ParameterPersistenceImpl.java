@@ -1,12 +1,5 @@
-package via.sep4.persistance;
+//ackage via.sep4.persistance;
 
-import via.sep4.model.Parameter;
-import via.sep4.model.SensorType;
-
-import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 //public class ParameterPersistenceImpl implements ParameterPersistance {
 //
