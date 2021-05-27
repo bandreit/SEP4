@@ -3,6 +3,7 @@ package via.sep4.mediator;
 
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import via.sep4.model.Room.Room;
 import via.sep4.model.Sensor.Sensor;
 import via.sep4.model.Sensor.SensorRepository;
 import via.sep4.network.NetworkPackage;
@@ -54,7 +55,11 @@ public class ClientHandler implements Runnable {
                     case SensorList:
                         ArrayList<Sensor> incomingSensorData = (ArrayList<Sensor>) incoming.getObject();
                         System.out.println("Privet in server : " + incomingSensorData);
-                        //here to add to the database
+                        for (Sensor sensor : incomingSensorData) {
+                            Room room = new Room("Freezer");
+                            sensor.setRoom(room);
+                            repository.save(sensor);
+                        }
                         break;
                     default:
                         sendData("ERROR");

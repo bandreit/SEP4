@@ -20,7 +20,7 @@ public class Room {
     @Column(name = "roomid")
     private Long roomid;
 
-    @Column(updatable = false)
+    @Column(updatable = false, unique = true)
     private String roomname;
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Sensor> sensors;
