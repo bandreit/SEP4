@@ -58,7 +58,5 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         mainActivityViewModel.init();
-
-//        FirebaseMessaging.getInstance().getToken();
     }
 }
