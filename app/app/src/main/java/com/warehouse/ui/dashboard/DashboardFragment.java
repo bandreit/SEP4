@@ -86,7 +86,7 @@ public class DashboardFragment extends Fragment {
         temperatureChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         temperatureChart.getXAxis().setDrawGridLines(false);
         temperatureChart.getXAxis().setLabelRotationAngle(45);
-        temperatureChart.getXAxis().setValueFormatter(new DayFormatter());
+        temperatureChart.getXAxis().setValueFormatter(new DayFormatter(getResources()));
         temperatureChart.getAxisLeft().setTextColor(Color.WHITE);
         temperatureChart.getAxisRight().setEnabled(false);
         temperatureChart.getLegend().setEnabled(false);
@@ -109,7 +109,7 @@ public class DashboardFragment extends Fragment {
 
 
         // Data set
-        LineDataSet dataSet = new LineDataSet(entries, "Temperature");
+        LineDataSet dataSet = new LineDataSet(entries, getResources().getString(R.string.chart_temperature));
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
 
@@ -130,7 +130,7 @@ public class DashboardFragment extends Fragment {
         humidityChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         humidityChart.getXAxis().setDrawGridLines(false);
         humidityChart.getXAxis().setLabelRotationAngle(45);
-        humidityChart.getXAxis().setValueFormatter(new DayFormatter());
+        humidityChart.getXAxis().setValueFormatter(new DayFormatter(getResources()));
 
         humidityChart.getAxisLeft().setTextColor(Color.WHITE);
 
@@ -156,7 +156,7 @@ public class DashboardFragment extends Fragment {
 
 
         // Data set
-        LineDataSet dataSet = new LineDataSet(entries, "Temperature");
+        LineDataSet dataSet = new LineDataSet(entries, getResources().getString(R.string.chart_temperature));
 
 
         // configure chart
@@ -177,7 +177,7 @@ public class DashboardFragment extends Fragment {
         co2Chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         co2Chart.getXAxis().setDrawGridLines(false);
         co2Chart.getXAxis().setLabelRotationAngle(45);
-        co2Chart.getXAxis().setValueFormatter(new DayFormatter());
+        co2Chart.getXAxis().setValueFormatter(new DayFormatter(getResources()));
 
         co2Chart.getAxisLeft().setTextColor(Color.WHITE);
 
@@ -203,7 +203,7 @@ public class DashboardFragment extends Fragment {
 
 
         // Data set
-        BarDataSet dataSet = new BarDataSet(entries, "Temperature");
+        BarDataSet dataSet = new BarDataSet(entries, getResources().getString(R.string.chart_temperature));
 
 
         // configure chart
