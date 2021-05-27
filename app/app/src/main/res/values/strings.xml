@@ -9,4 +9,10 @@
     <string name="title_theme">Dark theme</string>
     <string name="title_allow_notifications">Allow notifications</string>
     <string name="title_logout">Log Out</string>
+    <string-array name="filter_dashboard">
+        <item>Today</item>
+        <item>This Week</item>
+        <item>Last Week</item>
+        <item>Last Two Weeks</item>
+    </string-array>
 </resources>
