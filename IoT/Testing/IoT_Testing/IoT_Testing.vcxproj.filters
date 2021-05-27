@@ -10,6 +10,10 @@
     <ClCompile Include="CO2Testing.cpp" />
     <ClCompile Include="..\IoT_Production\application.c" />
     <ClCompile Include="ApplicationTesting.cpp" />
+    <ClCompile Include="LoRaWANDownlinkHandlerTesting.cpp" />
+    <ClCompile Include="..\IoT_Production\LoRaWANDownlinkHandler.c" />
+    <ClCompile Include="..\IoT_Production\ventilation.c" />
+    <ClCompile Include="VentilationTesting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

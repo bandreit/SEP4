@@ -6,9 +6,6 @@
 #include <event_groups.h>
 void myCo2CallBack(uint16_t ppm);
 
-
-
-
 void CO2Task_run()
 {
 	EventBits_t dataEventBits = xEventGroupWaitBits(dataEventGroup, BIT_HUMIDITY_TEMPERATURE, pdFALSE, pdTRUE, portMAX_DELAY);
