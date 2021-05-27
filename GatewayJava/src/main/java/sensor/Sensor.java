@@ -1,7 +1,5 @@
 package sensor;
 
-import java.sql.Timestamp;
-
 public class Sensor {
     private SensorType sensorType;
     private String unitType;
