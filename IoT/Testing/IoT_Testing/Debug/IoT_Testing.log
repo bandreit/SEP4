@@ -1,2 +1,12 @@
-﻿  ApplicationTesting.cpp
+﻿  CO2.c
+  Setup.c
+  TempAndHum.c
+  application.c
+  Generating Code...
+  ApplicationTesting.cpp
+  CO2Testing.cpp
+  FreeRTOS_MOCK_FFF.cpp
+  SetupTesting.cpp
+  TempAndHumTesting.cpp
+  Generating Code...
   IoT_Testing.vcxproj -> F:\UNIVERSITY\SEM4\SEP\SEP4\IoT\Testing\IoT_Production\Debug\IoT_Testing.exe

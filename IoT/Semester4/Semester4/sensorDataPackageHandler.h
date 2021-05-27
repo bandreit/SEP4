@@ -1,12 +1,9 @@
-/*
- * sensorDataPackageHandler.h
- *
- *  Author: IoT
- */ 
 
-#ifndef SENSORDATAPACKAGEHANDLER_H
-#define SENSORDATAPACKAGEHANDLER_H
 
+#pragma once
+
+#include <stdlib.h>
+#include <stdio.h>
 #include <stdint.h>
 
 #include <ATMEGA_FreeRTOS.h>
@@ -18,5 +15,3 @@ void sensorDataPackageHandler_setTemp_value(uint16_t value);
 void sensorDataPackageHandler_setHumidity_value(uint16_t value);
 void sensorDataPackageHandler_setVentilator_servo(uint8_t ventilator_state_servo);
 lora_driver_payload_t sensorDataPackageHandler_getLoRaPayload(uint8_t port_No);
-
-#endif

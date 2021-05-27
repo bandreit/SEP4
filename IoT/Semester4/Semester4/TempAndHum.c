@@ -1,12 +1,6 @@
 
-#include <ATMEGA_FreeRTOS.h>
-#include <hih8120.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <task.h>
-#include <semphr.h>
 #include "TempAndHum.h"
-#include "Setup.h"
+
 
 void initializeTempAndHumDriver()
 {
@@ -46,7 +40,6 @@ void TempAndHumTask(void* pvpParameter)
 	{
 		uint16_t Temp = 0;
 		uint16_t Humidity = 0;
-		//printf("TEMP TASK \n");
 		if(xSemaphoreTake(tempHumSemaphore,portMAX_DELAY)==pdTRUE)
 		{
 			measureTempAndHum();
@@ -60,20 +53,20 @@ void TempAndHumTask(void* pvpParameter)
 			xEventGroupSetBits(dataEventGroup,BIT_HUMIDITY_TEMPERATURE);
 
 		}
-		vTaskDelay(10);
+		vTaskDelay(pdMS_TO_TICKS(10));
 		
 	}
 }
 
-void createTempAndHumTask()
+void createTempAndHumTask(UBaseType_t Taskpriority)
 {
 	initializeTempAndHumDriver();
 		xTaskCreate(
 		TempAndHumTask
-		,  "TempAndHumTask"  // A name just for humans
-		,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
+		,  "TempAndHumTask"  
+		,  configMINIMAL_STACK_SIZE  
 		,  NULL
-		,  tskIDLE_PRIORITY + 1  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+		,  tskIDLE_PRIORITY + Taskpriority 
 		,  NULL );
 }
 
