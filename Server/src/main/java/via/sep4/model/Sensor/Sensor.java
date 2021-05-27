@@ -1,14 +1,22 @@
 package via.sep4.model.Sensor;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import via.sep4.model.Room.Room;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "Sensor")
+@Table(name = "sensor")
 public class Sensor {
+    @Id
+    @Column(updatable = false, name = "sensorid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long sensorID;
 
 
     @Column(updatable = false, name = "sensortype")
@@ -25,13 +33,14 @@ public class Sensor {
     private int maxValue;
     @Column(name = "currentvalue")
     private int currentValue;
-    @Id
-    @Column(updatable = false, name = "sensorid")
-    private int sensorID;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "roomid", nullable = false)
+    private Room room;
 
 
     @JsonCreator
-    public Sensor(@JsonProperty("sensorType") SensorType sensorType, @JsonProperty("unitType") String unitType, @JsonProperty("sensorValue") double value, @JsonProperty("sensorTimeStamp") Timestamp timestamp) {
+    public Sensor(SensorType sensorType, String unitType, double value, Timestamp timestamp, Room room) {
         this.sensorType = sensorType;
         this.unitType = unitType;
         this.sensorValue = value;
@@ -39,9 +48,19 @@ public class Sensor {
         this.currentValue = 0;
         this.maxValue = 0;
         this.minValue = 0;
+        this.room = room;
     }
 
     public Sensor() {
+    }
+
+    @JsonBackReference
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public int getMin() {
@@ -110,11 +129,11 @@ public class Sensor {
                 '}';
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.sensorID = id;
     }
 
-    public int getId() {
+    public Long getId() {
         return sensorID;
     }
 }

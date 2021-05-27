@@ -27,20 +27,20 @@ public class LoadDatabase {
     @Bean
     CommandLineRunner initDatabase(SensorRepository sensorRepository, RoomRepository roomRepository) {
         return args -> {
+            Room room = new Room("Freezer");
+            Room room1 = new Room("Main");
+            roomRepository.save(room);
+            roomRepository.save(room1);
 
-//            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//            Date date = dateFormat.parse("23/09/2007");
-//            long time = date.getTime();
-//            Timestamp timestamp = new Timestamp(time);
-//            SensorType sensorType = SensorType.valueOf("TEMPERATURE");
-//            Sensor sensor = new Sensor(sensorType, "Humidity", 43, timestamp);
-//            sensorRepository.save(sensor);
-
-//            int sensorid = sensorRepository.findAll().get(0).getId();
-//            Room room = new Room("Freezer", ,15);
-//            roomRepository.save(room);
-//            roomRepository.save(room);
-//            roomRepository.save(room);
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = dateFormat.parse("23/09/2007");
+            long time = date.getTime();
+            Timestamp timestamp = new Timestamp(time);
+            SensorType sensorType = SensorType.valueOf("TEMPERATURE");
+            Sensor sensor1 = new Sensor(sensorType, "Celcius", 43, timestamp, room);
+            Sensor sensor2 = new Sensor(sensorType, "Celcius", 99, timestamp, room1);
+            sensorRepository.save(sensor1);
+            sensorRepository.save(sensor2);
         };
     }
 }
