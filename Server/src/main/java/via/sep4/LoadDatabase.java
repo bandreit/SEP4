@@ -30,7 +30,6 @@ public class LoadDatabase {
             Room room1 = new Room("Main");
             roomRepository.save(room0);
             roomRepository.save(room1);
-
             Sensor sensor0 = new Sensor(SensorType.CO2, "PPM", room0);
             Sensor sensor1 = new Sensor(SensorType.HUMIDITY, "%", room0);
             Sensor sensor2 = new Sensor(SensorType.TEMPERATURE, "°C", room0);

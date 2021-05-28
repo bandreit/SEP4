@@ -8,6 +8,7 @@ import via.sep4.model.SensorHistory.SensorHistory;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,7 +18,6 @@ public class Sensor {
     @Column(updatable = false, name = "sensorid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sensorID;
-
     @Column(updatable = false, name = "sensortype")
     private SensorType sensorType;
     @Column(updatable = false, name = "unittype")
@@ -25,15 +25,15 @@ public class Sensor {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
     private double currentValue;
+    @Transient
+    private List<Double> allValues;
     @Column(name = "minvalue")
     private int minValue;
     @Column(name = "maxvalue")
     private int maxValue;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "roomid", nullable = false)
     private Room room;
-
     @OneToMany(mappedBy = "sensor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<SensorHistory> history;
 
