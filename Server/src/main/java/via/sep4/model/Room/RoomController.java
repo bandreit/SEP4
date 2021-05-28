@@ -22,5 +22,4 @@ public class RoomController {
     List<Room> all() {
         return roomService.findAll();
     }
-
 }
