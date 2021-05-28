@@ -75,8 +75,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:thumbColor="@color/teal_400"
-        app:trackColor="@color/white"
-        app:values="@array/rangeSliderValues">
+        app:trackColor="@color/white">
 
     </com.google.android.material.slider.RangeSlider>
     <!--</LinearLayout>-->
