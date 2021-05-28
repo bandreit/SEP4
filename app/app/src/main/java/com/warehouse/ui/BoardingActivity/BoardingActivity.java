@@ -29,8 +29,8 @@ public class BoardingActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences(BOARDING_PAGE_PREFERENCE, MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean (BOARDING_PAGE_COMPLETE,true);
-                editor.apply ();
-                finish ();
+                editor.apply();
+                finish();
             }
         });
     }

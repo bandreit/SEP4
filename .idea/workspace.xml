@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="087ea562-be02-44dc-a03a-ec189491f262" name="Default Changelist" comment="" />
+    <list default="true" id="feae315f-dce2-415d-bf8d-f0e11c8879b9" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,7 +10,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1sIBUyQj195hQjACZBMlhOabQ1V" />
+  <component name="ProjectId" id="1t5LGy6Yb1zhVYoZ6Qk5oyIK8d8" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -18,25 +18,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Namaste" />
+    <property name="settings.editor.selected.configurable" value="memory.settings" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="087ea562-be02-44dc-a03a-ec189491f262" name="Default Changelist" comment="" />
-      <created>1620550242396</created>
+      <changelist id="feae315f-dce2-415d-bf8d-f0e11c8879b9" name="Default Changelist" comment="" />
+      <created>1622053911301</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1620550242396</updated>
+      <updated>1622053911301</updated>
     </task>
     <servers />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="1409" y="275" key="FileChooserDialogImpl" timestamp="1621378577775">
-      <screen x="0" y="0" width="2560" height="1040" />
-    </state>
-    <state x="1409" y="275" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1621378577775" />
   </component>
 </project>
