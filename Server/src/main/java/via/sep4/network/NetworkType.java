@@ -1,5 +1,5 @@
 package via.sep4.network;
 
 public enum NetworkType {
-    SensorList, Ventilation
+    SensorList, Ventilation, DATA_VALUE
 }

@@ -4,6 +4,7 @@ package via.sep4.mediator;
 import com.google.gson.Gson;
 import via.sep4.model.Sensor;
 import via.sep4.network.NetworkPackage;
+import via.sep4.network.NetworkType;
 
 import java.io.*;
 import java.net.Socket;

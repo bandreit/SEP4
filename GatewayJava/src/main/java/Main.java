@@ -1,3 +1,4 @@
+import mediator.ClientHandler;
 import service.DownLinkDataMessage;
 import service.WebsocketClient;
 import com.google.gson.Gson;
@@ -15,15 +16,21 @@ public class Main {
 
         while (true) {
             try {
-                String integerAsHexString = Integer.toHexString(69);
-                DownLinkDataMessage downLinkDataMessage = new DownLinkDataMessage(true, integerAsHexString);
-                String downLinkPayload = gson.toJson(downLinkDataMessage, DownLinkDataMessage.class);
-                System.out.println(downLinkPayload);
-                websocketClient.sendDownLink(downLinkPayload);
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
+                ClientHandler clientHandler = new ClientHandler();
+                Thread t = new Thread(clientHandler);
+                t.setDaemon(true);
+                t.start();
+
+//                String integerAsHexString = Integer.toHexString(69);
+//                DownLinkDataMessage downLinkDataMessage = new DownLinkDataMessage(true, integerAsHexString);
+//                String downLinkPayload = gson.toJson(downLinkDataMessage, DownLinkDataMessage.class);
+//                System.out.println(downLinkPayload);
+//                websocketClient.sendDownLink(downLinkPayload);
+//                Thread.sleep(10000);
+            } catch ( IOException e) {
                 e.printStackTrace();
             }
+
         }
     }
 }
