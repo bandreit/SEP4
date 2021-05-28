@@ -22,11 +22,8 @@ public class Sensor {
     private SensorType sensorType;
     @Column(updatable = false, name = "unittype")
     private String unitType;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Transient
+    @Column
     private double currentValue;
-    @Transient
-    private List<Double> allValues;
     @Column(name = "minvalue")
     private int minValue;
     @Column(name = "maxvalue")
@@ -42,6 +39,7 @@ public class Sensor {
         this.unitType = unitType;
         this.maxValue = 0;
         this.minValue = 0;
+        this.currentValue = 0;
         this.room = room;
     }
 
@@ -57,36 +55,12 @@ public class Sensor {
         this.room = room;
     }
 
-    public int getMin() {
-        return minValue;
-    }
-
-    public void setMin(int minValue) {
-        this.minValue = minValue;
-    }
-
-    public int getMax() {
-        return maxValue;
-    }
-
-    public void setMax(int maxValue) {
-        this.maxValue = maxValue;
-    }
-
     public double getCurrentValue() {
         return currentValue;
     }
 
     public void setCurrentValue(double currentValue) {
         this.currentValue = currentValue;
-    }
-
-    public SensorType getSensorName() {
-        return sensorType;
-    }
-
-    public void setSensorName(SensorType sensorType) {
-        this.sensorType = sensorType;
     }
 
     public String getUnitType() {
@@ -144,15 +118,7 @@ public class Sensor {
         return "Sensor{" +
                 "name ='" + sensorType + '\'' +
                 ", unitType='" + unitType + '\'' +
-                ", value= " + currentValue +
+                ", currentValue= " + currentValue +
                 '}';
-    }
-
-    public void setId(Long id) {
-        this.sensorID = id;
-    }
-
-    public Long getId() {
-        return sensorID;
     }
 }

@@ -34,22 +34,6 @@ public class Room {
     public Room() {
     }
 
-    public Long getId() {
-        return roomid;
-    }
-
-    public void setId(Long id) {
-        this.roomid = id;
-    }
-
-    public String getName() {
-        return roomname;
-    }
-
-    public void setName(String name) {
-        this.roomname = name;
-    }
-
     public Long getRoomid() {
         return roomid;
     }

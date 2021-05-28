@@ -72,11 +72,16 @@ public class ClientHandler implements Runnable {
 
                         for (SensorHistory sensorHistory : incomingSensorData) {
                             Sensor sensor = sensorRepository.getOne(sensorHistory.getSensorId());
+                            double value =  sensorHistory.getValue();
+                            sensor.setCurrentValue(value);
+                            sensorRepository.save(sensor);
                             SensorHistory sensorHistoryToBb = new SensorHistory();
                             sensorHistoryToBb.setSensor(sensor);
                             sensorHistoryToBb.setTimestamp(new Timestamp(sensorHistory.getTimestampMillis()));
                             sensorHistoryToBb.setValue(sensorHistory.getValue());
                             sensorHistoryRepository.save(sensorHistoryToBb);
+
+
                         }
                         break;
                     default:
