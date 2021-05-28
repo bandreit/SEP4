@@ -1,6 +1,7 @@
 package via.sep4.model.SensorHistory;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import via.sep4.model.Room.Room;
 import via.sep4.model.Sensor.Sensor;
 
@@ -18,7 +19,13 @@ public class SensorHistory {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "sensorid", nullable = false)
     private Sensor sensor;
-    @Column(name = " timestamp")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
+    private long sensorId;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
+    private long timestampMillis;
+    @Column(name = "timestamp")
     private Timestamp timestamp;
     @Column(name = "value")
     private double value;
@@ -48,6 +55,22 @@ public class SensorHistory {
 
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
+    }
+
+    public long getSensorId() {
+        return sensorId;
+    }
+
+    public void setSensorId(long sensorId) {
+        this.sensorId = sensorId;
+    }
+
+    public long getTimestampMillis() {
+        return timestampMillis;
+    }
+
+    public void setTimestampMillis(long timestampMillis) {
+        this.timestampMillis = timestampMillis;
     }
 
     public Timestamp getTimestamp() {

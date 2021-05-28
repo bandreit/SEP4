@@ -1,7 +1,5 @@
 import network.NetworkPackage;
-import sensor.Sensor;
-import sensor.SensorType;
-import service.DownLinkDataMessage;
+import sensor.SensorHistory;
 import service.WebsocketClient;
 import com.google.gson.Gson;
 import mediator.ConnectionHandler;
@@ -9,15 +7,17 @@ import mediator.ConnectionManager;
 import network.NetworkType;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 
 public class Main {
+    private static final int[] rooms = {1, 2};
+    private static final long[] CO2_SENSORS = {1, 4};
+    private static final long[] HUM_SENSORS = {2, 5};
+    private static final long[] TEMP_SENSORS = {3, 6};
+    private static final Random rnd = new Random();
+
+
     public static void main(String[] args) {
 
         Gson gson = new Gson();
@@ -34,23 +34,24 @@ public class Main {
 //                websocketClient.sendDownLink(downLinkPayload);
 
 
-                ArrayList<Sensor> sensorArrayList = new ArrayList<>();
+                ArrayList<SensorHistory> sensorArrayList = new ArrayList<>();
 
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                Date date = dateFormat.parse("23/09/2007");
-                long time = date.getTime();
+                double decVal = getRandomValue(rnd, 1, 1251, 2);
+                int room = getRandomNumber(rooms.length - 1);
+                long timestamp = System.currentTimeMillis();
 
-                final Random rnd = new Random();
-                double decVal = Double.parseDouble(getRandomValue(rnd, 1, 1251, 2));
-
-
-                Sensor co2Sensor = new Sensor(SensorType.CO2, "ppm", decVal, time);
+                SensorHistory co2Sensor = new SensorHistory(CO2_SENSORS[room], timestamp, decVal);
+                System.out.println(co2Sensor.toString());
                 sensorArrayList.add(co2Sensor);
 
-                Sensor humSensor = new Sensor(SensorType.HUMIDITY, "%", ((double) decVal) / 10, time);
+                decVal = getRandomValue(rnd, 1, 1251, 2);
+                SensorHistory humSensor = new SensorHistory(HUM_SENSORS[room], timestamp, decVal);
+                System.out.println(humSensor.toString());
                 sensorArrayList.add(humSensor);
 
-                Sensor temperatureSensor = new Sensor(SensorType.TEMPERATURE, "C", ((double) decVal) / 10, time);
+                decVal = getRandomValue(rnd, 1, 1251, 2);
+                SensorHistory temperatureSensor = new SensorHistory(TEMP_SENSORS[room], timestamp, decVal);
+                System.out.println(temperatureSensor.toString());
                 sensorArrayList.add(temperatureSensor);
 
                 ConnectionHandler handler = ConnectionManager.getInstance();
@@ -59,15 +60,14 @@ public class Main {
                 handler.sendToServer(gsonToServer);
                 sensorArrayList.clear();
 
-
                 Thread.sleep(30000);
-            } catch (InterruptedException | IOException | ParseException e) {
+            } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static String getRandomValue(final Random random,
+    public static double getRandomValue(final Random random,
                                         final int lowerBound,
                                         final int upperBound,
                                         final int decimalPlaces) {
@@ -76,11 +76,13 @@ public class Main {
             throw new IllegalArgumentException("Put error message here");
         }
 
-        final double dbl =
-                ((random == null ? new Random() : random).nextDouble() //
-                        * (upperBound - lowerBound))
-                        + lowerBound;
-        return String.format("%." + decimalPlaces + "f", dbl);
+        return ((random == null ? new Random() : random).nextDouble() //
+                * (upperBound - lowerBound))
+                + lowerBound;
 
+    }
+
+    private static int getRandomNumber(int max) {
+        return (int) Math.floor(Math.random() * (max + 1));
     }
 }

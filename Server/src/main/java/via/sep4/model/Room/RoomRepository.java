@@ -1,9 +1,9 @@
 package via.sep4.model.Room;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import via.sep4.model.Sensor.Sensor;
-@Repository
+import org.springframework.stereotype.Component;
+
+@Component
 public interface RoomRepository extends JpaRepository<Room, Long> {
-    Room findOne(String roomname);
+    Room findByRoomname(String roomname);
 }

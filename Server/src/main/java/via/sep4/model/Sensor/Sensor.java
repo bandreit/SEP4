@@ -1,6 +1,7 @@
 package via.sep4.model.Sensor;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import via.sep4.model.Room.Room;
 import via.sep4.model.SensorHistory.SensorHistory;
@@ -21,6 +22,8 @@ public class Sensor {
     private SensorType sensorType;
     @Column(updatable = false, name = "unittype")
     private String unitType;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
     private double currentValue;
     @Column(name = "minvalue")
     private int minValue;

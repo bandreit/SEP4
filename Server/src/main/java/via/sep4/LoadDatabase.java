@@ -23,28 +23,26 @@ import java.util.List;
 public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
-
     @Bean
     CommandLineRunner initDatabase(SensorRepository sensorRepository, RoomRepository roomRepository) {
         return args -> {
-            Room room = new Room("Freezer");
+            Room room0 = new Room("Freezer");
             Room room1 = new Room("Main");
-            roomRepository.save(room);
+            roomRepository.save(room0);
             roomRepository.save(room1);
 
-
-            Sensor sensor1 = new Sensor(SensorType.TEMPERATURE, "°C", room);
-            Sensor sensor2 = new Sensor(SensorType.HUMIDITY, "%", room);
-            Sensor sensor3 = new Sensor(SensorType.CO2, "PPM", room);
-            Sensor sensor4 = new Sensor(SensorType.TEMPERATURE, "°C", room1);
-            Sensor sensor5 = new Sensor(SensorType.HUMIDITY, "%", room1);
-            Sensor sensor6 = new Sensor(SensorType.CO2, "PPM", room1);
+            Sensor sensor0 = new Sensor(SensorType.CO2, "PPM", room0);
+            Sensor sensor1 = new Sensor(SensorType.HUMIDITY, "%", room0);
+            Sensor sensor2 = new Sensor(SensorType.TEMPERATURE, "°C", room0);
+            Sensor sensor3 = new Sensor(SensorType.CO2, "PPM", room1);
+            Sensor sensor4 = new Sensor(SensorType.HUMIDITY, "%", room1);
+            Sensor sensor5 = new Sensor(SensorType.TEMPERATURE, "°C", room1);
+            sensorRepository.save(sensor0);
             sensorRepository.save(sensor1);
             sensorRepository.save(sensor2);
             sensorRepository.save(sensor3);
             sensorRepository.save(sensor4);
             sensorRepository.save(sensor5);
-            sensorRepository.save(sensor6);
         };
     }
 }

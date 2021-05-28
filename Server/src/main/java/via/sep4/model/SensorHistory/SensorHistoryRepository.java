@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import via.sep4.model.Sensor.Sensor;
 
 @Repository
-public interface SensorHistoryRepository extends JpaRepository<Sensor, Long> {
+public interface SensorHistoryRepository extends JpaRepository<SensorHistory, Long> {
 }
