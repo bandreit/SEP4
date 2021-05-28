@@ -47,13 +47,19 @@ public class SensorsRecyclerViewAdapter extends RecyclerView.Adapter<SensorsRecy
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.sensorName.setText(sensors.get(position).getName());
+        Sensor sensor = sensors.get(position);
+        String sensorValue = sensor.getCurrentValue() + " " + sensor.getMeasurementUnit();
+
+        holder.sensorName.setText(sensor.getName());
+        holder.sensorValue.setText(sensorValue);
+
         ImageButton configureButton= view.findViewById(R.id.configureBtn);
+
         configureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheetDialog bottomSheetDialog= new BottomSheetDialog();
-                bottomSheetDialog.show(  fragmentManager,"Bla bla");
+                bottomSheetDialog.show(  fragmentManager,"BOTTOM_SHEET_DIALOG");
             }
         });
     }
@@ -65,15 +71,13 @@ public class SensorsRecyclerViewAdapter extends RecyclerView.Adapter<SensorsRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView sensorName;
+        TextView sensorValue;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             sensorName = itemView.findViewById(R.id.sensorName);
-
-
-
-
+            sensorValue = itemView.findViewById(R.id.sensorValue);
         }
     }
 }
