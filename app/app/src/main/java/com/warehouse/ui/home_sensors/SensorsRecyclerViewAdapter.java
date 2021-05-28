@@ -59,7 +59,7 @@ public class SensorsRecyclerViewAdapter extends RecyclerView.Adapter<SensorsRecy
             @Override
             public void onClick(View v) {
                 BottomSheetDialog bottomSheetDialog= new BottomSheetDialog();
-                bottomSheetDialog.show(  fragmentManager,"BOTTOM_SHEET_DIALOG");
+                bottomSheetDialog.show(fragmentManager,"BOTTOM_SHEET_DIALOG");
             }
         });
     }
