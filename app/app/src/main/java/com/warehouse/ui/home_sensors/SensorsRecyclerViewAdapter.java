@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,12 +48,11 @@ public class SensorsRecyclerViewAdapter extends RecyclerView.Adapter<SensorsRecy
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.sensorName.setText(sensors.get(position).getName());
-        Button configureButton= view.findViewById(R.id.configureBtn);
+        ImageButton configureButton= view.findViewById(R.id.configureBtn);
         configureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BottomSheetDialog bottomSheetDialog= new BottomSheetDialog();
-
                 bottomSheetDialog.show(  fragmentManager,"Bla bla");
             }
         });
