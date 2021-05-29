@@ -60,8 +60,6 @@ void initialiseSystem()
 	stdio_initialise(ser_USART0);
 	initializeUsedData();
 	create_tasks();
-
-	
 }
 
 /*-----------------------------------------------------------*/

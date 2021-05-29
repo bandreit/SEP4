@@ -1,4 +1,3 @@
-
  #include "LoRaWANUplinkHandler.h"
 
  // Parameters for OTAA join - We have got these in a mail from IHA
@@ -131,7 +130,4 @@
 	, NULL
 	, tskIDLE_PRIORITY + lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	, NULL );
-
-
-	
  }

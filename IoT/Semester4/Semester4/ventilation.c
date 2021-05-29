@@ -6,7 +6,6 @@ void ventilationTask(void* pvpParameter)
 {
 	for(;;)
 	{
-	
 		if(xSemaphoreTake(ventilationSemaphore,portMAX_DELAY)==pdTRUE)
 		{
 			printf("setting the ventilation level.....\n");

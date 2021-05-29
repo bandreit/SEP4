@@ -12,5 +12,5 @@
 #include "Setup.h"
 #include "configuration.h"
 
- void lora_downlink_handler_create(UBaseType_t lora_handler_task_priority);
+void lora_downlink_handler_create(UBaseType_t lora_handler_task_priority);
 

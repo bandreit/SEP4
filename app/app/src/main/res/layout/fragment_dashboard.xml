@@ -16,19 +16,43 @@
 
         <!-- Temperature chart   -->
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/filterContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/card_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                style="@android:style/Widget.Holo.TextView.SpinnerItem"
+                android:textAlignment="gravity"
+                android:backgroundTint="@color/white"
+                android:popupBackground="@drawable/card_background"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Temperature chart   -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/temperatureChartContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/card_background"
             android:padding="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+            app:layout_constraintTop_toBottomOf="@+id/filterContainer">
 
             <TextView
                 android:id="@+id/temperatureChartLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Temperature variation"
+                android:text="@string/chart_temperature_variation"
                 android:textColor="@color/white"
                 android:textSize="12dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +85,7 @@
                     android:id="@+id/humidityLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Humidity"
+                    android:text="@string/chart_humidity"
                     android:textColor="@color/white"
                     android:textSize="12dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="30"
+                    android:text="0"
                     android:textColor="@color/white"
                     android:textSize="40dp"
                     android:textStyle="bold"
@@ -103,7 +127,7 @@
                     android:id="@+id/temperatureLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Temperature"
+                    android:text="@string/chart_temperature"
                     android:textColor="@color/white"
                     android:textSize="12dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +138,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="20.0"
+                    android:text="0"
                     android:textColor="@color/white"
                     android:textSize="40dp"
                     android:textStyle="bold"
@@ -149,7 +173,7 @@
                 android:id="@+id/co2ChartLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CO2 Variation"
+                android:text="@string/chart_co2_variation"
                 android:textColor="@color/white"
                 android:textSize="12dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -177,7 +201,7 @@
                 android:id="@+id/co2Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CO2 Level"
+                android:text="@string/chart_co2_level"
                 android:textColor="@color/white"
                 android:textSize="12dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -188,7 +212,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="130"
+                android:text="0"
                 android:textColor="@color/white"
                 android:textSize="40dp"
                 android:textStyle="bold"
@@ -223,7 +247,7 @@
                 android:id="@+id/humidityChartLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Humidity variation"
+                android:text="@string/chart_humidity_variation"
                 android:textColor="@color/white"
                 android:textSize="12dp"
                 app:layout_constraintStart_toStartOf="parent"
