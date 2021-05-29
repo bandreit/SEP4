@@ -16,14 +16,23 @@
             android:name=".ui.MainActivity.MainActivity"
             android:windowSoftInputMode="adjustPan"></activity>
 
-        <activity android:name=".ui.LoginActivity.LoginActivity">
+        <activity
+            android:name=".ui.LoginActivity.LoginActivity"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.BoardingActivity.BoardingActivity"/>
+
+        <activity android:name=".ui.BoardingActivity.BoardingActivity" />
+
+        <service android:name=".services.FirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

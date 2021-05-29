@@ -1,24 +1,16 @@
 package com.warehouse.ui.dashboard;
 
 import android.app.Application;
-import android.os.Build;
-import android.telecom.Call;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.warehouse.data.Room.Room;
 import com.warehouse.data.Room.Statistics;
 import com.warehouse.data.Room.StatisticsRepository;
 
-import java.time.DayOfWeek;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -36,13 +28,12 @@ public class DashboardViewModel extends AndroidViewModel {
         statisticsRepository.fetchStatistics ();
     }
 
-    private LiveData<List<Statistics>> getStatistics() {
+    public LiveData<List<Statistics>> getStatistics() {
         return statisticsRepository.getStatistics ();
     }
 
-    public HashMap<Integer, Integer> getActivity() {
+    public HashMap<Integer, Integer> getActivity(String name) {
         HashMap<Integer, Integer> activity = new HashMap<Integer, Integer>();
-
 
         List<Statistics> statistics = getStatistics ().getValue ();
         List<Integer> days = Arrays.asList(
@@ -60,10 +51,9 @@ public class DashboardViewModel extends AndroidViewModel {
         }
 
         for (Statistics values : Objects.requireNonNull (statistics)) {
-            if(values.getName ().equals ("temperature")) {
+            if(values.getName ().equals (name)){
                 for (int i = 0; i <= values.getValues ().size () - 1 ; i++) {
-                    activity.put (days.get (i), values.getValues ( ).get (i));
-                }
+                    activity.put (days.get (i), values.getValues ( ).get (i)); }
             }
         }
         return activity;

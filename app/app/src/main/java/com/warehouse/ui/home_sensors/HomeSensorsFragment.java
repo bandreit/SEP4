@@ -51,7 +51,7 @@ public class HomeSensorsFragment extends Fragment {
 
     private void initRecyclerView() {
         recyclerView = root.findViewById(R.id.sensorsListRV);
-        sensorsRecyclerViewAdapter = new SensorsRecyclerViewAdapter();
+        sensorsRecyclerViewAdapter = new SensorsRecyclerViewAdapter(this.getFragmentManager());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         recyclerView.setAdapter(sensorsRecyclerViewAdapter);

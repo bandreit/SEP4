@@ -3,21 +3,32 @@ package com.warehouse.ui.home_sensors;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.warehouse.R;
 import com.warehouse.data.Room.Sensor;
+import com.warehouse.ui.configure.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SensorsRecyclerViewAdapter extends RecyclerView.Adapter<SensorsRecyclerViewAdapter.ViewHolder> {
     List<Sensor> sensors = new ArrayList<>();
+    FragmentManager fragmentManager;
 
-    public SensorsRecyclerViewAdapter() {
+    View view;
+
+
+    public SensorsRecyclerViewAdapter(FragmentManager fragmentManager) {
+        this.fragmentManager=fragmentManager;
+
     }
 
     public void setSensors(List<Sensor> sensors) {
@@ -29,14 +40,28 @@ public class SensorsRecyclerViewAdapter extends RecyclerView.Adapter<SensorsRecy
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.home_sensor_item, parent, false);
+         view = inflater.inflate(R.layout.home_sensor_item, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.sensorName.setText(sensors.get(position).getName ());
+        Sensor sensor = sensors.get(position);
+        String sensorValue = sensor.getCurrentValue() + " " + sensor.getMeasurementUnit();
+
+        holder.sensorName.setText(sensor.getName());
+        holder.sensorValue.setText(sensorValue);
+
+        ImageButton configureButton= view.findViewById(R.id.configureBtn);
+
+        configureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialog bottomSheetDialog= new BottomSheetDialog(sensor);
+                bottomSheetDialog.show(fragmentManager,"BOTTOM_SHEET_DIALOG");
+            }
+        });
     }
 
     @Override
@@ -46,11 +71,13 @@ public class SensorsRecyclerViewAdapter extends RecyclerView.Adapter<SensorsRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView sensorName;
+        TextView sensorValue;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             sensorName = itemView.findViewById(R.id.sensorName);
+            sensorValue = itemView.findViewById(R.id.sensorValue);
         }
     }
 }

@@ -52,10 +52,10 @@ public class LoginActivity extends AppCompatActivity {
 
         if(TextUtils.isEmpty (email.getText ()) || TextUtils.isEmpty (password.getText ())) {
             if(TextUtils.isEmpty (email.getText ())){
-                email.setError( "Email is required!" );
+                email.setError(getResources().getString(R.string.validation_email_required));
             }
             if(TextUtils.isEmpty (password.getText ())) {
-                password.setError ("Password is required!");
+                password.setError(getResources().getString(R.string.validation_password_required));
             }
         }
         else loginActivityViewModel.login(email.getText().toString(), password.getText().toString());
@@ -68,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void checkIfSignedIn() {
         loginActivityViewModel.getUser().observe(this, user -> {
-            Log.d ("USEr",String.valueOf (user));
             if (user != null) {
                 goToMainActivity();
             }

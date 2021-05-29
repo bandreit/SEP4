@@ -9,6 +9,31 @@
     <string name="title_theme">Dark theme</string>
     <string name="title_allow_notifications">Allow notifications</string>
     <string name="title_logout">Log Out</string>
+    <string name="sign_in_title">Let\'s sign you in</string>
+    <string name="sign_in_subtitle">Welcome back! You’ve been missed</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="boarding_title">Lorem ipsum dolor sit</string>
+    <string name="boarding_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="boarding_get_started">Get Started</string>
+    <string name="chart_temperature_variation">Temperature variation</string>
+    <string name="chart_humidity">Humidity</string>
+    <string name="chart_temperature">Temperature</string>
+    <string name="chart_co2_variation">CO2 Variation</string>
+    <string name="chart_co2_level">CO2 Level</string>
+    <string name="chart_humidity_variation">Humidity variation</string>
+    <string name="status_off">Off</string>
+    <string name="validation_email_required">Email is required</string>
+    <string name="validation_password_required">Password is required</string>
+    <string name="day_monday">Monday</string>
+    <string name="day_tuesday">Tuesday</string>
+    <string name="day_wednesday">Wednesday</string>
+    <string name="day_thursday">Thursday</string>
+    <string name="day_friday">Friday</string>
+    <string name="day_saturday">Saturday</string>
+    <string name="day_sunday">Sunday</string>
+    <string name="configure">Configure</string>
     <string-array name="filter_dashboard">
         <item>Today</item>
         <item>This Week</item>
