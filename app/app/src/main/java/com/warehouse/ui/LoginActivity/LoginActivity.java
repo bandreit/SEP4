@@ -1,7 +1,10 @@
 package com.warehouse.ui.LoginActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,7 +13,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.warehouse.R;
+import com.warehouse.ui.BoardingActivity.BoardingActivity;
 import com.warehouse.ui.MainActivity.MainActivity;
+
+import static com.warehouse.ui.BoardingActivity.BoardingActivity.BOARDING_PAGE_COMPLETE;
+import static com.warehouse.ui.BoardingActivity.BoardingActivity.BOARDING_PAGE_PREFERENCE;
 
 public class LoginActivity extends AppCompatActivity {
     private LoginActivityViewModel loginActivityViewModel;
@@ -18,6 +25,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences(BOARDING_PAGE_PREFERENCE, MODE_PRIVATE);
+        if (!sharedPreferences.getBoolean(BOARDING_PAGE_COMPLETE, false)) {
+            startActivity(new Intent(this, BoardingActivity.class));
+            finish ();
+        }
 
         loginActivityViewModel = new ViewModelProvider(this).get(LoginActivityViewModel.class);
 
@@ -37,7 +50,15 @@ public class LoginActivity extends AppCompatActivity {
         TextView email = findViewById(R.id.login_email);
         TextView password = findViewById(R.id.login_password);
 
-        loginActivityViewModel.login(email.getText().toString(), password.getText().toString());
+        if(TextUtils.isEmpty (email.getText ()) || TextUtils.isEmpty (password.getText ())) {
+            if(TextUtils.isEmpty (email.getText ())){
+                email.setError(getResources().getString(R.string.validation_email_required));
+            }
+            if(TextUtils.isEmpty (password.getText ())) {
+                password.setError(getResources().getString(R.string.validation_password_required));
+            }
+        }
+        else loginActivityViewModel.login(email.getText().toString(), password.getText().toString());
     }
 
     private void goToMainActivity() {
@@ -52,4 +73,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 }

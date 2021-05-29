@@ -1,15 +1,5 @@
-/*
- * sensorDataPackageHandler.c
- *
- *  Author: IoT
- */ 
+
 #include "sensorDataPackageHandler.h"
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdint.h>
-
-#include <lora_driver.h>
 
 uint16_t co2_value;
 uint16_t hum_value;
@@ -58,7 +48,6 @@ lora_driver_payload_t sensorDataPackageHandler_getLoRaPayload(uint8_t port_No)
 		uplink_payload->bytes[3]=hum_value & 0xFF;
 		uplink_payload->bytes[4]=temp_value >> 8;
 		uplink_payload->bytes[5]=temp_value & 0xFF;
-		//uplink_payload->bytes[6]=ventilator_servo & 0xFF;
 	}
 	
 	return *uplink_payload;
