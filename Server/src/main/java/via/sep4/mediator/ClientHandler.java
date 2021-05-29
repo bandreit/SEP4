@@ -2,18 +2,32 @@ package via.sep4.mediator;
 
 
 import com.google.gson.Gson;
-import via.sep4.model.Sensor;
+import com.google.gson.reflect.TypeToken;
+import via.sep4.SpringConfiguration;
+import via.sep4.model.Room.RoomRepository;
+import via.sep4.model.Sensor.Sensor;
+import via.sep4.model.Sensor.SensorRepository;
+import via.sep4.model.SensorHistory.SensorHistory;
+import via.sep4.model.SensorHistory.SensorHistory;
+import via.sep4.model.SensorHistory.SensorHistoryRepository;
 import via.sep4.network.NetworkPackage;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.net.Socket;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ClientHandler implements Runnable {
     private Socket socket;
     private InputStream inputStream;
     private OutputStream outputStream;
     private Gson gson;
+    private Random rn = new Random();
+
+    private SensorRepository sensorRepository;
+    private SensorHistoryRepository sensorHistoryRepository;
 
     /**
      * Instantiates a new Client handler.
@@ -27,6 +41,8 @@ public class ClientHandler implements Runnable {
         // ??? los like we don't need to initiate a socket
         outputStream = socket.getOutputStream();
         this.gson = new Gson();
+        sensorRepository = (SensorRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorRepository");
+        sensorHistoryRepository = (SensorHistoryRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorHistoryRepository");
     }
 
     /**
@@ -36,6 +52,7 @@ public class ClientHandler implements Runnable {
      */
     @Override
     public void run() {
+
         while (true) {
             try {
                 //reading message from the client
@@ -47,10 +64,26 @@ public class ClientHandler implements Runnable {
 
                 switch (incoming.getType()) {
                     case SensorList:
-                        ArrayList<Sensor> incomingSensorData = (ArrayList<Sensor>) incoming.getObject();
-                        System.out.println("Privet in server : " + incomingSensorData);
-                        break;
+                        Type founderListType = new TypeToken<ArrayList<SensorHistory>>() {
+                        }.getType();
 
+                        ArrayList<SensorHistory> incomingSensorData = gson.fromJson(incoming.getObject().toString(), founderListType);
+                        System.out.println("Privet in server : " + incomingSensorData);
+
+                        for (SensorHistory sensorHistory : incomingSensorData) {
+                            Sensor sensor = sensorRepository.getOne(sensorHistory.getSensorId());
+                            double value =  sensorHistory.getValue();
+                            sensor.setCurrentValue(value);
+                            sensorRepository.save(sensor);
+                            SensorHistory sensorHistoryToBb = new SensorHistory();
+                            sensorHistoryToBb.setSensor(sensor);
+                            sensorHistoryToBb.setTimestamp(new Timestamp(sensorHistory.getTimestampMillis()));
+                            sensorHistoryToBb.setValue(sensorHistory.getValue());
+                            sensorHistoryRepository.save(sensorHistoryToBb);
+
+
+                        }
+                        break;
                     default:
                         sendData("ERROR");
                         break;
