@@ -9,7 +9,7 @@ void lora_downLink_task()
 	for(;;)
 	{
 		xMessageBufferReceive(downlinkMessageBuffer, &lora_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
-		printf("DOWN LINK<<<<<: from port: %d with %d bytes received!",lora_downlink_payload.portNo, lora_downlink_payload.len); // Just for Debug
+		printf("DOWN LINK<<<<<: from port: %d with %d bytes received!",lora_downlink_payload.portNo, lora_downlink_payload.len);
 		if (1 == lora_downlink_payload.len)
 		{
 			 uint8_t level =  (lora_downlink_payload.bytes[0]);
@@ -33,6 +33,4 @@ void lora_downLink_task()
  , NULL
  ,	tskIDLE_PRIORITY + lora_handler_task_priority  
  , NULL );
-	 
-	 
  }

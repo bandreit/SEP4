@@ -34,13 +34,11 @@ void ApplicationTask(void *pvParameters)
 
 		}
 		vTaskDelay(pdMS_TO_TICKS(50));
-		
 	}
 }
 
 void createApplicationTask(UBaseType_t Taskpriority)
 {
-	
 	xTaskCreate(
 	ApplicationTask
 	,  "AppTask" 
@@ -48,6 +46,5 @@ void createApplicationTask(UBaseType_t Taskpriority)
 	,  NULL
 	,  tskIDLE_PRIORITY + Taskpriority 
 	,  NULL );
-	
 }
 
