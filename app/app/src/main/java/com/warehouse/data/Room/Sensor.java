@@ -64,4 +64,5 @@ public class Sensor {
     public void setCurrentValue(Double currentValue) {
         this.currentValue = currentValue;
     }
+
 }

@@ -36,7 +36,7 @@ public class SensorsRecyclerViewAdapter extends RecyclerView.Adapter<SensorsRecy
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.sensorName.setText(sensors.get(position).getName());
+        holder.sensorName.setText(sensors.get(position).getName ());
     }
 
     @Override
