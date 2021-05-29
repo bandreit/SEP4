@@ -58,7 +58,7 @@ public class SensorsRecyclerViewAdapter extends RecyclerView.Adapter<SensorsRecy
         configureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomSheetDialog bottomSheetDialog= new BottomSheetDialog();
+                BottomSheetDialog bottomSheetDialog= new BottomSheetDialog(sensor);
                 bottomSheetDialog.show(fragmentManager,"BOTTOM_SHEET_DIALOG");
             }
         });
