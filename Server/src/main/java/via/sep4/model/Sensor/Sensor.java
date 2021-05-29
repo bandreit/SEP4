@@ -25,9 +25,9 @@ public class Sensor {
     @Column
     private double currentValue;
     @Column(name = "minvalue")
-    private int minValue;
+    private double minValue;
     @Column(name = "maxvalue")
-    private int maxValue;
+    private double maxValue;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "roomid", nullable = false)
     private Room room;
@@ -88,19 +88,19 @@ public class Sensor {
         this.sensorType = sensorType;
     }
 
-    public int getMinValue() {
+    public double getMinValue() {
         return minValue;
     }
 
-    public void setMinValue(int minValue) {
+    public void setMinValue(double minValue) {
         this.minValue = minValue;
     }
 
-    public int getMaxValue() {
+    public double getMaxValue() {
         return maxValue;
     }
 
-    public void setMaxValue(int maxValue) {
+    public void setMaxValue(double maxValue) {
         this.maxValue = maxValue;
     }
 
