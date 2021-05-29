@@ -27,7 +27,6 @@
 #ifndef FREERTOS_CONFIG_H
 #define FREERTOS_CONFIG_H
 
-#include <avr/io.h>
 
 /*-----------------------------------------------------------
  * Application specific definitions.
@@ -56,7 +55,7 @@
 #define configMINIMAL_STACK_SIZE            ( 192 )
 #define configMAX_TASK_NAME_LEN             ( 16 )
 
-#define configTOTAL_HEAP_SIZE 				2500   // Heap size 
+#define configTOTAL_HEAP_SIZE 				3200   // Heap size 
 
 #define configQUEUE_REGISTRY_SIZE           0
 #define configCHECK_FOR_STACK_OVERFLOW      1
