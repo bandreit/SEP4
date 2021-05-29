@@ -34,4 +34,8 @@ public class BottomSheetDialogViewModel extends AndroidViewModel {
 
         return "";
     }
+
+    public void updateSensorMinMax(Double min, Double max) {
+        System.out.printf("Update value...");
+    }
 }
