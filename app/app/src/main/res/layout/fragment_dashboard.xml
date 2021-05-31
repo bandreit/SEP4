@@ -14,7 +14,7 @@
         <!--    Tab Layout -->
         <include layout="@layout/component_rooms_navigation_tabs" />
 
-        <!-- Temperature chart   -->
+        <!-- Filter -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/filterContainer"
             android:layout_width="wrap_content"

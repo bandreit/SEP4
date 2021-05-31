@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -24,16 +26,28 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.warehouse.R;
+import com.warehouse.data.Room.Statistics;
 import com.warehouse.formaters.DayFormatter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class DashboardFragment extends Fragment {
+    DashboardViewModel dashboardViewModel;
     LineChart temperatureChart;
     LineChart humidityChart;
     BarChart co2Chart;
     View view;
     Spinner spinner;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
+    }
 
     @Nullable
     @Override
@@ -45,20 +59,20 @@ public class DashboardFragment extends Fragment {
         setupCO2Chart();
         setupFilter();
 
-        spinner.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener ( ) {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 0){
-                    Toast.makeText (getContext (),String.valueOf (position),Toast.LENGTH_SHORT).show ();
+                if (position == 0) {
+                    Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
                 }
-                if(position == 1){
-                    Toast.makeText (getContext (),String.valueOf (position),Toast.LENGTH_SHORT).show ();
+                if (position == 1) {
+                    Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
                 }
-                if(position == 2){
-                    Toast.makeText (getContext (),String.valueOf (position),Toast.LENGTH_SHORT).show ();
+                if (position == 2) {
+                    Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
                 }
-                if(position == 3){
-                    Toast.makeText (getContext (),String.valueOf (position),Toast.LENGTH_SHORT).show ();
+                if (position == 3) {
+                    Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -72,8 +86,8 @@ public class DashboardFragment extends Fragment {
     }
 
     private void setupFilter() {
-        spinner = view.findViewById (R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext (), R.array.filter_dashboard, R.layout.spinner_item);
+        spinner = view.findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.filter_dashboard, R.layout.spinner_item);
         spinner.setAdapter(adapter);
     }
 
@@ -96,30 +110,34 @@ public class DashboardFragment extends Fragment {
     }
 
     private void loadTemperatureChartData() {
-        // Data
-        ArrayList<Entry> entries = new ArrayList<>();
 
-        entries.add(new Entry(1, 470));
-        entries.add(new Entry(2, 80));
-        entries.add(new Entry(3, 2300));
-        entries.add(new Entry(4, 1200));
-        entries.add(new Entry(5, 5400));
-        entries.add(new Entry(6, 9100));
-        entries.add(new Entry(7, 2500));
+        dashboardViewModel.getActivity("temperature").observe(getViewLifecycleOwner(), new Observer<HashMap<Integer, Integer>>() {
+            @Override
+            public void onChanged(HashMap<Integer, Integer> values) {
+                ArrayList<Entry> entries = new ArrayList<>();
+                Iterator iterator = values.entrySet().iterator();
 
+                while (iterator.hasNext()) {
+                    Map.Entry<Integer, Integer> pair = (Map.Entry) iterator.next();
+                    entries.add(new Entry(pair.getKey(), pair.getValue()));
+                    iterator.remove();
+                }
 
-        // Data set
-        LineDataSet dataSet = new LineDataSet(entries, getResources().getString(R.string.chart_temperature));
-        dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-
-
-        // configure chart
-        LineData data = new LineData(dataSet);
+                // Data set
+                LineDataSet dataSet = new LineDataSet(entries, getResources().getString(R.string.chart_temperature));
+                dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
 
-        temperatureChart.setData(data);
-        temperatureChart.invalidate();
+                // configure chart
+                LineData data = new LineData(dataSet);
+
+
+                temperatureChart.setData(data);
+                temperatureChart.invalidate();
+            }
+        });
     }
+
 
     private void setupHumidityChart() {
         humidityChart = view.findViewById(R.id.humidityChart);
@@ -143,29 +161,31 @@ public class DashboardFragment extends Fragment {
     }
 
     private void loadHumidityChartData() {
-        // Data
-        ArrayList<Entry> entries = new ArrayList<>();
+        dashboardViewModel.getActivity("humidity").observe(getViewLifecycleOwner(), new Observer<HashMap<Integer, Integer>>() {
+            @Override
+            public void onChanged(HashMap<Integer, Integer> values) {
+                ArrayList<Entry> entries = new ArrayList<>();
+                Iterator iterator = values.entrySet().iterator();
 
-        entries.add(new Entry(1, 470));
-        entries.add(new Entry(2, 80));
-        entries.add(new Entry(3, 2300));
-        entries.add(new Entry(4, 1200));
-        entries.add(new Entry(5, 5400));
-        entries.add(new Entry(6, 9100));
-        entries.add(new Entry(7, 2500));
+                while (iterator.hasNext()) {
+                    Map.Entry<Integer, Integer> pair = (Map.Entry) iterator.next();
+                    entries.add(new Entry(pair.getKey(), pair.getValue()));
+                    iterator.remove();
+                }
 
-
-        // Data set
-        LineDataSet dataSet = new LineDataSet(entries, getResources().getString(R.string.chart_temperature));
-
-
-        // configure chart
-        LineData data = new LineData(dataSet);
+                // Data set
+                LineDataSet dataSet = new LineDataSet(entries, getResources().getString(R.string.chart_temperature));
 
 
-        humidityChart.setData(data);
-        humidityChart.invalidate();
+                // configure chart
+                LineData data = new LineData(dataSet);
+
+                humidityChart.setData(data);
+                humidityChart.invalidate();
+            }
+        });
     }
+
 
 
     private void setupCO2Chart() {
@@ -190,27 +210,29 @@ public class DashboardFragment extends Fragment {
     }
 
     private void loadCO2ChartData() {
-        // Data
-        ArrayList<BarEntry> entries = new ArrayList<>();
+        dashboardViewModel.getActivity("co2").observe(getViewLifecycleOwner(), new Observer<HashMap<Integer, Integer>>() {
+            @Override
+            public void onChanged(HashMap<Integer, Integer> values) {
+                ArrayList<BarEntry> entries = new ArrayList<>();
+                Iterator iterator = values.entrySet().iterator();
 
-        entries.add(new BarEntry(1, 470));
-        entries.add(new BarEntry(2, 80));
-        entries.add(new BarEntry(3, 2300));
-        entries.add(new BarEntry(4, 1200));
-        entries.add(new BarEntry(5, 5400));
-        entries.add(new BarEntry(6, 9100));
-        entries.add(new BarEntry(7, 2500));
+                while (iterator.hasNext()) {
+                    Map.Entry<Integer, Integer> pair = (Map.Entry) iterator.next();
+                    entries.add(new BarEntry(pair.getKey(), pair.getValue()));
+                    iterator.remove();
+                }
 
-
-        // Data set
-        BarDataSet dataSet = new BarDataSet(entries, getResources().getString(R.string.chart_temperature));
-
-
-        // configure chart
-        BarData data = new BarData(dataSet);
+                // Data set
+                BarDataSet dataSet = new BarDataSet(entries, getResources().getString(R.string.chart_temperature));
 
 
-        co2Chart.setData(data);
-        co2Chart.invalidate();
+                // configure chart
+                BarData data = new BarData(dataSet);
+
+
+                co2Chart.setData(data);
+                co2Chart.invalidate();
+            }
+        });
     }
 }

@@ -30,4 +30,5 @@ public class Room {
     public void setSensors(List<Sensor> sensors) {
         this.sensors = sensors;
     }
+
 }

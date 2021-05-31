@@ -18,16 +18,20 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.warehouse.R;
 import com.warehouse.ui.LoginActivity.LoginActivity;
+import com.warehouse.ui.dashboard.DashboardViewModel;
 
 
 public class MainActivity extends AppCompatActivity {
     private MainActivityViewModel mainActivityViewModel;
+    private DashboardViewModel dashboardViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
+
 
         setContentView(R.layout.activity_main);
         startAppActivity();
@@ -59,5 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         mainActivityViewModel.init();
+        dashboardViewModel.init ();
     }
 }

@@ -16,10 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.warehouse.R;
 import com.warehouse.data.Room.Room;
-import com.warehouse.data.Room.Sensor;
-import com.warehouse.ui.home.HomeViewModel;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeSensorsFragment extends Fragment {
@@ -67,7 +63,7 @@ public class HomeSensorsFragment extends Fragment {
             public void onChanged(List<Room> rooms) {
                 for (Room room : rooms) {
                     if (room.getId() == roomId) {
-                        sensorsRecyclerViewAdapter.setSensors(room.getSensors());
+                        sensorsRecyclerViewAdapter.setSensors (room.getSensors ());
                     }
                 }
             }
