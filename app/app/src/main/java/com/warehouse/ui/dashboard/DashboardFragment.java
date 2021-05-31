@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,10 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+        setupAverageTemperature();
+        setupAverageHumidity();
+        setupAverageCO2();
+
         setupTemperatureChart();
         setupHumidityChart();
         setupCO2Chart();
@@ -83,6 +88,35 @@ public class DashboardFragment extends Fragment {
         });
 
         return view;
+    }
+    private void setupAverageTemperature() {
+        TextView textView = view.findViewById (R.id.temperatureValue);
+        dashboardViewModel.getAverageActivity ("temperature").observe (getViewLifecycleOwner ( ), new Observer<Float> ( ) {
+            @Override
+            public void onChanged(Float value) {
+                textView.setText (String.valueOf (value));
+            }
+        });
+    }
+
+    private void setupAverageHumidity() {
+        TextView textView = view.findViewById (R.id.humidityValue);
+        dashboardViewModel.getAverageActivity ("humidity").observe (getViewLifecycleOwner ( ), new Observer<Float> ( ) {
+            @Override
+            public void onChanged(Float value) {
+                textView.setText (String.valueOf (value));
+            }
+        });
+    }
+
+    private void setupAverageCO2() {
+        TextView textView = view.findViewById (R.id.co2Value);
+        dashboardViewModel.getAverageActivity ("co2").observe (getViewLifecycleOwner ( ), new Observer<Float> ( ) {
+            @Override
+            public void onChanged(Float value) {
+                textView.setText (String.valueOf (value));
+            }
+        });
     }
 
     private void setupFilter() {
