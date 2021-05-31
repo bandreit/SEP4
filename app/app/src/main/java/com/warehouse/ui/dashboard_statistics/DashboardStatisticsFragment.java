@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -73,6 +74,9 @@ public class DashboardStatisticsFragment extends Fragment {
             @Override
             public void onChanged(List<Statistics> statistics) {
                 if (statistics != null) {
+                    setupAverageTemperature();
+                    setupAverageHumidity();
+                    setupAverageCO2();
                     setupTemperatureChart();
                     setupHumidityChart();
                     setupCO2Chart();
@@ -94,6 +98,36 @@ public class DashboardStatisticsFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
+    private void setupAverageTemperature() {
+        TextView textView = root.findViewById (R.id.temperatureValue);
+        dashboardStatisticsViewModel.getAverageActivity ("temperature").observe (getViewLifecycleOwner ( ), new Observer<Float> ( ) {
+            @Override
+            public void onChanged(Float value) {
+                textView.setText (String.valueOf (value));
+            }
+        });
+    }
+
+    private void setupAverageHumidity() {
+        TextView textView = root.findViewById (R.id.humidityValue);
+        dashboardStatisticsViewModel.getAverageActivity ("humidity").observe (getViewLifecycleOwner ( ), new Observer<Float> ( ) {
+            @Override
+            public void onChanged(Float value) {
+                textView.setText (String.valueOf (value));
+            }
+        });
+    }
+
+    private void setupAverageCO2() {
+        TextView textView = root.findViewById (R.id.co2Value);
+        dashboardStatisticsViewModel.getAverageActivity ("co2").observe (getViewLifecycleOwner ( ), new Observer<Float> ( ) {
+            @Override
+            public void onChanged(Float value) {
+                textView.setText (String.valueOf (value));
             }
         });
     }
