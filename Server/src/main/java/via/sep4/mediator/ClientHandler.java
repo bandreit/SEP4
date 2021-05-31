@@ -78,6 +78,7 @@ public class ClientHandler implements Runnable {
                             SensorHistory sensorHistoryToBb = new SensorHistory();
                             sensorHistoryToBb.setSensor(sensor);
                             sensorHistoryToBb.setTimestamp(new Timestamp(sensorHistory.getTimestampMillis()));
+                            sensorHistoryToBb.setTimestampMillis(sensorHistoryToBb.getTimestamp().getTime());
                             sensorHistoryToBb.setValue(sensorHistory.getValue());
                             sensorHistoryRepository.save(sensorHistoryToBb);
 

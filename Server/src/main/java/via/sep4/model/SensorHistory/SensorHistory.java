@@ -6,7 +6,10 @@ import via.sep4.model.Room.Room;
 import via.sep4.model.Sensor.Sensor;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "sensorhistory")
@@ -29,6 +32,8 @@ public class SensorHistory {
     private Timestamp timestamp;
     @Column(name = "value")
     private double value;
+    @Transient
+    private List<Double> values;
 
     public SensorHistory(Sensor sensor, Timestamp timestamp, double value) {
         this.sensor = sensor;
@@ -87,5 +92,13 @@ public class SensorHistory {
 
     public void setValue(double value) {
         this.value = value;
+    }
+
+    public List<Double> getValues() {
+        return values;
+    }
+
+    public void setValues(List<Double> values) {
+        this.values = values;
     }
 }
