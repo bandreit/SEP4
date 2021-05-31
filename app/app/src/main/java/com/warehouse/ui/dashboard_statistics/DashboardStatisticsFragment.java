@@ -62,7 +62,7 @@ public class DashboardStatisticsFragment extends Fragment {
         Bundle args = getArguments();
         roomId = args.getString(ARG_ROOM_ID);
 
-        dashboardStatisticsViewModel.init();
+        dashboardStatisticsViewModel.init(roomId);
 
         initStatistics();
         setupFilter();
