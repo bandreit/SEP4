@@ -159,6 +159,12 @@
     <Compile Include="CO2.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="configuration.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="configuration.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="drivers\display_7seg.h">
       <SubType>compile</SubType>
     </Compile>
@@ -327,6 +333,12 @@
     <Compile Include="TempAndHum.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="ventilation.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ventilation.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="drivers\" />
@@ -387,9 +399,6 @@
     <None Include="FreeRTOS\src\LICENSE.md">
       <SubType>compile</SubType>
     </None>
-    <Compile Include="LoRaWANHandler.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
