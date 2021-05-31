@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.Observable;
 
 public class DashboardViewModel extends AndroidViewModel {
     private StatisticsRepository statisticsRepository;

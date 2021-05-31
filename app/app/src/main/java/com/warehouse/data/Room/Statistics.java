@@ -25,11 +25,11 @@ public class Statistics {
         this.roomId = roomId;
     }
 
-    public String getStringId() {
+    public String getSensorId() {
         return sensorId;
     }
 
-    public void setStringId(String stringId) {
+    public void setSensorId(String stringId) {
         this.sensorId = stringId;
     }
 

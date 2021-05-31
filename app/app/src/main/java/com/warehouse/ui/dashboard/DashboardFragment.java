@@ -10,9 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedDispatcherOwner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -29,9 +31,11 @@ import com.warehouse.data.Room.Statistics;
 import com.warehouse.formaters.DayFormatter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 
 public class DashboardFragment extends Fragment {
     DashboardViewModel dashboardViewModel;
@@ -79,6 +83,8 @@ public class DashboardFragment extends Fragment {
 
             }
         });
+
+
 
         return view;
     }
@@ -134,15 +140,22 @@ public class DashboardFragment extends Fragment {
     }
 
     private List<Entry> getTemperatureEntries(){
-        ArrayList<Entry> entries = new ArrayList<>();
+        dashboardViewModel.getStatistics ().observe (getViewLifecycleOwner (), new Observer<List<Statistics>> ( ) {
+            @Override
+            public void onChanged(List<Statistics> statistics) {
+                dashboardViewModel.getActivity ("temperature");
+            }
+        });
 
-        Iterator iterator = dashboardViewModel.getActivity ("temperature").entrySet().iterator();
+        ArrayList<Entry> entries = new ArrayList<>();
+        Iterator iterator = dashboardViewModel.getActivity ("temperature").entrySet().iterator ();
 
         while (iterator.hasNext()) {
             Map.Entry<Integer, Integer> pair = (Map.Entry) iterator.next ( );
             entries.add (new Entry (pair.getKey ( ), pair.getValue ( )));
             iterator.remove ( );
         }
+
         return entries;
     }
 
