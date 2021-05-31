@@ -27,8 +27,8 @@ public class DashboardStatisticsViewModel extends AndroidViewModel {
         statisticsRepository = StatisticsRepository.getInstance(application);
     }
 
-    public void init() {
-        statisticsRepository.fetchStatistics();
+    public void init(String roomId) {
+        statisticsRepository.fetchStatistics(roomId);
     }
 
     public LiveData<List<Statistics>> getStatistics() {
