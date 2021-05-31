@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.warehouse.data.Room.Statistics;
 import com.warehouse.data.Room.StatisticsRepository;
@@ -33,7 +34,7 @@ public class DashboardViewModel extends AndroidViewModel {
         return statisticsRepository.getStatistics ();
     }
 
-    public HashMap<Integer, Integer> getActivity(String name) {
+    public LiveData<HashMap<Integer, Integer>> getActivity(String name) {
         HashMap<Integer, Integer> activity = new HashMap<Integer, Integer>();
 
         List<Statistics> statistics = getStatistics ().getValue ();
@@ -57,6 +58,7 @@ public class DashboardViewModel extends AndroidViewModel {
                     activity.put (days.get (i), values.getValues ( ).get (i)); }
             }
         }
-        return activity;
+
+        return new MutableLiveData<>(activity);
     }
 }
