@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.warehouse.R;
 import com.warehouse.data.Room.Room;
 import com.warehouse.ui.home_sensors.HomeSensorsFragment;
 
@@ -16,19 +17,31 @@ import java.util.List;
 
 public class RoomsViewPagerAdapter extends FragmentStatePagerAdapter {
     private List<Room> tabList = new ArrayList<>();
+    private Class fragmentClass;
 
-    public RoomsViewPagerAdapter(@NonNull FragmentManager fm) {
+    public RoomsViewPagerAdapter(@NonNull FragmentManager fm, Class fragmentClass) {
         super(fm);
+        this.fragmentClass = fragmentClass;
     }
+
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment = new HomeSensorsFragment();
+        Fragment fragment = null;
         Bundle args = new Bundle();
 
-        args.putString(HomeSensorsFragment.ARG_ROOM_ID, tabList.get(position).getId());
-        fragment.setArguments(args);
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+
+            args.putString(HomeSensorsFragment.ARG_ROOM_ID, tabList.get(position).getId());
+            fragment.setArguments(args);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+
 
         return fragment;
     }

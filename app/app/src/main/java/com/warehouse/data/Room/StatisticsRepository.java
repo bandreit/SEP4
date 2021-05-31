@@ -34,7 +34,7 @@ public class StatisticsRepository {
         return statistics;
     }
 
-    public void fetchStatistics() {
+    public void fetchStatistics(String roomId) {
         Call<StatisticsResponse> call = statisticsApi.getStatistics ();
 
         call.enqueue(new Callback<StatisticsResponse>() {
