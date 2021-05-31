@@ -66,9 +66,10 @@ public class DashboardStatisticsViewModel extends AndroidViewModel {
         return activity;
     }
 
-    public LiveData<Float> getAverageActivity(String name){
+    public Float getAverageActivity(String name){
         float sum = 0;
         float average = 0;
+
         List<Statistics> statistics = getStatistics ().getValue ();
         for (Statistics values : Objects.requireNonNull (statistics)) {
             if(values.getName ().equals (name)){
@@ -78,6 +79,7 @@ public class DashboardStatisticsViewModel extends AndroidViewModel {
                 average = sum / values.getValues ().size ();
             }
         }
-        return new MutableLiveData<>(average);
+
+        return average;
     }
 }

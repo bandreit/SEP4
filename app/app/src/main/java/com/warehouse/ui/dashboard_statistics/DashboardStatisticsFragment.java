@@ -103,33 +103,25 @@ public class DashboardStatisticsFragment extends Fragment {
     }
 
     private void setupAverageTemperature() {
-        TextView textView = root.findViewById (R.id.temperatureValue);
-        dashboardStatisticsViewModel.getAverageActivity ("temperature").observe (getViewLifecycleOwner ( ), new Observer<Float> ( ) {
-            @Override
-            public void onChanged(Float value) {
-                textView.setText (String.valueOf (value));
-            }
-        });
+        TextView textView = root.findViewById(R.id.temperatureValue);
+        Float value = dashboardStatisticsViewModel.getAverageActivity("temperature");
+
+        textView.setText(String.valueOf(value));
+
     }
 
     private void setupAverageHumidity() {
-        TextView textView = root.findViewById (R.id.humidityValue);
-        dashboardStatisticsViewModel.getAverageActivity ("humidity").observe (getViewLifecycleOwner ( ), new Observer<Float> ( ) {
-            @Override
-            public void onChanged(Float value) {
-                textView.setText (String.valueOf (value));
-            }
-        });
+        TextView textView = root.findViewById(R.id.humidityValue);
+        Float value = dashboardStatisticsViewModel.getAverageActivity("humidity");
+
+        textView.setText(String.valueOf(value));
     }
 
     private void setupAverageCO2() {
-        TextView textView = root.findViewById (R.id.co2Value);
-        dashboardStatisticsViewModel.getAverageActivity ("co2").observe (getViewLifecycleOwner ( ), new Observer<Float> ( ) {
-            @Override
-            public void onChanged(Float value) {
-                textView.setText (String.valueOf (value));
-            }
-        });
+        TextView textView = root.findViewById(R.id.co2Value);
+        Float value = dashboardStatisticsViewModel.getAverageActivity("co2");
+
+        textView.setText(String.valueOf(value));
     }
 
 
