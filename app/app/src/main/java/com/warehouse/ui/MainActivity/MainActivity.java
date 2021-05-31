@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.warehouse.R;
 import com.warehouse.ui.LoginActivity.LoginActivity;
+import com.warehouse.ui.loading.LoadingDialog;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
         setContentView(R.layout.activity_main);
+
         startAppActivity();
 
         checkIfSignedIn();

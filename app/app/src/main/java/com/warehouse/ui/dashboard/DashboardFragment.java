@@ -2,6 +2,7 @@ package com.warehouse.ui.dashboard;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.warehouse.R;
 import com.warehouse.formaters.DayFormatter;
+import com.warehouse.ui.LoginActivity.LoginActivity;
+import com.warehouse.ui.loading.LoadingDialog;
 
 import java.util.ArrayList;
 
@@ -39,12 +42,19 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
+        final LoadingDialog loadingDialog=new LoadingDialog(getActivity());
         setupTemperatureChart();
         setupHumidityChart();
         setupCO2Chart();
         setupFilter();
-
+        loadingDialog.startLoadingDialog();
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadingDialog.dismissDialog();
+            }
+        },2000);
         spinner.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener ( ) {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

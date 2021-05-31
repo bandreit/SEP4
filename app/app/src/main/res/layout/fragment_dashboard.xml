@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/blue_900"
+        android:background="?backgroundColor"
         android:paddingHorizontal="20dp"
         android:paddingVertical="40dp">
 
@@ -31,7 +31,7 @@
                 android:padding="5dp"
                 style="@android:style/Widget.Holo.TextView.SpinnerItem"
                 android:textAlignment="gravity"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/textColor"
                 android:popupBackground="@drawable/card_background"
                 android:spinnerMode="dropdown"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,8 +53,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/chart_temperature_variation"
-                android:textColor="@color/white"
-                android:textSize="12dp"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,8 +86,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chart_humidity"
-                    android:textColor="@color/white"
-                    android:textSize="12dp"
+                    android:textColor="@color/textColor"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,8 +97,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="0"
-                    android:textColor="@color/white"
-                    android:textSize="40dp"
+                    android:textColor="@color/textColor"
+                    android:textSize="40sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/humidityLabel" />
@@ -108,8 +108,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:text="%"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
+                    android:textColor="@color/textColor"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBaseline_toBaselineOf="@+id/humidityValue"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -128,8 +128,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chart_temperature"
-                    android:textColor="@color/white"
-                    android:textSize="12dp"
+                    android:textColor="@color/textColor"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -139,8 +139,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="0"
-                    android:textColor="@color/white"
-                    android:textSize="40dp"
+                    android:textColor="@color/textColor"
+                    android:textSize="40sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/temperatureLabel" />
@@ -150,8 +150,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:text="°C"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
+                    android:textColor="@color/textColor"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintBaseline_toBaselineOf="@+id/temperatureValue"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -174,8 +174,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/chart_co2_variation"
-                android:textColor="@color/white"
-                android:textSize="12dp"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -202,8 +202,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/chart_co2_level"
-                android:textColor="@color/white"
-                android:textSize="12dp"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -213,8 +213,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="0"
-                android:textColor="@color/white"
-                android:textSize="40dp"
+                android:textColor="@color/textColor"
+                android:textSize="40sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/co2Label" />
@@ -224,8 +224,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:text="PPM"
-                android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBaseline_toBaselineOf="@+id/co2Value"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -248,8 +248,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/chart_humidity_variation"
-                android:textColor="@color/white"
-                android:textSize="12dp"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

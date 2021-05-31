@@ -10,12 +10,11 @@
     <color name="transparent">#00ffffff</color>
     <color name="track">#614BD0ED</color>
     <color name="thumb">#4BD0ED</color>
-    <color name="cardBackgroundColor">#FF111D42</color>
-    <color name="textColor">#FFFFFF</color>
-    <color name="logbtn">#4BD0ED</color>
-    <color name="input_text_color"></color>
-    <color name="input_text_field">#FF111D42</color>
-    <color name="logBtnTextColor">#FFFFFFFF</color>
+    <color name="cardBackgroundColor">#FAFAFA</color>
+    <color name="textColor">#FF03113a</color>
+    <color name="logbtn">#FAFAFA</color>
+    <color name="input_text_field">#FAFAFA</color>
+    <color name="logBtnTextColor">#FF4BD0ED</color>
 
 
 </resources>

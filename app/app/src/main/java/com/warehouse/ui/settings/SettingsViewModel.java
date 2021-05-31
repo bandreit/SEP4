@@ -3,6 +3,7 @@ package com.warehouse.ui.settings;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -36,6 +37,17 @@ public class SettingsViewModel extends AndroidViewModel {
     }
 
     public void setTheme(Boolean themeValue) { theme.postValue (themeValue);
+        if(themeValue)
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+
+        }
+        else
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
     }
 
     public void logOut() {

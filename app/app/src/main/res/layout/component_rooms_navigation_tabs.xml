@@ -10,8 +10,8 @@
     app:layout_constraintTop_toTopOf="parent"
     app:tabIndicatorColor="@color/teal_400"
     app:tabMode="scrollable"
-    app:tabSelectedTextColor="@color/white"
-    app:tabTextColor="@color/white_800">
+    app:tabSelectedTextColor="@color/textColor"
+    app:tabTextColor="@color/textColor">
 
     <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
@@ -21,7 +21,8 @@
     <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Deposit" />
+        android:text="Deposit"
+        />
 
     <com.google.android.material.tabs.TabItem
         android:layout_width="wrap_content"

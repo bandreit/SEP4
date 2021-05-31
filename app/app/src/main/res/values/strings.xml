@@ -40,4 +40,5 @@
         <item>Last Week</item>
         <item>Last Two Weeks</item>
     </string-array>
+    <string name="text">Light Mode</string>
 </resources>

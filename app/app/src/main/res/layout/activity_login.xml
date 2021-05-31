@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_900"
+    android:background="?backgroundColor"
     android:padding="40dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,8 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
             android:text="@string/sign_in_title"
-            android:textColor="@color/white"
-            android:textSize="24dp"
+            android:textColor="@color/textColor"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/smartHomeIllustration" />
@@ -36,8 +36,8 @@
             android:alpha="0.7"
             android:gravity="center_horizontal"
             android:text="@string/sign_in_subtitle"
-            android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textColor="@color/textColor"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text" />
@@ -52,9 +52,9 @@
             android:inputType="textEmailAddress"
             android:paddingHorizontal="32dp"
             android:paddingVertical="19dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white_400"
-            android:textSize="16dp"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@+id/subtitle_text"
             tools:layout_editor_absoluteX="40dp" />
 
@@ -68,9 +68,9 @@
             android:inputType="textPassword"
             android:paddingHorizontal="32dp"
             android:paddingVertical="19dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white_400"
-            android:textSize="16dp"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@+id/login_email"
             tools:layout_editor_absoluteX="40dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -83,9 +83,9 @@
         android:padding="10dp"
         android:text="@string/login"
         android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:backgroundTint="@color/teal_400"
+        android:textColor="@color/logBtnTextColor"
+        android:textSize="20sp"
+        app:backgroundTint="?buttonBarStyle"
         app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

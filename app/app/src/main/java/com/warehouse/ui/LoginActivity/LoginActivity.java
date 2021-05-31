@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.warehouse.R;
 import com.warehouse.ui.BoardingActivity.BoardingActivity;
 import com.warehouse.ui.MainActivity.MainActivity;
+import com.warehouse.ui.loading.LoadingDialog;
 
 import static com.warehouse.ui.BoardingActivity.BoardingActivity.BOARDING_PAGE_COMPLETE;
 import static com.warehouse.ui.BoardingActivity.BoardingActivity.BOARDING_PAGE_PREFERENCE;
@@ -38,9 +39,14 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
+        final LoadingDialog loadingDialog=new LoadingDialog(LoginActivity.this);
+
         findViewById(R.id.loginBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                loadingDialog.startLoadingDialog();
+
                 login();
             }
         });

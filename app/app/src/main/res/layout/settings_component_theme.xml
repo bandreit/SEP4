@@ -12,7 +12,7 @@
         android:id="@+id/themeModeText"
         android:text="@string/title_theme"
         android:textSize="16sp"
-        android:textColor="@color/white"
+        android:textColor="@color/textColor"
         android:fontFamily="sans-serif-medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -32,11 +32,27 @@
         app:trackTint="@drawable/new_track"
         android:id="@+id/themeModeSwitch"
         android:enabled="true"
+        android:checked="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         tools:ignore="UseSwitchCompatOrMaterialXml"
         android:layout_alignParentEnd="true" />
 
+<!--    <androidx.appcompat.widget.SwitchCompat-->
+<!--        android:id="@+id/switchCompat"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_marginStart="227dp"-->
+<!--        android:layout_marginLeft="227dp"-->
+<!--        android:layout_marginEnd="45dp"-->
+<!--        android:layout_marginRight="45dp"-->
+<!--        android:layout_toEndOf="@+id/themeModeText"-->
+<!--        android:layout_toRightOf="@+id/themeModeText"-->
+<!--        android:checked="false"-->
+
+<!--        />-->
 
 </RelativeLayout>
