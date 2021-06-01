@@ -39,6 +39,6 @@ public class SettingsViewModel extends AndroidViewModel {
     }
 
     public void logOut() {
-        userRepository.signOut ();
+        userRepository.signOut();
     }
 }
