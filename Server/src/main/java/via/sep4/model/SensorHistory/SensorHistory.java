@@ -32,8 +32,6 @@ public class SensorHistory {
     private Timestamp timestamp;
     @Column(name = "value")
     private double value;
-    @Transient
-    private List<Double> values;
 
     public SensorHistory(Sensor sensor, Timestamp timestamp, double value) {
         this.sensor = sensor;
@@ -92,13 +90,5 @@ public class SensorHistory {
 
     public void setValue(double value) {
         this.value = value;
-    }
-
-    public List<Double> getValues() {
-        return values;
-    }
-
-    public void setValues(List<Double> values) {
-        this.values = values;
     }
 }

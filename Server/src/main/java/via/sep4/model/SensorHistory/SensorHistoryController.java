@@ -18,7 +18,8 @@ public class SensorHistoryController {
 
     @GetMapping("/sensorHistory/{id}")
     public List<Chart> getStatistics(@PathVariable long id, @RequestParam int period) {
-        return service.getSensorHistoryByPeriod(id, period);
+//        return service.getSensorHistoryByPeriod(id, period);
+        return service.getSensorsHistoryByPeriod(id, period);
     }
 
 }

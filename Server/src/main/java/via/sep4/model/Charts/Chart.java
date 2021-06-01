@@ -7,29 +7,37 @@ import java.util.List;
 
 public class Chart {
 
+    private long roomId;
     private long sensorId;
-    private SensorType sensorType;
-    private List<Double> average;
-    private List<Timestamp> timestamps;
-
+    private SensorType name;
+    private List<SensorValue> values;
+//    private List<Timestamp> timestamps;
 
     public Chart() {
     }
 
-    public List<Timestamp> getTimestamps() {
-        return timestamps;
+    public long getRoomId() {
+        return roomId;
     }
 
-    public void setTimestamps(List<Timestamp> timestamps) {
-        this.timestamps = timestamps;
+    public void setRoomId(long roomId) {
+        this.roomId = roomId;
     }
 
-    public List<Double> getAverage() {
-        return average;
+//    public List<Timestamp> getTimestamps() {
+//        return timestamps;
+//    }
+//
+//    public void setTimestamps(List<Timestamp> timestamps) {
+//        this.timestamps = timestamps;
+//    }
+
+    public List<SensorValue> getValues() {
+        return values;
     }
 
-    public void setAverage(List<Double> average) {
-        this.average = average;
+    public void setValues(List<SensorValue> values) {
+        this.values = values;
     }
 
     public long getSensorId() {
@@ -40,11 +48,11 @@ public class Chart {
         this.sensorId = sensorId;
     }
 
-    public SensorType getSensorType() {
-        return sensorType;
+    public SensorType getName() {
+        return name;
     }
 
-    public void setSensorType(SensorType sensorType) {
-        this.sensorType = sensorType;
+    public void setName(SensorType name) {
+        this.name = name;
     }
 }
