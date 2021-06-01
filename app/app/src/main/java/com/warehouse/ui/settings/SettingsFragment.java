@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -27,7 +28,6 @@ import com.warehouse.ui.home.HomeViewModel;
 
 public class SettingsFragment extends Fragment {
     SettingsViewModel settingsViewModel;
-    SharedPreferences sharedPreferences;
     View root;
 
     @Override
@@ -35,7 +35,7 @@ public class SettingsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         settingsViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
-        sharedPreferences = this.getContext().getSharedPreferences("night_mode", 0);
+        settingsViewModel.init();
     }
 
     @Nullable
@@ -59,13 +59,18 @@ public class SettingsFragment extends Fragment {
         SwitchMaterial notificationSwitch = root.findViewById(R.id.notificationSwitch);
         TextView enabledNotificationText = root.findViewById(R.id.NotificationsToggle);
 
-        notificationSwitch.setChecked(true);
-
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setSwitchText(isChecked, enabledNotificationText);
                 settingsViewModel.setNotification(isChecked);
+            }
+        });
+
+        settingsViewModel.getNotification().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isChecked) {
+                setSwitchText(isChecked, enabledNotificationText);
+                notificationSwitch.setChecked(isChecked);
             }
         });
     }
@@ -74,18 +79,18 @@ public class SettingsFragment extends Fragment {
         SwitchMaterial nightModeSwitch = root.findViewById(R.id.nightModeSwitch);
         TextView enableThemeModeText = root.findViewById(R.id.ThemeModeToggle);
 
-        nightModeSwitch.setChecked(true);
-
         nightModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setSwitchText(isChecked, enableThemeModeText);
                 settingsViewModel.setTheme(isChecked);
+            }
+        });
 
-                AppCompatDelegate.setDefaultNightMode(isChecked ? AppCompatDelegate.MODE_NIGHT_NO : AppCompatDelegate.MODE_NIGHT_YES);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("night_mode", isChecked);
-                editor.apply();
+        settingsViewModel.getTheme().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isChecked) {
+                setSwitchText(isChecked, enableThemeModeText);
+                nightModeSwitch.setChecked(isChecked);
             }
         });
     }

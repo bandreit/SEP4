@@ -19,11 +19,13 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.warehouse.R;
 import com.warehouse.ui.LoginActivity.LoginActivity;
 import com.warehouse.ui.dashboard.DashboardViewModel;
+import com.warehouse.ui.settings.SettingsViewModel;
 
 
 public class MainActivity extends AppCompatActivity {
     private MainActivityViewModel mainActivityViewModel;
     private DashboardViewModel dashboardViewModel;
+    private SettingsViewModel settingsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
+        settingsViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
 
 
         setContentView(R.layout.activity_main);
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mainActivityViewModel.init();
-        dashboardViewModel.init ();
+        dashboardViewModel.init();
+        settingsViewModel.init();
     }
 }
