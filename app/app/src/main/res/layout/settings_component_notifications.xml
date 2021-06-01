@@ -20,7 +20,6 @@
     <TextView
         android:id="@+id/NotificationsToggle"
         android:layout_below="@+id/notificationsText"
-        android:text="@string/title_enabled"
         android:layout_marginTop="3dp"
         android:textSize="14sp"
         android:textColor="#90939A"

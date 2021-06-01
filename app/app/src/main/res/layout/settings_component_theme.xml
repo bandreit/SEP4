@@ -18,7 +18,6 @@
     <TextView
         android:id="@+id/ThemeModeToggle"
         android:layout_below="@+id/themeModeText"
-        android:text="@string/title_disabled"
         android:layout_marginTop="3dp"
         android:textSize="14sp"
         android:textColor="#90939A"
@@ -30,7 +29,6 @@
         app:trackTint="@drawable/new_track"
         android:id="@+id/nightModeSwitch"
         android:enabled="true"
-        android:checked="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
