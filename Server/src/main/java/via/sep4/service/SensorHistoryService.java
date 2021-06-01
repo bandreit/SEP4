@@ -17,13 +17,9 @@ import java.util.*;
 
 @Service
 public class SensorHistoryService {
-    private SensorRepository sensorRepository;
-    private SensorHistoryRepository historyRepository;
-    private RoomRepository roomRepository;
+    private final RoomRepository roomRepository;
 
-    public SensorHistoryService(SensorRepository sensorRepository, SensorHistoryRepository historyRepository, RoomRepository roomRepository) {
-        this.sensorRepository = sensorRepository;
-        this.historyRepository = historyRepository;
+    public SensorHistoryService(RoomRepository roomRepository) {
         this.roomRepository = roomRepository;
     }
 
