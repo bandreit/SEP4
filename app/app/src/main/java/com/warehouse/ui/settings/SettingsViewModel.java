@@ -17,40 +17,31 @@ public class SettingsViewModel extends AndroidViewModel {
     MutableLiveData<Boolean> theme;
     UserRepository userRepository;
 
-    public SettingsViewModel(@NonNull Application application){
+    public SettingsViewModel(@NonNull Application application) {
         super(application);
         notification = new MutableLiveData<Boolean>();
         theme = new MutableLiveData<Boolean>();
 
         this.userRepository = UserRepository.getInstance(application);
     }
+
     public LiveData<Boolean> getNotification() {
         return notification;
     }
 
     public void setNotification(Boolean notificationValue) {
-        notification.postValue (notificationValue);
+        notification.postValue(notificationValue);
     }
 
     public LiveData<Boolean> getTheme() {
         return theme;
     }
 
-    public void setTheme(Boolean themeValue) { theme.postValue (themeValue);
-        if(themeValue)
-        {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-
-        }
-        else
-        {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
-
+    public void setTheme(Boolean themeValue) {
+        theme.postValue(themeValue);
     }
 
     public void logOut() {
-        userRepository.signOut ();
+        userRepository.signOut();
     }
 }
