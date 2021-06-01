@@ -2,7 +2,6 @@ package via.sep4.service;
 
 import org.springframework.stereotype.Service;
 import via.sep4.model.Charts.Chart;
-import via.sep4.model.Room.RoomRepository;
 import via.sep4.model.Sensor.Sensor;
 import via.sep4.model.Sensor.SensorRepository;
 import via.sep4.model.Sensor.SensorType;
@@ -38,8 +37,9 @@ public class SensorHistoryService {
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
         int year = cal.get(Calendar.YEAR);
-        Calendar currentDate = new GregorianCalendar(year, month, day);
-        long currentDateLong = currentDate.getTimeInMillis();
+        Calendar nowDate = new GregorianCalendar(year, month, day);
+        Date currentDate = nowDate.getTime();
+
 
         for (int i = 0; i < allSensors.size(); i++) {
             if (allSensors.get(i).getRoom().getRoomid() == roomId)
@@ -58,49 +58,63 @@ public class SensorHistoryService {
         Chart chartCO2 = new Chart();
         chartCO2.setSensorType(SensorType.CO2);
         chartCO2.setSensorId(foundSensors.get(0).getSensorID());
-        getAverage(period, co2Values, co2Sensors, chartsToSend, currentDateLong, chartCO2);
+        getAverage(period, co2Values, co2Sensors, chartsToSend, currentDate, chartCO2);
 
 
         Chart chartHumidity = new Chart();
         chartHumidity.setSensorType(SensorType.HUMIDITY);
         chartHumidity.setSensorId(foundSensors.get(1).getSensorID());
-        getAverage(period, humidityValues, humiditySensors, chartsToSend, currentDateLong, chartHumidity);
+        getAverage(period, humidityValues, humiditySensors, chartsToSend, currentDate, chartHumidity);
 
 
         Chart chartTemperature = new Chart();
         chartTemperature.setSensorType(SensorType.TEMPERATURE);
         chartTemperature.setSensorId(foundSensors.get(2).getSensorID());
-        getAverage(period, temperatureValues, temperatureSensors, chartsToSend, currentDateLong, chartTemperature);
+        getAverage(period, temperatureValues, temperatureSensors, chartsToSend, currentDate, chartTemperature);
 
         return chartsToSend;
 
     }
 
-    private void getAverage(int period, List<Double> values, List<SensorHistory> sensors, List<Chart> chartsToSend, long currentDateLong, Chart chart) {
+    private void getAverage(int period, List<Double> values, List<SensorHistory> specificSensorsHistory, List<Chart> chartsToSend, Date currentDate, Chart chart) {
         int count = 0;
         double sum = 0;
         double avg;
-        for (int k = 0; k < sensors.size(); k++) {
-            for (int l = 0; l < period; l++) {
-                Timestamp timestamp = sensors.get(k).getTimestamp();
-                Date date = new Date(timestamp.getTime());
-                Calendar calendar = new GregorianCalendar();
-                calendar.setTime(date);
-                int y = calendar.get(Calendar.YEAR);
-                int m = calendar.get(Calendar.MONTH);
-                int d = calendar.get(Calendar.DATE);
-                Calendar sensorDate = new GregorianCalendar(y, m, d);
-                if (sensorDate.getTimeInMillis() - l == currentDateLong - l) {
-                    sum += sensors.get(k).getValue();
+        List<Date> timestamps = new ArrayList<>();
+        Timestamp stamp = new Timestamp(currentDate.getTime());
+
+//                Timestamp timestamp = sensors.get(k).getTimestamp();
+//                Date date = new Date(timestamp.getTime());
+//                Calendar calendar = new GregorianCalendar();
+//                calendar.setTime(date);
+//                int y = calendar.get(Calendar.YEAR);
+//                int m = calendar.get(Calendar.MONTH);
+//                int d = calendar.get(Calendar.DATE);
+//                Calendar sensorDate = new GregorianCalendar(y, m, d);
+
+        for (int i = period - 1; i >= 0; i--) {
+            for (int k = 0; k < specificSensorsHistory.size(); k++) {
+               stamp = specificSensorsHistory.get(k).getTimestamp();
+                Date forSpecificHistory = new Date(stamp.getTime());
+                if (forSpecificHistory.equals(minusDays(i))) {
+                    sum += specificSensorsHistory.get(k).getValue();
                     count++;
+
                 }
             }
+            timestamps.add(stamp);
+            avg = sum / count;
+            values.add(avg);
         }
-        avg = sum / count;
-        values.add(avg);
         chart.setAverage(values);
         chartsToSend.add(chart);
     }
+
+
+    private Date minusDays(int period) {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -period);
+        return cal.getTime();
+    }
+
 }
-
-

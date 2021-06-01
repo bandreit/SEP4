@@ -2,6 +2,7 @@ package via.sep4.model.Charts;
 
 import via.sep4.model.Sensor.SensorType;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Chart {
@@ -9,9 +10,18 @@ public class Chart {
     private long sensorId;
     private SensorType sensorType;
     private List<Double> average;
+    private List<Timestamp> timestamps;
 
 
     public Chart() {
+    }
+
+    public List<Timestamp> getTimestamps() {
+        return timestamps;
+    }
+
+    public void setTimestamps(List<Timestamp> timestamps) {
+        this.timestamps = timestamps;
     }
 
     public List<Double> getAverage() {
