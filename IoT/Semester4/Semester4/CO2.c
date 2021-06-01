@@ -1,19 +1,15 @@
+
 #include "CO2.h"
-#include <ATMEGA_FreeRTOS.h>
-#include <mh_z19.h>
-#include <stdio.h>
-#include "Setup.h"
-#include <event_groups.h>
+
 void myCo2CallBack(uint16_t ppm);
 
 mh_z19_returnCode_t rc;
 
 void initializeCO2Driver()
 {
-	// The parameter is the USART port the MH-Z19 sensor is connected to - in this case USART3
 	mh_z19_initialise(ser_USART3);
 	
-	
+	mh_z19_injectCallBack(myCo2CallBack);
 }
 void measureCO2()
 {
@@ -28,18 +24,13 @@ void CO2Task()
 	while(1)
 	{
 
-//printf("CO2 Task\n");
-EventBits_t dataEventBits = xEventGroupWaitBits
-(dataEventGroup,BIT_HUMIDITY_TEMPERATURE,pdFALSE,pdTRUE,portMAX_DELAY);
-
+		EventBits_t dataEventBits = xEventGroupWaitBits
+		(dataEventGroup,BIT_HUMIDITY_TEMPERATURE,pdFALSE,pdTRUE,portMAX_DELAY);
 
 		if((dataEventBits & BIT_HUMIDITY_TEMPERATURE)==BIT_HUMIDITY_TEMPERATURE)
-		{
-			//printf("Measured\n");
 			measureCO2();
-		
-		}
-		vTaskDelay(30);
+			
+		vTaskDelay(pdMS_TO_TICKS(50));
 			
 	}
 }
@@ -48,21 +39,16 @@ void myCo2CallBack(uint16_t ppm)
 		//printf("CO2 Value: %d\n",ppm);
 		xQueueSend(sensorDataQueue,&ppm,portMAX_DELAY);
 		xEventGroupSetBits(dataEventGroup,BIT_CO2);
-		xSemaphoreGive(tempHumSemaphore);
-		
-		
-
 }
-void createCO2Task()
+void createCO2Task( UBaseType_t Taskpriority)
 {
 			initializeCO2Driver();
-			mh_z19_injectCallBack(myCo2CallBack);
 			xTaskCreate(
 			CO2Task
-			,  "CO2Task"  // A name just for humans
-			,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
+			,  "CO2Task" 
+			,  configMINIMAL_STACK_SIZE 
 			,  NULL
-			,  tskIDLE_PRIORITY + 1  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+			,  tskIDLE_PRIORITY + Taskpriority 
 			,  NULL );
 			
 }

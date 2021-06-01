@@ -19,6 +19,7 @@ import com.warehouse.R;
 import com.warehouse.adapters.RoomsViewPagerAdapter;
 import com.warehouse.data.Room.Room;
 import com.warehouse.ui.MainActivity.MainActivityViewModel;
+import com.warehouse.ui.home_sensors.HomeSensorsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class HomeFragment extends Fragment {
         roomsTabLayout = root.findViewById(R.id.roomsTabLayout);
         roomsViewPager = root.findViewById(R.id.roomsViewPager);
 
-        RoomsViewPagerAdapter adapter = new RoomsViewPagerAdapter(getChildFragmentManager());
+        RoomsViewPagerAdapter adapter = new RoomsViewPagerAdapter(getChildFragmentManager(), HomeSensorsFragment.class);
 
         homeViewModel.getRooms().observe(getViewLifecycleOwner(), new Observer<List<Room>>() {
             @Override
