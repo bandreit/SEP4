@@ -15,6 +15,9 @@
     <color name="logbtn">#FAFAFA</color>
     <color name="input_text_field">#FAFAFA</color>
     <color name="logBtnTextColor">#FF4BD0ED</color>
+    <color name="bottomIconStandard">#8003113A</color>
+    <color name="tabNotSelected">#CD111D42</color>
+
 
 
 </resources>

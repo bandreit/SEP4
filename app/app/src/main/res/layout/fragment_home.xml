@@ -28,6 +28,6 @@
             app:tabIndicatorColor="@color/teal_400"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/textColor"
-            app:tabTextColor="@color/textColor" />
+            app:tabTextColor="@color/tabNotSelected" />
     </androidx.viewpager.widget.ViewPager>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,8 @@
     <color name="input_text_color"></color>
     <color name="input_text_field">#FF111D42</color>
     <color name="logBtnTextColor">#FFFFFFFF</color>
+    <color name="bottomIconStandard">#B2FFFFFF</color>
+    <color name="tabNotSelected">#CDFFFFFF</color>
 
 
 </resources>

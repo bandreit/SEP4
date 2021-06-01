@@ -18,7 +18,7 @@
         <item name="cardBackgroundColor">@color/blue_500</item>
 
         <item name="icon">@color/white</item>
-        <item name="textAllCaps" > @color/textColor</item>
+
         <item name="buttonBarStyle">@color/logbtn</item>
 
     </style>
