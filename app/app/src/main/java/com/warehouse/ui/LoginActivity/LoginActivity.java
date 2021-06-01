@@ -3,6 +3,7 @@ package com.warehouse.ui.LoginActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.warehouse.R;
 import com.warehouse.ui.BoardingActivity.BoardingActivity;
+import com.warehouse.ui.LoadingDialog;
 import com.warehouse.ui.MainActivity.MainActivity;
 
 import static com.warehouse.ui.BoardingActivity.BoardingActivity.BOARDING_PAGE_COMPLETE;
@@ -38,13 +40,26 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
+        final LoadingDialog loadingDialog = new LoadingDialog(LoginActivity.this);
         findViewById(R.id.loginBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadingDialog.startLoadingDialog();
+//                Handler handler = new Handler();
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        loadingDialog.dialog.dismiss();
+//                    }
+//                },10000);
+
                 login();
             }
         });
+
     }
+
+
 
     private void login() {
         TextView email = findViewById(R.id.login_email);
@@ -53,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         if(TextUtils.isEmpty (email.getText ()) || TextUtils.isEmpty (password.getText ())) {
             if(TextUtils.isEmpty (email.getText ())){
                 email.setError(getResources().getString(R.string.validation_email_required));
+
             }
             if(TextUtils.isEmpty (password.getText ())) {
                 password.setError(getResources().getString(R.string.validation_password_required));
@@ -69,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
     private void checkIfSignedIn() {
         loginActivityViewModel.getUser().observe(this, user -> {
             if (user != null) {
+
                 goToMainActivity();
             }
         });

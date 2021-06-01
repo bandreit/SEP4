@@ -34,6 +34,7 @@
     <string name="day_saturday">Saturday</string>
     <string name="day_sunday">Sunday</string>
     <string name="configure">Configure</string>
+    <string name="loading">Loading...</string>
     <string-array name="filter_dashboard">
         <item>Today</item>
         <item>This Week</item>
