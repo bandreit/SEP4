@@ -1,14 +1,11 @@
 package via.sep4.model.Sensor;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import via.sep4.model.Room.Room;
 import via.sep4.model.SensorHistory.SensorHistory;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,7 +20,7 @@ public class Sensor {
     @Column(updatable = false, name = "unittype")
     private String unitType;
     @Column
-    private double currentValue;
+    private double currentvalue;
     @Column(name = "minvalue")
     private double minValue;
     @Column(name = "maxvalue")
@@ -39,7 +36,7 @@ public class Sensor {
         this.unitType = unitType;
         this.maxValue = 0;
         this.minValue = 0;
-        this.currentValue = 0;
+        this.currentvalue = 0;
         this.room = room;
     }
 
@@ -55,12 +52,12 @@ public class Sensor {
         this.room = room;
     }
 
-    public double getCurrentValue() {
-        return currentValue;
+    public double getCurrentvalue() {
+        return currentvalue;
     }
 
-    public void setCurrentValue(double currentValue) {
-        this.currentValue = currentValue;
+    public void setCurrentvalue(double currentValue) {
+        this.currentvalue = currentValue;
     }
 
     public String getUnitType() {
@@ -118,7 +115,7 @@ public class Sensor {
         return "Sensor{" +
                 "name ='" + sensorType + '\'' +
                 ", unitType='" + unitType + '\'' +
-                ", currentValue= " + currentValue +
+                ", currentValue= " + currentvalue +
                 '}';
     }
 }

@@ -4,10 +4,8 @@ package via.sep4.mediator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import via.sep4.SpringConfiguration;
-import via.sep4.model.Room.RoomRepository;
 import via.sep4.model.Sensor.Sensor;
 import via.sep4.model.Sensor.SensorRepository;
-import via.sep4.model.SensorHistory.SensorHistory;
 import via.sep4.model.SensorHistory.SensorHistory;
 import via.sep4.model.SensorHistory.SensorHistoryRepository;
 import via.sep4.network.NetworkPackage;
@@ -73,7 +71,7 @@ public class ClientHandler implements Runnable {
                         for (SensorHistory sensorHistory : incomingSensorData) {
                             Sensor sensor = sensorRepository.getOne(sensorHistory.getSensorId());
                             double value =  sensorHistory.getValue();
-                            sensor.setCurrentValue(value);
+                            sensor.setCurrentvalue(value);
                             sensorRepository.save(sensor);
                             SensorHistory sensorHistoryToBb = new SensorHistory();
                             sensorHistoryToBb.setSensor(sensor);

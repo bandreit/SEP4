@@ -6,6 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import via.sep4.model.Product.Product;
+import via.sep4.model.Product.ProductRepository;
 import via.sep4.model.Room.Room;
 import via.sep4.model.Room.RoomRepository;
 import via.sep4.model.Sensor.Sensor;
@@ -24,7 +26,7 @@ public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
     @Bean
-    CommandLineRunner initDatabase(SensorRepository sensorRepository, RoomRepository roomRepository) {
+    CommandLineRunner initDatabase(SensorRepository sensorRepository, RoomRepository roomRepository, ProductRepository productRepository) {
         return args -> {
             Room room0 = new Room("Freezer");
             Room room1 = new Room("Main");
@@ -42,6 +44,10 @@ public class LoadDatabase {
             sensorRepository.save(sensor3);
             sensorRepository.save(sensor4);
             sensorRepository.save(sensor5);
+            Product product0=new Product("tomato",8,"vegetable",true,room1);
+            Product product1=new Product("chicken wings",5,"meat",true,room0);
+            productRepository.save(product0);
+            productRepository.save(product1);
         };
     }
 }
