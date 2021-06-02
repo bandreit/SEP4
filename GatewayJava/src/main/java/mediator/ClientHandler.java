@@ -3,19 +3,23 @@ package mediator;
 import com.google.gson.Gson;
 import network.NetworkPackage;
 import network.NetworkType;
+import service.WebsocketClient;
 
 import java.io.IOException;
 
-public class ClientHandler implements Runnable{
+public class ClientHandler implements Runnable {
 
+    private WebsocketClient websocketClient;
     private ConnectionHandler handler;
     private Gson gson;
 
     /**
      * Constructor that initialize instance variables
+     *
      * @throws IOException
      */
-    public ClientHandler() throws IOException {
+    public ClientHandler(WebsocketClient websocketClient) throws IOException {
+        this.websocketClient = websocketClient;
         this.handler = ConnectionManager.getInstance();
         this.gson = new Gson();
     }
