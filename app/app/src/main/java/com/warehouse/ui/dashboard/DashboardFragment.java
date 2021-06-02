@@ -1,16 +1,10 @@
 package com.warehouse.ui.dashboard;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ScrollView;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,28 +13,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.material.tabs.TabLayout;
 import com.warehouse.R;
 import com.warehouse.adapters.RoomsViewPagerAdapter;
 import com.warehouse.data.Room.Room;
-import com.warehouse.data.Room.Statistics;
-import com.warehouse.formaters.DayFormatter;
 import com.warehouse.ui.dashboard_statistics.DashboardStatisticsFragment;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class DashboardFragment extends Fragment {
     DashboardViewModel dashboardViewModel;
@@ -83,8 +62,6 @@ public class DashboardFragment extends Fragment {
                 adapter.setTabList(rooms);
             }
         });
-
-
 
         roomsViewPager.setAdapter(adapter);
         roomsTabLayout.setupWithViewPager(roomsViewPager);

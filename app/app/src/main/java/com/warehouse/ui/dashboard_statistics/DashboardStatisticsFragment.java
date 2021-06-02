@@ -27,7 +27,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.warehouse.R;
-import com.warehouse.data.Room.Statistics;
+import com.warehouse.data.Statistics.Statistics;
 import com.warehouse.formaters.DayFormatter;
 
 import java.util.ArrayList;

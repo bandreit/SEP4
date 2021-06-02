@@ -58,4 +58,26 @@ public class RoomRepository {
             }
         });
     }
+    public void updateSensor(String id, Sensor sensor) {
+        Call<RoomsResponse> call = roomApi.putSensor (id,sensor);
+
+        call.enqueue(new Callback<RoomsResponse>() {
+            @Override
+            public void onResponse(Call<RoomsResponse> call, Response<RoomsResponse> response) {
+                if(response.isSuccessful()) {
+                    rooms.postValue(response.body().getData());
+                } else {
+                    System.out.println("Failure ======");
+                    System.out.println(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RoomsResponse> call, Throwable t) {
+                System.out.println("!!! Failure");
+                t.printStackTrace();
+            }
+        });
+    }
+
 }

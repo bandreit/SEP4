@@ -1,4 +1,4 @@
-package com.warehouse.data.Room;
+package com.warehouse.data.Statistics;
 
 import java.util.List;
 
