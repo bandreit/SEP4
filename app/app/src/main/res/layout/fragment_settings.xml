@@ -26,18 +26,6 @@
             android:id="@+id/themeMode"
             layout="@layout/settings_component_theme" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
         <include
             android:id="@+id/logout"
             layout="@layout/settings_component_logout" />
