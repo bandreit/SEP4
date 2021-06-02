@@ -40,8 +40,8 @@ public class ClientHandler implements Runnable {
         inputStream = this.socket.getInputStream();
         outputStream = socket.getOutputStream();
         this.gson = new Gson();
-//        sensorRepository = (SensorRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorRepository");
-//        sensorHistoryRepository = (SensorHistoryRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorHistoryRepository");
+        sensorRepository = (SensorRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorRepository");
+        sensorHistoryRepository = (SensorHistoryRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorHistoryRepository");
     }
 
     /**
@@ -69,18 +69,17 @@ public class ClientHandler implements Runnable {
                         ArrayList<SensorHistory> incomingSensorData = gson.fromJson(incoming.getObject().toString(), founderListType);
 
                         for (SensorHistory sensorHistory : incomingSensorData) {
-//                            Sensor sensor = sensorRepository.getOne(sensorHistory.getSensorId());
-//                            double value = sensorHistory.getValue();
-//                            sensor.setCurrentvalue(value);
-//                            sensorRepository.save(sensor);
-//                            checkIfWithinLimits(sensor);
-                            checkIfWithinLimits();
-//                            SensorHistory sensorHistoryToBb = new SensorHistory();
-//                            sensorHistoryToBb.setSensor(sensor);
-//                            sensorHistoryToBb.setTimestamp(new Timestamp(sensorHistory.getTimestampMillis()));
-//                            sensorHistoryToBb.setTimestampMillis(sensorHistoryToBb.getTimestamp().getTime());
-//                            sensorHistoryToBb.setValue(sensorHistory.getValue());
-//                            sensorHistoryRepository.save(sensorHistoryToBb);
+                            Sensor sensor = sensorRepository.getOne(sensorHistory.getSensorId());
+                            double value = sensorHistory.getValue();
+                            sensor.setCurrentvalue(value);
+                            sensorRepository.save(sensor);
+                            checkIfWithinLimits(sensor);
+                            SensorHistory sensorHistoryToBb = new SensorHistory();
+                            sensorHistoryToBb.setSensor(sensor);
+                            sensorHistoryToBb.setTimestamp(new Timestamp(sensorHistory.getTimestampMillis()));
+                            sensorHistoryToBb.setTimestampMillis(sensorHistoryToBb.getTimestamp().getTime());
+                            sensorHistoryToBb.setValue(sensorHistory.getValue());
+                            sensorHistoryRepository.save(sensorHistoryToBb);
                         }
                         break;
                     default:
@@ -109,18 +108,6 @@ public class ClientHandler implements Runnable {
                 }
             }
         }
-    }
-
-    private void checkIfWithinLimits() {
-        Integer ventilation = 100;
-        NetworkPackage networkPackage = new NetworkPackage(NetworkType.Ventilation, ventilation);
-        String gsonToServer = gson.toJson(networkPackage);
-        try {
-            sendData(gsonToServer);
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-
     }
 
     /**
