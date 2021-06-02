@@ -44,7 +44,7 @@ public class ClientHandler implements Runnable {
                         DownLinkDataMessage downLinkDataMessage = new DownLinkDataMessage(true, integerAsHexString);
                         String downLinkPayload = gson.toJson(downLinkDataMessage, DownLinkDataMessage.class);
                         System.out.println(downLinkPayload);
-                        websocketClient.sendDownLink(downLinkPayload);
+//                        websocketClient.sendDownLink(downLinkPayload);
                         break;
                 }
             } catch (IOException e) {
