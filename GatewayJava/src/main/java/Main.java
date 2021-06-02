@@ -1,8 +1,6 @@
 import mediator.ClientHandler;
 import network.NetworkPackage;
 import sensor.SensorHistory;
-import mediator.ClientHandler;
-import service.DownLinkDataMessage;
 import service.WebsocketClient;
 import com.google.gson.Gson;
 import mediator.ConnectionHandler;
@@ -32,15 +30,6 @@ public class Main {
                 Thread t = new Thread(clientHandler);
                 t.setDaemon(true);
                 t.start();
-
-                // this is used for downlinks DON'T DELETE, just LEAVE COMENTED
-
-//                String integerAsHexString = Integer.toHexString(69);
-//                DownLinkDataMessage downLinkDataMessage = new DownLinkDataMessage(true, integerAsHexString);
-//                String downLinkPayload = gson.toJson(downLinkDataMessage, DownLinkDataMessage.class);
-//                System.out.println(downLinkPayload);
-//                websocketClient.sendDownLink(downLinkPayload);
-
 
                 ArrayList<SensorHistory> sensorArrayList = new ArrayList<>();
 

@@ -2,7 +2,7 @@ package mediator;
 
 import com.google.gson.Gson;
 import network.NetworkPackage;
-import network.NetworkType;
+import service.DownLinkDataMessage;
 import service.WebsocketClient;
 
 import java.io.IOException;
@@ -39,7 +39,13 @@ public class ClientHandler implements Runnable {
 
                 switch (incoming.getType()) {
                     case DATA_VALUE:
-                        System.out.println("A ajuns in Client hamdler > " + incoming.getObject());
+                        Integer incomingValue = (Integer) incoming.getObject();
+
+                        String integerAsHexString = Integer.toHexString(incomingValue);
+                        DownLinkDataMessage downLinkDataMessage = new DownLinkDataMessage(true, integerAsHexString);
+                        String downLinkPayload = gson.toJson(downLinkDataMessage, DownLinkDataMessage.class);
+                        System.out.println(downLinkPayload);
+                        websocketClient.sendDownLink(downLinkPayload);
                         break;
                 }
             } catch (IOException e) {
