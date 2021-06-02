@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+via.sep4.SpringConfiguration,\
+via.sep4.LoadDatabase

@@ -6,8 +6,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * The type Sensor history not found advice.
+ */
 @ControllerAdvice
 public class SensorHistoryNotFoundAdvice {
+    /**
+     * Parameter not found handler string.
+     *
+     * @param ex the ex
+     * @return the string
+     */
     @ResponseBody
     @ExceptionHandler(SensorHistoryNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)

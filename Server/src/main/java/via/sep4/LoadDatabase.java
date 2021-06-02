@@ -17,17 +17,23 @@ import via.sep4.model.SensorHistory.SensorHistory;
 import via.sep4.model.SensorHistory.SensorHistoryRepository;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
+/**
+ * The type Load database.
+ */
 @Configuration
 public class LoadDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
+    /**
+     * Init database command line runner. Inserts information into the database.
+     *
+     * @param sensorRepository        the sensor repository
+     * @param roomRepository          the room repository
+     * @param productRepository       the product repository
+     * @param sensorHistoryRepository the sensor history repository
+     * @return the command line runner
+     */
     @Bean
     CommandLineRunner initDatabase(SensorRepository sensorRepository, RoomRepository roomRepository, ProductRepository productRepository, SensorHistoryRepository sensorHistoryRepository) {
         return args -> {
