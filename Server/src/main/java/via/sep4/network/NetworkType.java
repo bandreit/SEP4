@@ -11,9 +11,5 @@ public enum NetworkType {
     /**
      * Ventilation network type.
      */
-    Ventilation,
-    /**
-     * Ventilation value coming from Server.
-     */
-    DATA_VALUE
+    Ventilation
 }

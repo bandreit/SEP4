@@ -38,18 +38,17 @@ public class ClientHandler implements Runnable {
                 NetworkPackage incoming = gson.fromJson(dataFromServer, NetworkPackage.class);
 
                 switch (incoming.getType()) {
-                    case DATA_VALUE:
-                        Integer incomingValue = (Integer) incoming.getObject();
-
-                        String integerAsHexString = Integer.toHexString(incomingValue);
+                    case Ventilation:
+                        Integer incomingSensorData = gson.fromJson(incoming.getObject().toString(), Integer.class);
+                        String integerAsHexString = Integer.toHexString(incomingSensorData);
                         DownLinkDataMessage downLinkDataMessage = new DownLinkDataMessage(true, integerAsHexString);
                         String downLinkPayload = gson.toJson(downLinkDataMessage, DownLinkDataMessage.class);
                         System.out.println(downLinkPayload);
-                        websocketClient.sendDownLink(downLinkPayload);
+//                        websocketClient.sendDownLink(downLinkPayload);
                         break;
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Couldn't process request");
             }
         }
     }

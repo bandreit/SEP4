@@ -50,6 +50,15 @@ public class Sensor {
         this.room = room;
     }
 
+    public Sensor(SensorType sensorType, String unitType, Room room, double min, double max) {
+        this.sensorType = sensorType;
+        this.unitType = unitType;
+        this.maxValue = max;
+        this.minValue = min;
+        this.currentvalue = 0;
+        this.room = room;
+    }
+
     /**
      * Instantiates a new Sensor.
      */

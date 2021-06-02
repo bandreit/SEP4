@@ -44,7 +44,6 @@ public class SensorConvertingService {
         System.out.println(temperatureSensor.toString());
         sensorArrayList.add(temperatureSensor);
 
-
         Gson gson = new Gson();
 
         try {

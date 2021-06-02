@@ -3,8 +3,10 @@ package via.sep4.mediator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import via.sep4.SpringConfiguration;
+import via.sep4.model.Room.Room;
 import via.sep4.model.Sensor.Sensor;
 import via.sep4.model.Sensor.SensorRepository;
+import via.sep4.model.Sensor.SensorType;
 import via.sep4.model.SensorHistory.SensorHistory;
 import via.sep4.model.SensorHistory.SensorHistoryRepository;
 import via.sep4.network.NetworkPackage;
@@ -38,8 +40,8 @@ public class ClientHandler implements Runnable {
         inputStream = this.socket.getInputStream();
         outputStream = socket.getOutputStream();
         this.gson = new Gson();
-        sensorRepository = (SensorRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorRepository");
-        sensorHistoryRepository = (SensorHistoryRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorHistoryRepository");
+//        sensorRepository = (SensorRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorRepository");
+//        sensorHistoryRepository = (SensorHistoryRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorHistoryRepository");
     }
 
     /**
@@ -65,21 +67,20 @@ public class ClientHandler implements Runnable {
                         }.getType();
 
                         ArrayList<SensorHistory> incomingSensorData = gson.fromJson(incoming.getObject().toString(), founderListType);
-                        System.out.println("Privet in server : " + incomingSensorData);
 
                         for (SensorHistory sensorHistory : incomingSensorData) {
-                            Sensor sensor = sensorRepository.getOne(sensorHistory.getSensorId());
-                            double value =  sensorHistory.getValue();
-                            sensor.setCurrentvalue(value);
-                            sensorRepository.save(sensor);
-                            SensorHistory sensorHistoryToBb = new SensorHistory();
-                            sensorHistoryToBb.setSensor(sensor);
-                            sensorHistoryToBb.setTimestamp(new Timestamp(sensorHistory.getTimestampMillis()));
-                            sensorHistoryToBb.setTimestampMillis(sensorHistoryToBb.getTimestamp().getTime());
-                            sensorHistoryToBb.setValue(sensorHistory.getValue());
-                            sensorHistoryRepository.save(sensorHistoryToBb);
-
-
+//                            Sensor sensor = sensorRepository.getOne(sensorHistory.getSensorId());
+//                            double value = sensorHistory.getValue();
+//                            sensor.setCurrentvalue(value);
+//                            sensorRepository.save(sensor);
+//                            checkIfWithinLimits(sensor);
+                            checkIfWithinLimits();
+//                            SensorHistory sensorHistoryToBb = new SensorHistory();
+//                            sensorHistoryToBb.setSensor(sensor);
+//                            sensorHistoryToBb.setTimestamp(new Timestamp(sensorHistory.getTimestampMillis()));
+//                            sensorHistoryToBb.setTimestampMillis(sensorHistoryToBb.getTimestamp().getTime());
+//                            sensorHistoryToBb.setValue(sensorHistory.getValue());
+//                            sensorHistoryRepository.save(sensorHistoryToBb);
                         }
                         break;
                     default:
@@ -93,6 +94,33 @@ public class ClientHandler implements Runnable {
                 break;
             }
         }
+    }
+
+    private void checkIfWithinLimits(Sensor sensor) {
+        if (sensor.getSensorType().equals(SensorType.TEMPERATURE)) {
+            if (sensor.getCurrentvalue() > sensor.getMaxValue()) {
+                Integer ventilation = 100;
+                NetworkPackage networkPackage = new NetworkPackage(NetworkType.Ventilation, ventilation);
+                String gsonToServer = gson.toJson(networkPackage);
+                try {
+                    sendData(gsonToServer);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void checkIfWithinLimits() {
+        Integer ventilation = 100;
+        NetworkPackage networkPackage = new NetworkPackage(NetworkType.Ventilation, ventilation);
+        String gsonToServer = gson.toJson(networkPackage);
+        try {
+            sendData(gsonToServer);
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
     }
 
     /**
