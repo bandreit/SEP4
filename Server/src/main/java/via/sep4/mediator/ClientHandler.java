@@ -1,6 +1,5 @@
 package via.sep4.mediator;
 
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import via.sep4.SpringConfiguration;
@@ -36,7 +35,6 @@ public class ClientHandler implements Runnable {
     public ClientHandler(Socket socket) throws IOException {
         this.socket = socket;
         inputStream = this.socket.getInputStream();
-        // ??? los like we don't need to initiate a socket
         outputStream = socket.getOutputStream();
         this.gson = new Gson();
         sensorRepository = (SensorRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorRepository");

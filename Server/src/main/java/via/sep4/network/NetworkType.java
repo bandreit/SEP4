@@ -1,5 +1,15 @@
 package via.sep4.network;
 
+/**
+ * The enum Network type.
+ */
 public enum NetworkType {
-    SensorList, Ventilation
+    /**
+     * Sensor list network type.
+     */
+    SensorList,
+    /**
+     * Ventilation network type.
+     */
+    Ventilation
 }
