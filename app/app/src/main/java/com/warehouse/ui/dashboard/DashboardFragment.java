@@ -34,7 +34,9 @@ import com.warehouse.adapters.RoomsViewPagerAdapter;
 import com.warehouse.data.Room.Room;
 import com.warehouse.data.Room.Statistics;
 import com.warehouse.formaters.DayFormatter;
+import com.warehouse.ui.LoginActivity.LoginActivity;
 import com.warehouse.ui.dashboard_statistics.DashboardStatisticsFragment;
+import com.warehouse.ui.loading.LoadingDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,11 +50,13 @@ public class DashboardFragment extends Fragment {
     ViewPager roomsViewPager;
     ScrollView dashboardContainerSV;
     View root;
+    private LoadingDialog loadingDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
+
     }
 
     @Nullable

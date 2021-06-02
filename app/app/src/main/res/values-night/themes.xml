@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Warehouse" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue_900</item>
+        <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/blue_900</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -14,10 +14,10 @@
         <!-- Customize your theme here. -->
 <!--        <item name="android:textColorPrimary"> </item>-->
         <item name="colorOnBackground">@color/teal_400 </item>
-        <item name="backgroundColor">@color/blue_900</item>
-        <item name="cardBackgroundColor">@color/blue_500</item>
+        <item name="backgroundColor">@color/white</item>
+        <item name="cardBackgroundColor">@color/cardBackgroundColor</item>
 
-        <item name="icon">@color/white</item>
+        <item name="icon">@color/blue_900</item>
 
         <item name="buttonBarStyle">@color/logbtn</item>
 

@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.warehouse.ui.LoginActivity.LoginActivity;
 
 public class UserRepository {
     private UserLiveData user;
@@ -42,11 +43,12 @@ public class UserRepository {
         mAuth.signOut();
     }
 
-    public void login(String email, String password) {
+    public void login(String email, String password, LoginActivity.LoginCallback loginCallback) {
         mAuth.signInWithEmailAndPassword(email, password).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(application.getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+          loginCallback.LoginFail();
             }
         });
     }
