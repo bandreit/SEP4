@@ -2,7 +2,6 @@ package via.sep4.model.SensorHistory;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import via.sep4.model.Room.Room;
 import via.sep4.model.Sensor.Sensor;
 
 import javax.persistence.*;
@@ -14,7 +13,7 @@ import java.sql.Timestamp;
 public class SensorHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long historyid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "sensorid", nullable = false)
@@ -40,12 +39,12 @@ public class SensorHistory {
 
     }
 
-    public Long getId() {
-        return id;
+    public Long getHistoryid() {
+        return historyid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setHistoryid(Long id) {
+        this.historyid = id;
     }
 
     @JsonBackReference

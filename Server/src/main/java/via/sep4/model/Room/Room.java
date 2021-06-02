@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import via.sep4.model.Product.Product;
 import via.sep4.model.Sensor.Sensor;
 
 
@@ -24,7 +25,8 @@ public class Room {
     private String roomname;
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Sensor> sensors;
-//    private Set<Products> products;
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Product> products;
 
 
     public Room(String roomname) {
@@ -32,6 +34,15 @@ public class Room {
     }
 
     public Room() {
+    }
+
+    @JsonManagedReference
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
     public Long getRoomid() {
