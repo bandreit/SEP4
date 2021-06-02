@@ -11,18 +11,22 @@ import com.warehouse.ui.LoginActivity.LoginActivity;
 import com.warehouse.ui.MainActivity.MainActivity;
 import com.warehouse.ui.MainActivity.MainActivityViewModel;
 import com.warehouse.ui.dashboard.DashboardViewModel;
+import com.warehouse.ui.settings.SettingsViewModel;
 
 public class SplashActivity extends AppCompatActivity {
     SplashActivityViewModel splashActivityViewModel;
+    SettingsViewModel settingsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         splashActivityViewModel = new ViewModelProvider(this).get(SplashActivityViewModel.class);
+        settingsViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
 
         setContentView(R.layout.activity_splash);
 
+        settingsViewModel.init();
         checkIfSignedIn();
     }
 
