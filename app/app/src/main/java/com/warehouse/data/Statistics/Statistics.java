@@ -8,9 +8,9 @@ public class Statistics {
     private String roomId;
     private String sensorId;
     private String name;
-    private ArrayList<Integer> values;
+    private ArrayList<StatisticsValue> values;
 
-    public Statistics(String roomId, String sensorId, String name, ArrayList<Integer> values) {
+    public Statistics(String roomId, String sensorId, String name, ArrayList<StatisticsValue> values) {
         this.roomId = roomId;
         this.sensorId = sensorId;
         this.name = name;
@@ -41,11 +41,11 @@ public class Statistics {
         this.name = name;
     }
 
-    public ArrayList<Integer> getValues() {
+    public ArrayList<StatisticsValue> getValues() {
         return values;
     }
 
-    public void setValues(ArrayList<Integer> values) {
+    public void setValues(ArrayList<StatisticsValue> values) {
         this.values = values;
     }
 

@@ -27,7 +27,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.warehouse.R;
 import com.warehouse.data.Statistics.Statistics;
-import com.warehouse.formaters.DayFormatter;
+import com.warehouse.formaters.DateFormatter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -106,7 +106,7 @@ public class DashboardStatisticsFragment extends Fragment {
         TextView textView = root.findViewById(R.id.temperatureValue);
         Float value = dashboardStatisticsViewModel.getAverageActivity("temperature");
 
-        textView.setText(String.valueOf(value));
+        textView.setText(String.format("%.02f", value));
 
     }
 
@@ -114,14 +114,14 @@ public class DashboardStatisticsFragment extends Fragment {
         TextView textView = root.findViewById(R.id.humidityValue);
         Float value = dashboardStatisticsViewModel.getAverageActivity("humidity");
 
-        textView.setText(String.valueOf(value));
+        textView.setText(String.format("%.02f", value));
     }
 
     private void setupAverageCO2() {
         TextView textView = root.findViewById(R.id.co2Value);
         Float value = dashboardStatisticsViewModel.getAverageActivity("co2");
 
-        textView.setText(String.valueOf(value));
+        textView.setText(String.format("%.02f", value));
     }
 
 
@@ -135,7 +135,7 @@ public class DashboardStatisticsFragment extends Fragment {
         temperatureChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         temperatureChart.getXAxis().setDrawGridLines(false);
         temperatureChart.getXAxis().setLabelRotationAngle(45);
-        temperatureChart.getXAxis().setValueFormatter(new DayFormatter(getResources()));
+        temperatureChart.getXAxis().setValueFormatter(new DateFormatter(getResources()));
         temperatureChart.getAxisLeft().setTextColor(myColor);
         temperatureChart.getAxisRight().setEnabled(false);
         temperatureChart.getLegend().setEnabled(false);
@@ -147,13 +147,13 @@ public class DashboardStatisticsFragment extends Fragment {
 
 
     private void loadTemperatureChartData() {
-        HashMap<Integer, Integer> values = dashboardStatisticsViewModel.getActivity("temperature");
+        HashMap<String, Double> values = dashboardStatisticsViewModel.getActivity("temperature");
         ArrayList<Entry> entries = new ArrayList<>();
         Iterator iterator = values.entrySet().iterator();
 
         while (iterator.hasNext()) {
-            Map.Entry<Integer, Integer> pair = (Map.Entry) iterator.next();
-            entries.add(new Entry(pair.getKey(), pair.getValue()));
+            Map.Entry<String, Double> pair = (Map.Entry) iterator.next();
+            entries.add(new Entry(Float.parseFloat(pair.getKey()), pair.getValue().floatValue()));
             iterator.remove();
         }
 
@@ -181,7 +181,7 @@ public class DashboardStatisticsFragment extends Fragment {
         humidityChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         humidityChart.getXAxis().setDrawGridLines(false);
         humidityChart.getXAxis().setLabelRotationAngle(45);
-        humidityChart.getXAxis().setValueFormatter(new DayFormatter(getResources()));
+        humidityChart.getXAxis().setValueFormatter(new DateFormatter(getResources()));
 
         humidityChart.getAxisLeft().setTextColor(myColor);
 
@@ -194,13 +194,13 @@ public class DashboardStatisticsFragment extends Fragment {
     }
 
     private void loadHumidityChartData() {
-        HashMap<Integer, Integer> values = dashboardStatisticsViewModel.getActivity("humidity");
+        HashMap<String, Double> values = dashboardStatisticsViewModel.getActivity("humidity");
         ArrayList<Entry> entries = new ArrayList<>();
         Iterator iterator = values.entrySet().iterator();
 
         while (iterator.hasNext()) {
-            Map.Entry<Integer, Integer> pair = (Map.Entry) iterator.next();
-            entries.add(new Entry(pair.getKey(), pair.getValue()));
+            Map.Entry<String, Double> pair = (Map.Entry) iterator.next();
+            entries.add(new Entry(Float.parseFloat(pair.getKey()), pair.getValue().floatValue()));
             iterator.remove();
         }
 
@@ -226,7 +226,7 @@ public class DashboardStatisticsFragment extends Fragment {
         co2Chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         co2Chart.getXAxis().setDrawGridLines(false);
         co2Chart.getXAxis().setLabelRotationAngle(45);
-        co2Chart.getXAxis().setValueFormatter(new DayFormatter(getResources()));
+        co2Chart.getXAxis().setValueFormatter(new DateFormatter(getResources()));
 
         co2Chart.getAxisLeft().setTextColor(myColor);
 
@@ -239,13 +239,13 @@ public class DashboardStatisticsFragment extends Fragment {
     }
 
     private void loadCO2ChartData() {
-        HashMap<Integer, Integer> values = dashboardStatisticsViewModel.getActivity("co2");
+        HashMap<String, Double> values = dashboardStatisticsViewModel.getActivity("co2");
         ArrayList<BarEntry> entries = new ArrayList<>();
         Iterator iterator = values.entrySet().iterator();
 
         while (iterator.hasNext()) {
-            Map.Entry<Integer, Integer> pair = (Map.Entry) iterator.next();
-            entries.add(new BarEntry(pair.getKey(), pair.getValue()));
+            Map.Entry<String, Double> pair = (Map.Entry) iterator.next();
+            entries.add(new BarEntry(Float.parseFloat(pair.getKey()), pair.getValue().floatValue()));
             iterator.remove();
         }
 

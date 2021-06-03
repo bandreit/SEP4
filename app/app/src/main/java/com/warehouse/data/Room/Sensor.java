@@ -16,6 +16,7 @@ public class Sensor {
     @SerializedName("currentvalue")
     private Double currentValue;
 
+
     public Sensor(String id, String name, String measurementUnit, Double minValue, Double maxValue, Double currentValue) {
         this.id = id;
         this.name = name;
