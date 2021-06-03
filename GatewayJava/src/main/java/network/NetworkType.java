@@ -1,5 +1,5 @@
 package network;
 
 public enum NetworkType {
-    SensorList
+    SensorList, Ventilation
 }

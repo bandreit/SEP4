@@ -1,0 +1,17 @@
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\persistance\ParameterPersistenceImpl.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\network\NetworkType.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\service\DBController.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\model\ParameterController.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\model\Parameter.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\model\SensorType.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\model\ParameterRepository.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\LoadDatabase.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\mediator\ClientHandler.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\network\NetworkPackage.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\persistance\ParameterPersistance.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\model\ParameterNotFoundException.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\ServiceApiApplication.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\mediator\ClientConnector.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\model\ParameterNotFoundAdvice.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\utility\DatabaseQueries.java
+C:\Users\elena\SEP4\Server\src\main\java\via\sep4\model\Sensor.java

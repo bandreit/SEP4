@@ -12,7 +12,7 @@
         android:id="@+id/notificationsText"
         android:text="@string/title_allow_notifications"
         android:textSize="16sp"
-        android:textColor="@color/white"
+        android:textColor="@color/textColor"
         android:fontFamily="sans-serif-medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -20,7 +20,6 @@
     <TextView
         android:id="@+id/NotificationsToggle"
         android:layout_below="@+id/notificationsText"
-        android:text="@string/title_enabled"
         android:layout_marginTop="3dp"
         android:textSize="14sp"
         android:textColor="#90939A"

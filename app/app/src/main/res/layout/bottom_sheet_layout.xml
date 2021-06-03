@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/configure_bottom_sheet_background"
+    android:paddingHorizontal="40dp"
+    android:paddingVertical="25dp">
+
+    <TextView
+        android:id="@+id/configureSensorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temperature"
+        android:textColor="@color/textColor"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/configureSensorRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Deposit"
+        android:textColor="@color/textColor"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/configureSensorName" />
+
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/configureRangeSlider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:stepSize="1"
+        app:haloColor="@color/blue_900"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/configureSensorRoom"
+        app:thumbColor="@color/teal_400"
+        app:trackColor="?icon"
+        app:values="@array/configure_slider_values" />
+</androidx.constraintlayout.widget.ConstraintLayout>
