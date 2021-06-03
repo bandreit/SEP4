@@ -1,12 +1,21 @@
 package com.warehouse.data.Room;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Sensor {
+    @SerializedName("sensorID")
     private String id;
+    @SerializedName("sensorType")
     private String name;
+    @SerializedName("unitType")
     private String measurementUnit;
+    @SerializedName("minValue")
     private Double minValue;
+    @SerializedName("maxValue")
     private Double maxValue;
+    @SerializedName("currentvalue")
     private Double currentValue;
+
 
     public Sensor(String id, String name, String measurementUnit, Double minValue, Double maxValue, Double currentValue) {
         this.id = id;
