@@ -1,10 +1,21 @@
 package com.warehouse.data.Room;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
 import com.google.gson.annotations.SerializedName;
+import com.warehouse.adapters.DataConverter;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+@Entity(tableName = "rooms_table")
+@TypeConverters(DataConverter.class)
 public class Room {
+    @PrimaryKey
+    @NotNull
     @SerializedName("roomid")
     private String id;
     @SerializedName("roomname")
