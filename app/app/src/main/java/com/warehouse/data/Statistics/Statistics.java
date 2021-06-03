@@ -1,20 +1,11 @@
 package com.warehouse.data.Statistics;
 
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
-
-import com.warehouse.adapters.SensorsDataConverter;
-import com.warehouse.adapters.StatisticsDataConverter;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity(tableName = "statistics")
-@TypeConverters(StatisticsDataConverter.class)
 public class Statistics {
     @PrimaryKey
     @NotNull
@@ -58,7 +49,7 @@ public class Statistics {
         return values;
     }
 
-    public void setValues(ArrayList<StatisticsValue> values) {
+    public void setValues(List<StatisticsValue> values) {
         this.values = values;
     }
 

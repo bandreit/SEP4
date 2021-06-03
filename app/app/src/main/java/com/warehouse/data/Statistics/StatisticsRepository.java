@@ -24,20 +24,13 @@ import retrofit2.Response;
 
 public class StatisticsRepository {
     private static StatisticsApi statisticsApi = ServiceGenerator.getStatisticsApi();
-    private StatisticsDao statisticsDao;
     private static StatisticsRepository instance;
-    private final ExecutorService executorService;
     private String roomId;
-    private LiveData<List<Statistics>> statistics;
+    private MutableLiveData<List<Statistics>> statistics;
 
     private StatisticsRepository(Application application, String roomId) {
         this.roomId = roomId;
-
-        StatisticsDatabase statisticsDatabase = StatisticsDatabase.getInstance(application);
-        statisticsDao = statisticsDatabase.statisticsDao();
-        executorService = Executors.newFixedThreadPool(2);
-        statistics = statisticsDao.getAllStatistics();
-
+        statistics = new MutableLiveData<>();
     }
 
     public static synchronized StatisticsRepository getInstance(Application application, String roomId) {
@@ -53,7 +46,7 @@ public class StatisticsRepository {
     }
 
     public void insert(List<Statistics> statistics) {
-        executorService.execute(() -> statisticsDao.insert(statistics));
+        this.statistics.postValue(statistics);
     }
 
     public void fetchStatistics() {
