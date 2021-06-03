@@ -1,8 +1,6 @@
 package mediator;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 
 public class ConnectionManager implements ConnectionHandler {
@@ -15,9 +13,10 @@ public class ConnectionManager implements ConnectionHandler {
      */
     public static final int PORT = 9876;
     private Socket socket;
-    private InputStream inputStream;
-    private OutputStream outputStream;
+    private DataInputStream inputStream;
+    private DataOutputStream outputStream;
     private static ConnectionManager instance;
+
     private static Object lock = new Object();
 
     private ConnectionManager() throws IOException {
@@ -31,12 +30,9 @@ public class ConnectionManager implements ConnectionHandler {
      * @throws IOException the io exception
      */
     public static ConnectionManager getInstance() throws IOException {
-        if(instance == null)
-        {
-            synchronized (lock)
-            {
-                if (instance == null)
-                {
+        if (instance == null) {
+            synchronized (lock) {
+                if (instance == null) {
                     instance = new ConnectionManager();
                 }
             }
@@ -47,14 +43,15 @@ public class ConnectionManager implements ConnectionHandler {
     @Override
     public void connect() throws IOException {
         this.socket = new Socket(HOST, PORT);
-        inputStream = socket.getInputStream();
-        outputStream = socket.getOutputStream();
+        inputStream = new DataInputStream(socket.getInputStream());
+        outputStream = new DataOutputStream(socket.getOutputStream());
     }
 
     @Override
     public void disconnect() throws IOException {
         socket.close();
     }
+
     /**
      * Sends bytes via Socket connection
      *
@@ -82,11 +79,11 @@ public class ConnectionManager implements ConnectionHandler {
     @Override
     public String readFromServer() throws IOException {
         byte[] lenBytes = new byte[4];
-        inputStream.read(lenBytes, 0, 4);
+        inputStream.readFully(lenBytes, 0, 4);
         int len = (((lenBytes[3] & 0xff) << 24) | ((lenBytes[2] & 0xff) << 16) |
                 ((lenBytes[1] & 0xff) << 8) | (lenBytes[0] & 0xff));
         byte[] receivedBytes = new byte[len];
-        inputStream.read(receivedBytes, 0, len);
+        inputStream.readFully(receivedBytes, 0, len);
 
         return new String(receivedBytes, 0, len);
     }

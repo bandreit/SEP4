@@ -33,8 +33,7 @@ public class WebsocketClient implements WebSocket.Listener {
      *
      * @param jsonTelegram the json telegram
      */
-// Send down-link message to device
-    // Must be in Json format according to https://github.com/ihavn/IoT_Semester_project/blob/master/LORA_NETWORK_SERVER.md
+    // Send down-link message to device
     public void sendDownLink(String jsonTelegram) {
         server.sendText(jsonTelegram, true);
     }
