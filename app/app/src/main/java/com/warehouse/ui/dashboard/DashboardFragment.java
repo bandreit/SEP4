@@ -32,7 +32,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.warehouse.R;
 import com.warehouse.adapters.RoomsViewPagerAdapter;
 import com.warehouse.data.Room.Room;
-import com.warehouse.data.Room.Statistics;
 import com.warehouse.formaters.DayFormatter;
 import com.warehouse.ui.LoginActivity.LoginActivity;
 import com.warehouse.ui.dashboard_statistics.DashboardStatisticsFragment;

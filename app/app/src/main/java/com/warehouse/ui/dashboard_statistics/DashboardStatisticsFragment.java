@@ -27,7 +27,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.warehouse.R;
-import com.warehouse.data.Room.Statistics;
+import com.warehouse.data.Statistics.Statistics;
 import com.warehouse.formaters.DayFormatter;
 
 import java.util.ArrayList;
@@ -89,7 +89,9 @@ public class DashboardStatisticsFragment extends Fragment {
     private void setupFilter() {
         spinner = root.findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.filter_dashboard, R.layout.spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

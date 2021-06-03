@@ -27,6 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tabIndicatorColor="@color/teal_400"
             app:tabMode="scrollable"
+            app:tabGravity="start"
             app:tabSelectedTextColor="@color/textColor"
             app:tabTextColor="@color/tabNotSelected" />
     </androidx.viewpager.widget.ViewPager>

@@ -1,4 +1,4 @@
-package com.warehouse.data.Room;
+package com.warehouse.data.Statistics;
 
 import android.app.Application;
 
@@ -35,7 +35,7 @@ public class StatisticsRepository {
     }
 
     public void fetchStatistics(String roomId) {
-        Call<StatisticsResponse> call = statisticsApi.getStatistics ();
+        Call<StatisticsResponse> call = statisticsApi.getStatistics (roomId);
 
         call.enqueue(new Callback<StatisticsResponse>() {
             @Override
