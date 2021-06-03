@@ -45,6 +45,7 @@ public class RoomRepository {
         executorService.execute(() -> roomsDao.insert(rooms));
     }
 
+
     public void fetchRooms() {
         Call<RoomsResponse> call = roomsApi.getRooms();
 
@@ -67,26 +68,26 @@ public class RoomRepository {
         });
     }
 
-    public void updateSensor(String id, Sensor sensor) {
-//        Call<RoomsResponse> call = roomsApi.putSensor(id, sensor);
-//
-//        call.enqueue(new Callback<RoomsResponse>() {
-//            @Override
-//            public void onResponse(Call<RoomsResponse> call, Response<RoomsResponse> response) {
-//                if (response.isSuccessful()) {
-//                    rooms.postValue(response.body().getData());
-//                } else {
-//                    System.out.println("Failure ======");
-//                    System.out.println(response.message());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<RoomsResponse> call, Throwable t) {
-//                System.out.println("!!! Failure");
-//                t.printStackTrace();
-//            }
-//        });
+    public void updateSensor(String id, String minValue, String maxValue) {
+        Call<RoomsResponse> call = roomsApi.updateSensor(id, minValue, maxValue);
+
+        call.enqueue(new Callback<RoomsResponse>() {
+            @Override
+            public void onResponse(Call<RoomsResponse> call, Response<RoomsResponse> response) {
+                if (response.isSuccessful()) {
+                    fetchRooms();
+                } else {
+                    System.out.println("Failure ======");
+                    System.out.println(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RoomsResponse> call, Throwable t) {
+                System.out.println("!!! Failure");
+                t.printStackTrace();
+            }
+        });
     }
 
 }

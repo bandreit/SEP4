@@ -5,6 +5,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RoomsApi {
     // /rooms
@@ -12,5 +13,5 @@ public interface RoomsApi {
     Call<RoomsResponse> getRooms();
     // /sensors/:sensorId
     @PUT("/sensors/{id}")
-    Call<RoomsResponse> putSensor(@Path("id") String id, @Body Sensor sensor);
+    Call<RoomsResponse> updateSensor(@Path("id") String id, @Query("min") String min, @Query("max") String max);
 }
