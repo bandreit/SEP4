@@ -3,9 +3,8 @@ package via.sep4.model.Room;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import via.sep4.model.Charts.DataToSendRooms;
 import via.sep4.service.RoomService;
-
-import java.util.List;
 
 /**
  * The type Room controller.
@@ -30,7 +29,7 @@ public class RoomController {
      * @return the list containing the rooms and everything they contain
      */
     @GetMapping("/rooms")
-    List<Room> all() {
+    DataToSendRooms all() {
         return roomService.findAll();
     }
 }

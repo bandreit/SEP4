@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The type Main.
+ */
 public class Main {
     private static final int[] rooms = {1, 2};
     private static final long[] CO2_SENSORS = {1, 4};
@@ -18,9 +21,14 @@ public class Main {
     private static final long[] TEMP_SENSORS = {3, 6};
     private static final Random rnd = new Random();
 
+    /**
+     * The entry point of application.
+     * Sending sensors to the server through WebSockets
+     *
+     * @param args the input arguments
+     */
 
     public static void main(String[] args) throws IOException {
-
         Gson gson = new Gson();
         WebsocketClient websocketClient = new WebsocketClient("wss://iotnet.cibicom.dk/app?token=vnoTuwAAABFpb3RuZXQuY2liaWNvbS5kaxOt1kIOlKdP0z7zj8xIG_I=");
 
@@ -61,10 +69,18 @@ public class Main {
             } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
+    /**
+     * Gets random value.
+     *
+     * @param random        the random
+     * @param lowerBound    the lower bound
+     * @param upperBound    the upper bound
+     * @param decimalPlaces the decimal places
+     * @return the random value
+     */
     public static double getRandomValue(final Random random,
                                         final int lowerBound,
                                         final int upperBound,
