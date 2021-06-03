@@ -1,15 +1,19 @@
 package com.warehouse.ui.MainActivity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,37 +36,31 @@ public class MainActivity extends AppCompatActivity {
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
 
+        mainActivityViewModel.init();
+        dashboardViewModel.init();
 
         setContentView(R.layout.activity_main);
-        startAppActivity();
+
+        setupNavigation();
 
         checkIfSignedIn();
     }
 
     public void checkIfSignedIn() {
         mainActivityViewModel.getUser().observe(this, user -> {
-            if(user == null) {
-                startLoginActivity();
-            } else {
-                startAppActivity();
+            if (user == null) {
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
             }
         });
     }
 
-    private void startLoginActivity() {
-        startActivity(new Intent(this, LoginActivity.class));
+    public void setupNavigation() {
+        mainActivityViewModel.init();
 
-        finish();
-    }
-
-    public void startAppActivity() {
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
-
-
-        mainActivityViewModel.init();
-        dashboardViewModel.init ();
     }
 }

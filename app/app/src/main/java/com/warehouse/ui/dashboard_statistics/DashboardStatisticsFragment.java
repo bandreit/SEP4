@@ -46,6 +46,7 @@ public class DashboardStatisticsFragment extends Fragment {
     private BarChart co2Chart;
     private Spinner spinner;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -105,53 +106,48 @@ public class DashboardStatisticsFragment extends Fragment {
     }
 
     private void setupAverageTemperature() {
-        TextView textView = root.findViewById (R.id.temperatureValue);
-        dashboardStatisticsViewModel.getAverageActivity ("temperature").observe (getViewLifecycleOwner ( ), new Observer<Float> ( ) {
-            @Override
-            public void onChanged(Float value) {
-                textView.setText (String.valueOf (value));
-            }
-        });
+        TextView textView = root.findViewById(R.id.temperatureValue);
+        Float value = dashboardStatisticsViewModel.getAverageActivity("temperature");
+
+        textView.setText(String.valueOf(value));
+
     }
 
     private void setupAverageHumidity() {
-        TextView textView = root.findViewById (R.id.humidityValue);
-        dashboardStatisticsViewModel.getAverageActivity ("humidity").observe (getViewLifecycleOwner ( ), new Observer<Float> ( ) {
-            @Override
-            public void onChanged(Float value) {
-                textView.setText (String.valueOf (value));
-            }
-        });
+        TextView textView = root.findViewById(R.id.humidityValue);
+        Float value = dashboardStatisticsViewModel.getAverageActivity("humidity");
+
+        textView.setText(String.valueOf(value));
     }
 
     private void setupAverageCO2() {
-        TextView textView = root.findViewById (R.id.co2Value);
-        dashboardStatisticsViewModel.getAverageActivity ("co2").observe (getViewLifecycleOwner ( ), new Observer<Float> ( ) {
-            @Override
-            public void onChanged(Float value) {
-                textView.setText (String.valueOf (value));
-            }
-        });
+        TextView textView = root.findViewById(R.id.co2Value);
+        Float value = dashboardStatisticsViewModel.getAverageActivity("co2");
+
+        textView.setText(String.valueOf(value));
     }
 
 
     private void setupTemperatureChart() {
+        int myColor = getResources().getColor(R.color.textColor);
         temperatureChart = root.findViewById(R.id.temperatureChart);
 
         temperatureChart.setMinimumHeight(500);
 
-        temperatureChart.getXAxis().setTextColor(Color.WHITE);
+        temperatureChart.getXAxis().setTextColor(myColor);
         temperatureChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         temperatureChart.getXAxis().setDrawGridLines(false);
         temperatureChart.getXAxis().setLabelRotationAngle(45);
         temperatureChart.getXAxis().setValueFormatter(new DayFormatter(getResources()));
-        temperatureChart.getAxisLeft().setTextColor(Color.WHITE);
+        temperatureChart.getAxisLeft().setTextColor(myColor);
         temperatureChart.getAxisRight().setEnabled(false);
         temperatureChart.getLegend().setEnabled(false);
         temperatureChart.getDescription().setEnabled(false);
 
         loadTemperatureChartData();
     }
+
+
 
     private void loadTemperatureChartData() {
         HashMap<Integer, Integer> values = dashboardStatisticsViewModel.getActivity("temperature");
@@ -179,17 +175,18 @@ public class DashboardStatisticsFragment extends Fragment {
 
 
     private void setupHumidityChart() {
+        int myColor = getResources().getColor(R.color.textColor);
         humidityChart = root.findViewById(R.id.humidityChart);
 
         humidityChart.setMinimumHeight(500);
 
-        humidityChart.getXAxis().setTextColor(Color.WHITE);
+        humidityChart.getXAxis().setTextColor(myColor);
         humidityChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         humidityChart.getXAxis().setDrawGridLines(false);
         humidityChart.getXAxis().setLabelRotationAngle(45);
         humidityChart.getXAxis().setValueFormatter(new DayFormatter(getResources()));
 
-        humidityChart.getAxisLeft().setTextColor(Color.WHITE);
+        humidityChart.getAxisLeft().setTextColor(myColor);
 
         humidityChart.getAxisRight().setEnabled(false);
 
@@ -223,17 +220,18 @@ public class DashboardStatisticsFragment extends Fragment {
 
 
     private void setupCO2Chart() {
+        int myColor = getResources().getColor(R.color.textColor);
         co2Chart = root.findViewById(R.id.co2Chart);
 
         co2Chart.setMinimumHeight(500);
 
-        co2Chart.getXAxis().setTextColor(Color.WHITE);
+        co2Chart.getXAxis().setTextColor(myColor);
         co2Chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         co2Chart.getXAxis().setDrawGridLines(false);
         co2Chart.getXAxis().setLabelRotationAngle(45);
         co2Chart.getXAxis().setValueFormatter(new DayFormatter(getResources()));
 
-        co2Chart.getAxisLeft().setTextColor(Color.WHITE);
+        co2Chart.getAxisLeft().setTextColor(myColor);
 
         co2Chart.getAxisRight().setEnabled(false);
 

@@ -4,7 +4,7 @@
     android:id="@+id/dashboardContainerSV"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_900"
+    android:background="?backgroundColor"
     android:paddingHorizontal="20dp"
     android:paddingVertical="40dp"
     android:fillViewport="true">
@@ -25,9 +25,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tabIndicatorColor="@color/teal_400"
             app:tabMode="scrollable"
-            app:tabIndicatorFullWidth="false"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/white_800" />
+            app:tabSelectedTextColor="@color/textColor"
+            app:tabTextColor="@color/tabNotSelected" />
     </com.warehouse.adapters.ScrollableViewPagerAdapter>
 
 </ScrollView>

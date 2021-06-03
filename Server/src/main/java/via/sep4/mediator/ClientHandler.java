@@ -1,13 +1,10 @@
 package via.sep4.mediator;
 
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import via.sep4.SpringConfiguration;
-import via.sep4.model.Room.RoomRepository;
 import via.sep4.model.Sensor.Sensor;
 import via.sep4.model.Sensor.SensorRepository;
-import via.sep4.model.SensorHistory.SensorHistory;
 import via.sep4.model.SensorHistory.SensorHistory;
 import via.sep4.model.SensorHistory.SensorHistoryRepository;
 import via.sep4.network.NetworkPackage;
@@ -38,7 +35,6 @@ public class ClientHandler implements Runnable {
     public ClientHandler(Socket socket) throws IOException {
         this.socket = socket;
         inputStream = this.socket.getInputStream();
-        // ??? los like we don't need to initiate a socket
         outputStream = socket.getOutputStream();
         this.gson = new Gson();
         sensorRepository = (SensorRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorRepository");
@@ -73,11 +69,12 @@ public class ClientHandler implements Runnable {
                         for (SensorHistory sensorHistory : incomingSensorData) {
                             Sensor sensor = sensorRepository.getOne(sensorHistory.getSensorId());
                             double value =  sensorHistory.getValue();
-                            sensor.setCurrentValue(value);
+                            sensor.setCurrentvalue(value);
                             sensorRepository.save(sensor);
                             SensorHistory sensorHistoryToBb = new SensorHistory();
                             sensorHistoryToBb.setSensor(sensor);
                             sensorHistoryToBb.setTimestamp(new Timestamp(sensorHistory.getTimestampMillis()));
+                            sensorHistoryToBb.setTimestampMillis(sensorHistoryToBb.getTimestamp().getTime());
                             sensorHistoryToBb.setValue(sensorHistory.getValue());
                             sensorHistoryRepository.save(sensorHistoryToBb);
 
