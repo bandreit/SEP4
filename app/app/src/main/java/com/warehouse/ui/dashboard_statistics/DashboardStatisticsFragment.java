@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class DashboardStatisticsFragment extends Fragment {
     public static final String ARG_ROOM_ID = "ROOM_ID";
@@ -104,7 +105,7 @@ public class DashboardStatisticsFragment extends Fragment {
 
     private void setupAverageTemperature() {
         TextView textView = root.findViewById(R.id.temperatureValue);
-        Float value = dashboardStatisticsViewModel.getAverageActivity("temperature");
+        Float value = dashboardStatisticsViewModel.getAverageActivity("TEMPERATURE");
 
         textView.setText(String.format("%.02f", value));
 
@@ -112,14 +113,14 @@ public class DashboardStatisticsFragment extends Fragment {
 
     private void setupAverageHumidity() {
         TextView textView = root.findViewById(R.id.humidityValue);
-        Float value = dashboardStatisticsViewModel.getAverageActivity("humidity");
+        Float value = dashboardStatisticsViewModel.getAverageActivity("HUMIDITY");
 
         textView.setText(String.format("%.02f", value));
     }
 
     private void setupAverageCO2() {
         TextView textView = root.findViewById(R.id.co2Value);
-        Float value = dashboardStatisticsViewModel.getAverageActivity("co2");
+        Float value = dashboardStatisticsViewModel.getAverageActivity("CO2");
 
         textView.setText(String.format("%.02f", value));
     }
@@ -145,7 +146,6 @@ public class DashboardStatisticsFragment extends Fragment {
     }
 
 
-
     private void loadTemperatureChartData() {
         HashMap<String, Double> values = dashboardStatisticsViewModel.getActivity("temperature");
         ArrayList<Entry> entries = new ArrayList<>();
@@ -153,7 +153,9 @@ public class DashboardStatisticsFragment extends Fragment {
 
         while (iterator.hasNext()) {
             Map.Entry<String, Double> pair = (Map.Entry) iterator.next();
-            entries.add(new Entry(Float.parseFloat(pair.getKey()), pair.getValue().floatValue()));
+            Long key = Long.parseLong(pair.getKey()) / (long)Math.pow(10, 7.5);
+
+            entries.add(new Entry(key, pair.getValue().floatValue()));
             iterator.remove();
         }
 
@@ -200,7 +202,9 @@ public class DashboardStatisticsFragment extends Fragment {
 
         while (iterator.hasNext()) {
             Map.Entry<String, Double> pair = (Map.Entry) iterator.next();
-            entries.add(new Entry(Float.parseFloat(pair.getKey()), pair.getValue().floatValue()));
+            Long key = Long.parseLong(pair.getKey()) / (long)Math.pow(10, 7.5);
+
+            entries.add(new Entry(key, pair.getValue().floatValue()));
             iterator.remove();
         }
 
@@ -243,9 +247,13 @@ public class DashboardStatisticsFragment extends Fragment {
         ArrayList<BarEntry> entries = new ArrayList<>();
         Iterator iterator = values.entrySet().iterator();
 
+        int i = 1;
+
         while (iterator.hasNext()) {
             Map.Entry<String, Double> pair = (Map.Entry) iterator.next();
-            entries.add(new BarEntry(Float.parseFloat(pair.getKey()), pair.getValue().floatValue()));
+            Long key = Long.parseLong(pair.getKey()) / (long)Math.pow(10, 7.5);
+
+            entries.add(new BarEntry(key, pair.getValue().floatValue()));
             iterator.remove();
         }
 

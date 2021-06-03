@@ -19,6 +19,6 @@ public class DateFormatter extends ValueFormatter {
     @Override
     public String getFormattedValue(float value) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM HH:mm", Locale.ENGLISH);
-        return sdf.format(value);
+        return sdf.format(value * Math.pow(10, 7.5));
     }
 }
