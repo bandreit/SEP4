@@ -11,22 +11,39 @@ import java.nio.ByteBuffer;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
+/**
+ * The type Websocket client.
+ */
 public class WebsocketClient implements WebSocket.Listener {
     private WebSocket server = null;
     private SensorConvertingService sensorConvertingService;
     private Gson gson;
 
+    /**
+     * Gets server.
+     *
+     * @return the server
+     */
     public WebSocket getServer() {
         return server;
     }
 
+    /**
+     * Send down link.
+     *
+     * @param jsonTelegram the json telegram
+     */
     // Send down-link message to device
-    // Must be in Json format according to https://github.com/ihavn/IoT_Semester_project/blob/master/LORA_NETWORK_SERVER.md
     public void sendDownLink(String jsonTelegram) {
         server.sendText(jsonTelegram, true);
     }
 
-    // E.g. url: "wss://iotnet.teracom.dk/app?token=??????????????????????????????????????????????="
+    /**
+     * Instantiates a new Websocket client.
+     *
+     * @param url the url
+     */
+// E.g. url: "wss://iotnet.teracom.dk/app?token=??????????????????????????????????????????????="
     // Substitute ????????????????? with the token you have been given
     public WebsocketClient(String url) {
         HttpClient client = HttpClient.newHttpClient();

@@ -3,12 +3,11 @@ package com.warehouse.ui.home_sensors;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,7 +53,14 @@ public class SensorsRecyclerViewAdapter extends RecyclerView.Adapter<SensorsRecy
         holder.sensorValue.setText(sensorValue);
 
         ImageButton configureButton= view.findViewById(R.id.configureBtn);
-
+        ConstraintLayout sensorItem = view.findViewById (R.id.sensorItem);
+        sensorItem.setOnClickListener (new View.OnClickListener ( ) {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialog bottomSheetDialog= new BottomSheetDialog(sensor);
+                bottomSheetDialog.show(fragmentManager,"BOTTOM_SHEET_DIALOG");
+            }
+        });
         configureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

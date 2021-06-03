@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +14,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.slider.RangeSlider;
 import com.warehouse.R;
 import com.warehouse.data.Room.Sensor;
-import com.warehouse.ui.home.HomeViewModel;
 
 public class BottomSheetDialog extends BottomSheetDialogFragment {
     private Sensor sensor;
@@ -59,20 +56,14 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
         rangeSlider.setValueTo(100.0f);
         rangeSlider.setValues(minValue, maxValue);
 
+            rangeSlider.addOnChangeListener (new RangeSlider.OnChangeListener ( ) {
+                @Override
+                public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
+                    Double minValue = slider.getValues().get(0).doubleValue();
+                    Double maxValue = slider.getValues().get(1).doubleValue();
 
-        rangeSlider.addOnSliderTouchListener(new RangeSlider.OnSliderTouchListener() {
-            @Override
-            public void onStartTrackingTouch(@NonNull RangeSlider slider) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(@NonNull RangeSlider slider) {
-                Double minValue = slider.getValues().get(0).doubleValue();
-                Double maxValue = slider.getValues().get(1).doubleValue();
-
-                bottomSheetDialogViewModel.updateSensorMinMax(minValue, maxValue);
-            }
-        });
+                    bottomSheetDialogViewModel.updateSensorMinMax(sensor.getId (),minValue, maxValue);
+                }
+            });
     }
 }

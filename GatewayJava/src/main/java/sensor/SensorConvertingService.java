@@ -10,6 +10,9 @@ import service.UpLinkDataMessage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The type Sensor converting service.
+ */
 public class SensorConvertingService {
     private String hexVal;
     private int decVal;
@@ -18,9 +21,17 @@ public class SensorConvertingService {
     private static final long[] HUM_SENSORS = {2, 5};
     private static final long[] TEMP_SENSORS = {3, 6};
 
+    /**
+     * Instantiates a new Sensor converting service.
+     */
     public SensorConvertingService() {
     }
 
+    /**
+     * Convert and send.
+     *
+     * @param upLinkDataMessage the up link data message
+     */
     public void convertAndSend(UpLinkDataMessage upLinkDataMessage) {
         ArrayList<SensorHistory> sensorArrayList = new ArrayList<>();
         long timestamp = upLinkDataMessage.getTs();
@@ -43,7 +54,6 @@ public class SensorConvertingService {
         SensorHistory temperatureSensor = new SensorHistory(TEMP_SENSORS[room], timestamp, decVal);
         System.out.println(temperatureSensor.toString());
         sensorArrayList.add(temperatureSensor);
-
 
         Gson gson = new Gson();
 
