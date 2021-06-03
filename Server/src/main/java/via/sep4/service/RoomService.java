@@ -31,13 +31,13 @@ public class RoomService {
      * @return the list
      */
     public DataToSendRooms findAll() {
-        DataRooms createData = new DataRooms();
         List<DataRooms> arrayListOfData = new ArrayList<>();
         List<Room> allRooms = roomRepository.findAll();
-        for (Room room : allRooms) {
-            createData.setRoomid(room.getRoomid());
-            createData.setRoomname(room.getRoomname());
-            createData.setListOfSensors(room.getSensors());
+        for (int i = 0; i < allRooms.size(); i++) {
+            DataRooms createData = new DataRooms();
+            createData.setRoomid(allRooms.get(i).getRoomid());
+            createData.setRoomname(allRooms.get(i).getRoomname());
+            createData.setListOfSensors(allRooms.get(i).getSensors());
             arrayListOfData.add(createData);
         }
         DataToSendRooms send = new DataToSendRooms();

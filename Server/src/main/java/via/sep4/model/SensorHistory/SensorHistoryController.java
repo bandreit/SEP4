@@ -30,6 +30,7 @@ public class SensorHistoryController {
      */
     @GetMapping("/sensorHistory/{id}")
     public DataToSendHistory getStatistics(@PathVariable long id, @RequestParam int period) {
+
         return service.getSensorsHistoryByPeriod(id, period);
     }
 
