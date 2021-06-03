@@ -5,6 +5,6 @@ import retrofit2.http.GET;
 
 public interface RoomApi {
     // /rooms
-    @GET("fed032ca-d872-40fd-8827-a2390b90515b")
+    @GET("ca62039e-e176-4047-b57f-64ed8b4d8ba8")
     Call<RoomsResponse> getRooms();
 }

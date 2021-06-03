@@ -1,4 +1,4 @@
-package com.warehouse.data.Room;
+package com.warehouse.data.Statistics;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -1,7 +1,7 @@
 package com.warehouse.services;
 
 import com.warehouse.data.Room.RoomApi;
-import com.warehouse.data.Room.StatisticsApi;
+import com.warehouse.data.Statistics.StatisticsApi;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

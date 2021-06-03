@@ -1,9 +1,13 @@
 package com.warehouse.data.Room;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Room {
+    @SerializedName("roomid")
     private String id;
+    @SerializedName("roomname")
     private String name;
     private List<Sensor> sensors;
 

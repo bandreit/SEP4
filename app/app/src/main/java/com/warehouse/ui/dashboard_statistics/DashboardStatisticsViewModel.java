@@ -5,12 +5,9 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
-import com.warehouse.data.Room.Room;
-import com.warehouse.data.Room.RoomRepository;
-import com.warehouse.data.Room.Statistics;
-import com.warehouse.data.Room.StatisticsRepository;
+import com.warehouse.data.Statistics.Statistics;
+import com.warehouse.data.Statistics.StatisticsRepository;
 
 import java.util.Arrays;
 import java.util.Calendar;
