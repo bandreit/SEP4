@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The type Main.
+ */
 public class Main {
     private static final int[] rooms = {1, 2};
     private static final long[] CO2_SENSORS = {1, 4};
@@ -18,6 +21,12 @@ public class Main {
     private static final Random rnd = new Random();
 
 
+    /**
+     * The entry point of application.
+     * Sending sensors to the server through WebSockets
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
 
         Gson gson = new Gson();
@@ -67,6 +76,15 @@ public class Main {
         }
     }
 
+    /**
+     * Gets random value.
+     *
+     * @param random        the random
+     * @param lowerBound    the lower bound
+     * @param upperBound    the upper bound
+     * @param decimalPlaces the decimal places
+     * @return the random value
+     */
     public static double getRandomValue(final Random random,
                                         final int lowerBound,
                                         final int upperBound,
