@@ -48,6 +48,7 @@ public class RoomsViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
+
         return tabList.size();
     }
 

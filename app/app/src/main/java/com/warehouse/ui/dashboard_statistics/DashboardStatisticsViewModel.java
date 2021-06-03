@@ -9,15 +9,16 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.warehouse.data.Statistics.Statistics;
 import com.warehouse.data.Statistics.StatisticsRepository;
+import com.warehouse.data.Statistics.StatisticsValue;
 
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class DashboardStatisticsViewModel extends AndroidViewModel {
     private StatisticsRepository statisticsRepository;
+    private String roomId;
 
     public DashboardStatisticsViewModel(@NonNull Application application) {
         super(application);
@@ -26,55 +27,55 @@ public class DashboardStatisticsViewModel extends AndroidViewModel {
     }
 
     public void init(String roomId) {
-        statisticsRepository.fetchStatistics(roomId);
+        this.roomId = roomId;
+        changePeriod(0);
+    }
+
+    public void changePeriod(int position) {
+        String period = "0";
+
+        if(position > 0) {
+            period = "" + position * 7;
+        }
+
+        statisticsRepository.fetchStatistics(roomId, period);
     }
 
     public LiveData<List<Statistics>> getStatistics() {
         return statisticsRepository.getStatistics();
     }
 
-    public HashMap<Integer, Integer> getActivity(String name) {
-        HashMap<Integer, Integer> activity = new HashMap<Integer, Integer>();
-
+    public HashMap<String, Double> getActivity(String name) {
+        HashMap<String, Double> activity = new HashMap<String, Double>();
         List<Statistics> statistics = getStatistics().getValue();
 
-
-        List<Integer> days = Arrays.asList(
-                Calendar.SUNDAY,
-                Calendar.MONDAY,
-                Calendar.TUESDAY,
-                Calendar.WEDNESDAY,
-                Calendar.THURSDAY,
-                Calendar.FRIDAY,
-                Calendar.SATURDAY
-        );
-
-        for (int i = 0; i <= days.size() - 1; i++) {
-            activity.put(days.get(i), 0);
-        }
-
-        for (Statistics values : Objects.requireNonNull(statistics)) {
-            if (values.getName().equals(name)) {
-                for (int i = 0; i <= values.getValues().size() - 1; i++) {
-                    activity.put(days.get(i), values.getValues().get(i));
+        for (Statistics statisticsValue : statistics) {
+            if (statisticsValue.getName().equals(name.toUpperCase())) {
+                for (StatisticsValue statisticsHistory : statisticsValue.getValues()) {
+                    activity.put(statisticsHistory.getTimestamp(), statisticsHistory.getValue());
                 }
             }
         }
 
+
         return activity;
     }
 
-    public Float getAverageActivity(String name){
+    public Float getAverageActivity(String name) {
         float sum = 0;
         float average = 0;
 
-        List<Statistics> statistics = getStatistics ().getValue ();
-        for (Statistics values : Objects.requireNonNull (statistics)) {
-            if(values.getName ().equals (name)){
-                for (int i = 0; i <values.getValues ().size () ; i++) {
-                    sum += values.getValues ().get (i);
+        List<Statistics> statistics = getStatistics().getValue();
+
+        for (Statistics statisticsValue : statistics) {
+            if (statisticsValue.getName().equals(name.toUpperCase())) {
+                for (StatisticsValue statisticsHistory : statisticsValue.getValues()) {
+                    sum += statisticsHistory.getValue();
                 }
-                average = sum / values.getValues ().size ();
+
+                if(statisticsValue.getValues().size() > 0) {
+                    average = sum / statisticsValue.getValues().size();
+                }
             }
         }
 

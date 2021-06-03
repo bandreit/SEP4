@@ -56,14 +56,19 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
         rangeSlider.setValueTo(100.0f);
         rangeSlider.setValues(minValue, maxValue);
 
-            rangeSlider.addOnChangeListener (new RangeSlider.OnChangeListener ( ) {
-                @Override
-                public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-                    Double minValue = slider.getValues().get(0).doubleValue();
-                    Double maxValue = slider.getValues().get(1).doubleValue();
+        rangeSlider.addOnSliderTouchListener(new RangeSlider.OnSliderTouchListener() {
+            @Override
+            public void onStartTrackingTouch(@NonNull RangeSlider slider) {
 
-                    bottomSheetDialogViewModel.updateSensorMinMax(sensor.getId (),minValue, maxValue);
-                }
-            });
+            }
+
+            @Override
+            public void onStopTrackingTouch(@NonNull RangeSlider slider) {
+                Double minValue = slider.getValues().get(0).doubleValue();
+                Double maxValue = slider.getValues().get(1).doubleValue();
+
+                bottomSheetDialogViewModel.updateSensorMinMax(sensor.getId(), minValue, maxValue);
+            }
+        });
     }
 }

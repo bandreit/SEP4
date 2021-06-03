@@ -1,16 +1,20 @@
 package com.warehouse.data.Statistics;
 
+import androidx.room.PrimaryKey;
+
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Statistics {
+    @PrimaryKey
+    @NotNull
     private String roomId;
     private String sensorId;
     private String name;
-    private ArrayList<Integer> values;
+    private List<StatisticsValue> values;
 
-    public Statistics(String roomId, String sensorId, String name, ArrayList<Integer> values) {
+    public Statistics(String roomId, String sensorId, String name, List<StatisticsValue> values) {
         this.roomId = roomId;
         this.sensorId = sensorId;
         this.name = name;
@@ -41,11 +45,11 @@ public class Statistics {
         this.name = name;
     }
 
-    public ArrayList<Integer> getValues() {
+    public List<StatisticsValue> getValues() {
         return values;
     }
 
-    public void setValues(ArrayList<Integer> values) {
+    public void setValues(List<StatisticsValue> values) {
         this.values = values;
     }
 

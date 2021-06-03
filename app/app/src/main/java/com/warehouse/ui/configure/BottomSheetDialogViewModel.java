@@ -35,17 +35,6 @@ public class BottomSheetDialogViewModel extends AndroidViewModel {
     }
 
     public void updateSensorMinMax(String sensorId, Double min, Double max) {
-        List<Room> rooms =  roomRepository.getRooms ().getValue();
-        for (Room room : rooms) {
-            for (Sensor sensor : room.getSensors()) {
-                if (sensor.getId().equals(sensorId)) {
-                    if(sensor != null) {
-                        sensor.setMaxValue (max);
-                        sensor.setMinValue (min);
-                        roomRepository.updateSensor (sensorId,sensor);
-                    }
-                }
-            }
-        }
+        roomRepository.updateSensor(sensorId, min.toString(), max.toString());
     }
 }
