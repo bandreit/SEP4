@@ -34,18 +34,12 @@ public class Sensor {
     @OneToMany(mappedBy = "sensor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<SensorHistory> history;
 
-    /**
-     * Instantiates a new Sensor.
-     *
-     * @param sensorType the sensor type
-     * @param unitType   the unit type
-     * @param room       the room
-     */
-    public Sensor(SensorType sensorType, String unitType, Room room) {
+
+    public Sensor(SensorType sensorType, String unitType, Room room, double min, double max) {
         this.sensorType = sensorType;
         this.unitType = unitType;
-        this.maxValue = 0;
-        this.minValue = 0;
+        this.maxValue = max;
+        this.minValue = min;
         this.currentvalue = 0;
         this.room = room;
     }

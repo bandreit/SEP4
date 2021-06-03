@@ -1,7 +1,8 @@
 package via.sep4.service;
 
 import org.springframework.stereotype.Service;
-import via.sep4.model.Charts.Chart;
+import via.sep4.model.Charts.DataHistory;
+import via.sep4.model.Charts.DataToSendHistory;
 import via.sep4.model.Charts.SensorValue;
 import via.sep4.model.Room.Room;
 import via.sep4.model.Room.RoomRepository;
@@ -34,8 +35,9 @@ public class SensorHistoryService {
      * @param period the period
      * @return the sensors history by period
      */
-    public List<Chart> getSensorsHistoryByPeriod(long id, int period) {
-        List<Chart> charts = new ArrayList<>();
+    public DataToSendHistory getSensorsHistoryByPeriod(long id, int period) {
+        DataToSendHistory sendHistories = new DataToSendHistory();
+        List<DataHistory> charts = new ArrayList<>();
         Room room = roomRepository.findByRoomidIs(id);
 
         // create a date that is X(period) days ago
@@ -44,7 +46,7 @@ public class SensorHistoryService {
 
         // get all the sensors in the room
         for (Sensor sensor : room.getSensors()) {
-            Chart sensorChart = new Chart();
+            DataHistory sensorChart = new DataHistory();
             sensorChart.setRoomId(room.getRoomid());
             sensorChart.setSensorId(sensor.getSensorID());
             sensorChart.setName(sensor.getSensorType());
@@ -64,6 +66,7 @@ public class SensorHistoryService {
             sensorChart.setValues(sensorValues);
             charts.add(sensorChart);
         }
-        return charts;
+        sendHistories.setData(charts);
+        return sendHistories;
     }
 }
