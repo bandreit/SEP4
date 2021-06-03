@@ -1,9 +1,12 @@
 package via.sep4.service;
 
 import org.springframework.stereotype.Service;
+import via.sep4.model.Charts.DataRooms;
+import via.sep4.model.Charts.DataToSendRooms;
 import via.sep4.model.Room.Room;
 import via.sep4.model.Room.RoomRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +30,18 @@ public class RoomService {
      *
      * @return the list
      */
-    public List<Room> findAll() {
-        return roomRepository.findAll();
+    public DataToSendRooms findAll() {
+        DataRooms createData = new DataRooms();
+        List<DataRooms> arrayListOfData = new ArrayList<>();
+        List<Room> allRooms = roomRepository.findAll();
+        for (Room room : allRooms) {
+            createData.setRoomid(room.getRoomid());
+            createData.setRoomname(room.getRoomname());
+            createData.setListOfSensors(room.getSensors());
+            arrayListOfData.add(createData);
+        }
+        DataToSendRooms send = new DataToSendRooms();
+        send.setData(arrayListOfData);
+        return send;
     }
 }

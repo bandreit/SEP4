@@ -1,10 +1,8 @@
 package via.sep4.model.SensorHistory;
 
 import org.springframework.web.bind.annotation.*;
-import via.sep4.model.Charts.Chart;
+import via.sep4.model.Charts.DataToSendHistory;
 import via.sep4.service.SensorHistoryService;
-
-import java.util.List;
 
 /**
  * The type Sensor history controller.
@@ -31,7 +29,7 @@ public class SensorHistoryController {
      * @return the statistics
      */
     @GetMapping("/sensorHistory/{id}")
-    public List<Chart> getStatistics(@PathVariable long id, @RequestParam int period) {
+    public DataToSendHistory getStatistics(@PathVariable long id, @RequestParam int period) {
         return service.getSensorsHistoryByPeriod(id, period);
     }
 
