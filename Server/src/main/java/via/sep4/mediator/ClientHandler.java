@@ -22,7 +22,7 @@ import java.util.Random;
 public class ClientHandler implements Runnable {
     private Socket socket;
     private InputStream inputStream;
-    private OutputStream outputStream;
+    private DataOutputStream outputStream;
     private Gson gson;
     private Random rn = new Random();
 
@@ -38,7 +38,7 @@ public class ClientHandler implements Runnable {
     public ClientHandler(Socket socket) throws IOException {
         this.socket = socket;
         inputStream = this.socket.getInputStream();
-        outputStream = socket.getOutputStream();
+        outputStream = new DataOutputStream(socket.getOutputStream());
         this.gson = new Gson();
         sensorRepository = (SensorRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorRepository");
         sensorHistoryRepository = (SensorHistoryRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorHistoryRepository");
@@ -99,8 +99,7 @@ public class ClientHandler implements Runnable {
         if (sensor.getSensorType().equals(SensorType.TEMPERATURE)) {
             if (sensor.getCurrentvalue() > sensor.getMaxValue()) {
                 Integer ventilation = 100;
-                NetworkPackage networkPackage = new NetworkPackage(NetworkType.Ventilation, ventilation);
-                String gsonToServer = gson.toJson(networkPackage);
+                String gsonToServer = gson.toJson(ventilation);
                 try {
                     sendData(gsonToServer);
                 } catch (IOException ioException) {
