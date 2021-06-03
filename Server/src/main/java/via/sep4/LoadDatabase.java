@@ -21,7 +21,7 @@ import java.sql.Timestamp;
  */
 @Configuration
 public class LoadDatabase {
-    private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+
 
     /**
      * Init database command line runner. Inserts information into the database.

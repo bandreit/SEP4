@@ -10,14 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface RoomRepository extends JpaRepository<Room, Long> {
     /**
-     * Find room by roomname.
-     *
-     * @param roomname the roomname
-     * @return the room
-     */
-    Room findByRoomname(String roomname);
-
-    /**
      * Find room by roomid.
      *
      * @param roomid the roomid

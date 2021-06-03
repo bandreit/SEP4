@@ -69,7 +69,7 @@ public class Main {
                 handler.sendToServer(gsonToServer);
                 sensorArrayList.clear();
 
-                Thread.sleep(3000);
+                Thread.sleep(300000);
             } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
