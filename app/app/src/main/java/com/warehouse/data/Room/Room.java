@@ -20,6 +20,7 @@ public class Room {
     private String id;
     @SerializedName("roomname")
     private String name;
+    @SerializedName("listOfSensors")
     private List<Sensor> sensors;
 
     public String getId() {

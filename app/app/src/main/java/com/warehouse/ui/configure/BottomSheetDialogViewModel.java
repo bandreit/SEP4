@@ -35,6 +35,6 @@ public class BottomSheetDialogViewModel extends AndroidViewModel {
     }
 
     public void updateSensorMinMax(String sensorId, Double min, Double max) {
-        roomRepository.updateSensor (sensorId, min.toString(), max.toString());
+        roomRepository.updateSensor(sensorId, min.toString(), max.toString());
     }
 }

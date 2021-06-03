@@ -25,17 +25,15 @@ import retrofit2.Response;
 public class StatisticsRepository {
     private static StatisticsApi statisticsApi = ServiceGenerator.getStatisticsApi();
     private static StatisticsRepository instance;
-    private String roomId;
     private MutableLiveData<List<Statistics>> statistics;
 
-    private StatisticsRepository(Application application, String roomId) {
-        this.roomId = roomId;
+    private StatisticsRepository(Application application) {
         statistics = new MutableLiveData<>();
     }
 
-    public static synchronized StatisticsRepository getInstance(Application application, String roomId) {
+    public static synchronized StatisticsRepository getInstance(Application application) {
         if (instance == null) {
-            instance = new StatisticsRepository(application, roomId);
+            instance = new StatisticsRepository(application);
         }
 
         return instance;
@@ -49,8 +47,8 @@ public class StatisticsRepository {
         this.statistics.postValue(statistics);
     }
 
-    public void fetchStatistics() {
-        Call<StatisticsResponse> call = statisticsApi.getStatistics();
+    public void fetchStatistics(String roomId, String period) {
+        Call<StatisticsResponse> call = statisticsApi.getStatistics(roomId, period);
 
         call.enqueue(new Callback<StatisticsResponse>() {
             @Override

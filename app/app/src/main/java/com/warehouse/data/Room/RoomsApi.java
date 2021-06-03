@@ -9,9 +9,9 @@ import retrofit2.http.Query;
 
 public interface RoomsApi {
     // /rooms
-    @GET("ca62039e-e176-4047-b57f-64ed8b4d8ba8")
+    @GET("rooms")
     Call<RoomsResponse> getRooms();
-    // /sensors/:sensorId
-    @PUT("/sensors/{id}")
-    Call<RoomsResponse> updateSensor(@Path("id") String id, @Query("min") String min, @Query("max") String max);
+
+    @PUT("sensor/{sensorId}")
+    Call<RoomsResponse> updateSensor(@Path("sensorId") String id, @Query("min") String min, @Query("max") String max);
 }

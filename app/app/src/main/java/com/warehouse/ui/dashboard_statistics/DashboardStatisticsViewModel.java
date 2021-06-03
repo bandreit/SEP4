@@ -23,12 +23,22 @@ public class DashboardStatisticsViewModel extends AndroidViewModel {
     public DashboardStatisticsViewModel(@NonNull Application application) {
         super(application);
 
-        statisticsRepository = StatisticsRepository.getInstance(application, roomId);
+        statisticsRepository = StatisticsRepository.getInstance(application);
     }
 
     public void init(String roomId) {
         this.roomId = roomId;
-        statisticsRepository.fetchStatistics();
+        changePeriod(0);
+    }
+
+    public void changePeriod(int position) {
+        String period = "0";
+
+        if(position > 0) {
+            period = "" + position * 7;
+        }
+
+        statisticsRepository.fetchStatistics(roomId, period);
     }
 
     public LiveData<List<Statistics>> getStatistics() {

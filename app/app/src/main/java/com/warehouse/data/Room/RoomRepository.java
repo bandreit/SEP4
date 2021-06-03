@@ -4,6 +4,7 @@ package com.warehouse.data.Room;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.warehouse.services.ServiceGenerator;
 
@@ -70,6 +71,7 @@ public class RoomRepository {
 
     public void updateSensor(String id, String minValue, String maxValue) {
         Call<RoomsResponse> call = roomsApi.updateSensor(id, minValue, maxValue);
+
 
         call.enqueue(new Callback<RoomsResponse>() {
             @Override

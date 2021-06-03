@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
     private static final Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-            .baseUrl("https://run.mocky.io/v3/")
+            .baseUrl("https://816ac34414a9.ngrok.io/SEP4/")
             .addConverterFactory(GsonConverterFactory.create());
 
     private static final Retrofit retrofit = retrofitBuilder.build();

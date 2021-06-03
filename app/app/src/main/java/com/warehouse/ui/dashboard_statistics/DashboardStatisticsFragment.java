@@ -95,7 +95,7 @@ public class DashboardStatisticsFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+                dashboardStatisticsViewModel.changePeriod(position);
             }
 
             @Override
