@@ -5,14 +5,14 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.SerializedName;
-import com.warehouse.adapters.DataConverter;
+import com.warehouse.adapters.SensorsDataConverter;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@Entity(tableName = "rooms_table")
-@TypeConverters(DataConverter.class)
+@Entity(tableName = "rooms")
+@TypeConverters(SensorsDataConverter.class)
 public class Room {
     @PrimaryKey
     @NotNull

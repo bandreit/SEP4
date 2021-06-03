@@ -23,22 +23,23 @@ public class DashboardStatisticsViewModel extends AndroidViewModel {
     public DashboardStatisticsViewModel(@NonNull Application application) {
         super(application);
 
-        statisticsRepository = StatisticsRepository.getInstance(application);
+        statisticsRepository = StatisticsRepository.getInstance(application, roomId);
     }
 
     public void init(String roomId) {
         this.roomId = roomId;
-        statisticsRepository.fetchStatistics(roomId);
+        statisticsRepository.fetchStatistics();
     }
 
     public LiveData<List<Statistics>> getStatistics() {
-        return statisticsRepository.getStatistics(roomId);
+        return statisticsRepository.getStatistics();
     }
 
     public HashMap<String, Double> getActivity(String name) {
         HashMap<String, Double> activity = new HashMap<String, Double>();
+        List<Statistics> statistics = getStatistics().getValue();
 
-        for (Statistics statisticsValue : getStatistics().getValue()) {
+        for (Statistics statisticsValue : statistics) {
             if (statisticsValue.getName().equals(name.toUpperCase())) {
                 for (StatisticsValue statisticsHistory : statisticsValue.getValues()) {
                     activity.put(statisticsHistory.getTimestamp(), statisticsHistory.getValue());
@@ -54,7 +55,9 @@ public class DashboardStatisticsViewModel extends AndroidViewModel {
         float sum = 0;
         float average = 0;
 
-        for (Statistics statisticsValue : getStatistics().getValue()) {
+        List<Statistics> statistics = getStatistics().getValue();
+
+        for (Statistics statisticsValue : statistics) {
             if (statisticsValue.getName().equals(name.toUpperCase())) {
                 for (StatisticsValue statisticsHistory : statisticsValue.getValues()) {
                     sum += statisticsHistory.getValue();

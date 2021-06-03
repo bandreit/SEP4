@@ -41,10 +41,6 @@ public class RoomRepository {
         return rooms;
     }
 
-    public void deleteRooms() {
-        executorService.execute(roomsDao::deleteAllRooms);
-    }
-
     public void insert(List<Room> rooms) {
         executorService.execute(() -> roomsDao.insert(rooms));
     }

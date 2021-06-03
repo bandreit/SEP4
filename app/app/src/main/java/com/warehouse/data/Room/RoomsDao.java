@@ -16,9 +16,9 @@ public interface RoomsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(List<Room> rooms);
 
-    @Query("SELECT * FROM rooms_table")
+    @Query("SELECT * FROM rooms")
     LiveData<List<Room>> getAllRooms();
 
-    @Query("DELETE FROM rooms_table")
+    @Query("DELETE FROM rooms")
     void deleteAllRooms();
 }

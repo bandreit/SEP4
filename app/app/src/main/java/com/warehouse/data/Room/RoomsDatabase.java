@@ -13,7 +13,7 @@ public abstract class RoomsDatabase extends androidx.room.RoomDatabase {
     public static synchronized RoomsDatabase getInstance(Context context) {
         if(instance == null) {
             instance = androidx.room.Room.databaseBuilder(context.getApplicationContext(),
-                    RoomsDatabase.class, "rooms_database")
+                    RoomsDatabase.class, "rooms")
                     .fallbackToDestructiveMigration()
                     .build();
         }
