@@ -455,7 +455,6 @@ void ApplicationTask(void *pvParameters)
      2ee:	80 e0       	ldi	r24, 0x00	; 0
      2f0:	90 e0       	ldi	r25, 0x00	; 0
      2f2:	0e 94 59 12 	call	0x24b2	; 0x24b2 <vTaskDelay>
-		
 	}
      2f6:	ca cf       	rjmp	.-108    	; 0x28c <ApplicationTask>
 
@@ -467,7 +466,6 @@ void createApplicationTask(UBaseType_t Taskpriority)
      2f8:	ef 92       	push	r14
      2fa:	ff 92       	push	r15
      2fc:	0f 93       	push	r16
-	
 	xTaskCreate(
      2fe:	e1 2c       	mov	r14, r1
      300:	f1 2c       	mov	r15, r1
@@ -481,11 +479,11 @@ void createApplicationTask(UBaseType_t Taskpriority)
      310:	86 e4       	ldi	r24, 0x46	; 70
      312:	91 e0       	ldi	r25, 0x01	; 1
      314:	0e 94 54 0f 	call	0x1ea8	; 0x1ea8 <xTaskCreate>
+	,  "AppTask" 
 	,  configMINIMAL_STACK_SIZE  
 	,  NULL
 	,  tskIDLE_PRIORITY + Taskpriority 
 	,  NULL );
-	
 }
      318:	0f 91       	pop	r16
      31a:	ff 90       	pop	r15
@@ -736,6 +734,7 @@ uint8_t getVentilationLevel()
      478:	80 91 74 17 	lds	r24, 0x1774	; 0x801774 <ventilationLevel>
      47c:	00 c0       	rjmp	.+0      	; 0x47e <getVentilationLevel+0x32>
 	}
+}
      47e:	0f 91       	pop	r16
      480:	08 95       	ret
 
@@ -8428,7 +8427,7 @@ void lora_downLink_task()
     39e8:	80 91 99 17 	lds	r24, 0x1799	; 0x801799 <downlinkMessageBuffer>
     39ec:	90 91 9a 17 	lds	r25, 0x179A	; 0x80179a <downlinkMessageBuffer+0x1>
     39f0:	0e 94 b9 0c 	call	0x1972	; 0x1972 <xStreamBufferReceive>
-		printf("DOWN LINK<<<<<: from port: %d with %d bytes received!",lora_downlink_payload.portNo, lora_downlink_payload.len); // Just for Debug
+		printf("DOWN LINK<<<<<: from port: %d with %d bytes received!",lora_downlink_payload.portNo, lora_downlink_payload.len);
     39f4:	c5 e7       	ldi	r28, 0x75	; 117
     39f6:	d7 e1       	ldi	r29, 0x17	; 23
     39f8:	99 81       	ldd	r25, Y+1	; 0x01
@@ -8502,11 +8501,11 @@ void lora_downLink_task()
     3a68:	8d ee       	ldi	r24, 0xED	; 237
     3a6a:	9c e1       	ldi	r25, 0x1C	; 28
     3a6c:	0e 94 54 0f 	call	0x1ea8	; 0x1ea8 <xTaskCreate>
+ "lora_downlink"  
+ , configMINIMAL_STACK_SIZE 
  , NULL
  ,	tskIDLE_PRIORITY + lora_handler_task_priority  
  , NULL );
-	 
-	 
  }
     3a70:	0f 91       	pop	r16
     3a72:	ff 90       	pop	r15
@@ -8957,11 +8956,11 @@ void lora_downLink_task()
     3d28:	84 ef       	ldi	r24, 0xF4	; 244
     3d2a:	9d e1       	ldi	r25, 0x1D	; 29
     3d2c:	0e 94 54 0f 	call	0x1ea8	; 0x1ea8 <xTaskCreate>
+	 "LRHandUplink"  // A name just for humans
+	, configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
+	, NULL
 	, tskIDLE_PRIORITY + lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	, NULL );
-
-
-	
  }
     3d30:	0f 91       	pop	r16
     3d32:	ff 90       	pop	r15
@@ -9333,11 +9332,11 @@ void createTempAndHumTask(UBaseType_t Taskpriority)
     3f42:	08 95       	ret
 
 00003f44 <ventilationTask>:
+
 void ventilationTask(void* pvpParameter)
 {
 	for(;;)
 	{
-	
 		if(xSemaphoreTake(ventilationSemaphore,portMAX_DELAY)==pdTRUE)
     3f44:	4f ef       	ldi	r20, 0xFF	; 255
     3f46:	5f ef       	ldi	r21, 0xFF	; 255
