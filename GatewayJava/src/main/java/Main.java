@@ -1,4 +1,3 @@
-import mediator.ClientHandler;
 import network.NetworkPackage;
 import sensor.SensorHistory;
 import service.WebsocketClient;
