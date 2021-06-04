@@ -28,8 +28,9 @@ public class SensorController {
      * @param max the max
      */
     @PutMapping("/sensor/{id}")
-    public void update(@PathVariable long id, @RequestParam double min, @RequestParam double max) {
+    public String update(@PathVariable long id, @RequestParam double min, @RequestParam double max) {
         service.update(id, min, max);
+        return "The values has been updated max : " + max + " and min: " + min + "";
     }
 
 }

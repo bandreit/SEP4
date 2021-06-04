@@ -1,6 +1,5 @@
 package com.warehouse.ui.dashboard_statistics;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,13 +27,14 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.warehouse.R;
 import com.warehouse.data.Statistics.Statistics;
-import com.warehouse.formaters.DayFormatter;
+import com.warehouse.formaters.DateFormatter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class DashboardStatisticsFragment extends Fragment {
     public static final String ARG_ROOM_ID = "ROOM_ID";
@@ -92,11 +92,10 @@ public class DashboardStatisticsFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+                dashboardStatisticsViewModel.changePeriod(position);
             }
 
             @Override
@@ -107,24 +106,24 @@ public class DashboardStatisticsFragment extends Fragment {
 
     private void setupAverageTemperature() {
         TextView textView = root.findViewById(R.id.temperatureValue);
-        Float value = dashboardStatisticsViewModel.getAverageActivity("temperature");
+        Float value = dashboardStatisticsViewModel.getAverageActivity("TEMPERATURE");
 
-        textView.setText(String.valueOf(value));
+        textView.setText(String.format("%.02f", value));
 
     }
 
     private void setupAverageHumidity() {
         TextView textView = root.findViewById(R.id.humidityValue);
-        Float value = dashboardStatisticsViewModel.getAverageActivity("humidity");
+        Float value = dashboardStatisticsViewModel.getAverageActivity("HUMIDITY");
 
-        textView.setText(String.valueOf(value));
+        textView.setText(String.format("%.02f", value));
     }
 
     private void setupAverageCO2() {
         TextView textView = root.findViewById(R.id.co2Value);
-        Float value = dashboardStatisticsViewModel.getAverageActivity("co2");
+        Float value = dashboardStatisticsViewModel.getAverageActivity("CO2");
 
-        textView.setText(String.valueOf(value));
+        textView.setText(String.format("%.02f", value));
     }
 
 
@@ -138,7 +137,7 @@ public class DashboardStatisticsFragment extends Fragment {
         temperatureChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         temperatureChart.getXAxis().setDrawGridLines(false);
         temperatureChart.getXAxis().setLabelRotationAngle(45);
-        temperatureChart.getXAxis().setValueFormatter(new DayFormatter(getResources()));
+        temperatureChart.getXAxis().setValueFormatter(new DateFormatter(getResources()));
         temperatureChart.getAxisLeft().setTextColor(myColor);
         temperatureChart.getAxisRight().setEnabled(false);
         temperatureChart.getLegend().setEnabled(false);
@@ -148,15 +147,16 @@ public class DashboardStatisticsFragment extends Fragment {
     }
 
 
-
     private void loadTemperatureChartData() {
-        HashMap<Integer, Integer> values = dashboardStatisticsViewModel.getActivity("temperature");
+        HashMap<String, Double> values = dashboardStatisticsViewModel.getActivity("temperature");
         ArrayList<Entry> entries = new ArrayList<>();
         Iterator iterator = values.entrySet().iterator();
 
         while (iterator.hasNext()) {
-            Map.Entry<Integer, Integer> pair = (Map.Entry) iterator.next();
-            entries.add(new Entry(pair.getKey(), pair.getValue()));
+            Map.Entry<String, Double> pair = (Map.Entry) iterator.next();
+            Long key = Long.parseLong(pair.getKey()) / (long)Math.pow(10, 7.5);
+
+            entries.add(new Entry(key, pair.getValue().floatValue()));
             iterator.remove();
         }
 
@@ -184,7 +184,7 @@ public class DashboardStatisticsFragment extends Fragment {
         humidityChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         humidityChart.getXAxis().setDrawGridLines(false);
         humidityChart.getXAxis().setLabelRotationAngle(45);
-        humidityChart.getXAxis().setValueFormatter(new DayFormatter(getResources()));
+        humidityChart.getXAxis().setValueFormatter(new DateFormatter(getResources()));
 
         humidityChart.getAxisLeft().setTextColor(myColor);
 
@@ -197,13 +197,15 @@ public class DashboardStatisticsFragment extends Fragment {
     }
 
     private void loadHumidityChartData() {
-        HashMap<Integer, Integer> values = dashboardStatisticsViewModel.getActivity("humidity");
+        HashMap<String, Double> values = dashboardStatisticsViewModel.getActivity("humidity");
         ArrayList<Entry> entries = new ArrayList<>();
         Iterator iterator = values.entrySet().iterator();
 
         while (iterator.hasNext()) {
-            Map.Entry<Integer, Integer> pair = (Map.Entry) iterator.next();
-            entries.add(new Entry(pair.getKey(), pair.getValue()));
+            Map.Entry<String, Double> pair = (Map.Entry) iterator.next();
+            Long key = Long.parseLong(pair.getKey()) / (long)Math.pow(10, 7.5);
+
+            entries.add(new Entry(key, pair.getValue().floatValue()));
             iterator.remove();
         }
 
@@ -229,7 +231,7 @@ public class DashboardStatisticsFragment extends Fragment {
         co2Chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         co2Chart.getXAxis().setDrawGridLines(false);
         co2Chart.getXAxis().setLabelRotationAngle(45);
-        co2Chart.getXAxis().setValueFormatter(new DayFormatter(getResources()));
+        co2Chart.getXAxis().setValueFormatter(new DateFormatter(getResources()));
 
         co2Chart.getAxisLeft().setTextColor(myColor);
 
@@ -242,13 +244,17 @@ public class DashboardStatisticsFragment extends Fragment {
     }
 
     private void loadCO2ChartData() {
-        HashMap<Integer, Integer> values = dashboardStatisticsViewModel.getActivity("co2");
+        HashMap<String, Double> values = dashboardStatisticsViewModel.getActivity("co2");
         ArrayList<BarEntry> entries = new ArrayList<>();
         Iterator iterator = values.entrySet().iterator();
 
+        int i = 1;
+
         while (iterator.hasNext()) {
-            Map.Entry<Integer, Integer> pair = (Map.Entry) iterator.next();
-            entries.add(new BarEntry(pair.getKey(), pair.getValue()));
+            Map.Entry<String, Double> pair = (Map.Entry) iterator.next();
+            Long key = Long.parseLong(pair.getKey()) / (long)Math.pow(10, 7.5);
+
+            entries.add(new BarEntry(key, pair.getValue().floatValue()));
             iterator.remove();
         }
 
