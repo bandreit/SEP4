@@ -20,29 +20,24 @@ public class Main {
     private static final long[] TEMP_SENSORS = {3, 6};
     private static final Random rnd = new Random();
 
-
     /**
      * The entry point of application.
      * Sending sensors to the server through WebSockets
      *
      * @param args the input arguments
      */
-    public static void main(String[] args) {
 
+    public static void main(String[] args) throws IOException {
         Gson gson = new Gson();
         WebsocketClient websocketClient = new WebsocketClient("wss://iotnet.cibicom.dk/app?token=vnoTuwAAABFpb3RuZXQuY2liaWNvbS5kaxOt1kIOlKdP0z7zj8xIG_I=");
 
+        ClientHandler clientHandler = new ClientHandler(websocketClient);
+        Thread t = new Thread(clientHandler);
+        t.setDaemon(true);
+        t.start();
+
         while (true) {
             try {
-                // this is used for downlinks DON'T DELETE, just LEAVE COMENTED
-
-//                String integerAsHexString = Integer.toHexString(69);
-//                DownLinkDataMessage downLinkDataMessage = new DownLinkDataMessage(true, integerAsHexString);
-//                String downLinkPayload = gson.toJson(downLinkDataMessage, DownLinkDataMessage.class);
-//                System.out.println(downLinkPayload);
-//                websocketClient.sendDownLink(downLinkPayload);
-
-
                 ArrayList<SensorHistory> sensorArrayList = new ArrayList<>();
 
                 double decVal = getRandomValue(rnd, 1, 1251, 2);
@@ -53,12 +48,12 @@ public class Main {
                 System.out.println(co2Sensor.toString());
                 sensorArrayList.add(co2Sensor);
 
-                decVal = getRandomValue(rnd, 1, 1251, 2);
+                decVal = getRandomValue(rnd, 1, 500, 2);
                 SensorHistory humSensor = new SensorHistory(HUM_SENSORS[room], timestamp, decVal);
                 System.out.println(humSensor.toString());
                 sensorArrayList.add(humSensor);
 
-                decVal = getRandomValue(rnd, 1, 1251, 2);
+                decVal = getRandomValue(rnd, 30, 40, 2);
                 SensorHistory temperatureSensor = new SensorHistory(TEMP_SENSORS[room], timestamp, decVal);
                 System.out.println(temperatureSensor.toString());
                 sensorArrayList.add(temperatureSensor);
@@ -69,7 +64,7 @@ public class Main {
                 handler.sendToServer(gsonToServer);
                 sensorArrayList.clear();
 
-                Thread.sleep(300000);
+                Thread.sleep(30000);
             } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
@@ -97,7 +92,6 @@ public class Main {
         return ((random == null ? new Random() : random).nextDouble() //
                 * (upperBound - lowerBound))
                 + lowerBound;
-
     }
 
     private static int getRandomNumber(int max) {

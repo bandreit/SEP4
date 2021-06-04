@@ -9,7 +9,6 @@ import com.warehouse.data.Room.Room;
 import com.warehouse.data.Room.RoomRepository;
 import com.warehouse.data.Room.Sensor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BottomSheetDialogViewModel extends AndroidViewModel {
@@ -35,7 +34,7 @@ public class BottomSheetDialogViewModel extends AndroidViewModel {
         return "";
     }
 
-    public void updateSensorMinMax(Double min, Double max) {
-        System.out.printf("Update value...");
+    public void updateSensorMinMax(String sensorId, Double min, Double max) {
+        roomRepository.updateSensor(sensorId, min.toString(), max.toString());
     }
 }

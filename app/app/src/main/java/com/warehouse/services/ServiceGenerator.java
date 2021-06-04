@@ -1,20 +1,27 @@
 package com.warehouse.services;
 
-import com.warehouse.data.Room.RoomApi;
+import com.warehouse.data.Room.RoomsApi;
+import com.warehouse.data.Statistics.StatisticsApi;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
-    private static Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-            .baseUrl("https://run.mocky.io/v3/")
+    private static final Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+            .baseUrl("https://816ac34414a9.ngrok.io/SEP4/")
             .addConverterFactory(GsonConverterFactory.create());
 
-    private static Retrofit retrofit = retrofitBuilder.build();
+    private static final Retrofit retrofit = retrofitBuilder.build();
 
-    private static RoomApi roomApi = retrofit.create(RoomApi.class);
+    private static final RoomsApi ROOMS_API = retrofit.create(RoomsApi.class);
 
-    public static RoomApi getRoomApi() {
-        return roomApi;
+    private static final StatisticsApi statisticsApi = retrofit.create (StatisticsApi.class);
+
+    public static RoomsApi getRoomsApi() {
+        return ROOMS_API;
+    }
+
+    public static StatisticsApi getStatisticsApi(){
+        return statisticsApi;
     }
 }

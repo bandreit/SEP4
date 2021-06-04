@@ -18,8 +18,8 @@ public class LoginActivityViewModel extends AndroidViewModel {
         this.userRepository = UserRepository.getInstance(application);
     }
 
-    public void login(String email, String password) {
-        userRepository.login(email, password);
+    public void login(String email, String password, LoginActivity.LoginCallback loginCallback) {
+        userRepository.login(email, password,loginCallback);
     }
 
     public LiveData<FirebaseUser> getUser() {

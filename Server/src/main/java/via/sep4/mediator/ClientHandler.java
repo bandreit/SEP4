@@ -3,11 +3,14 @@ package via.sep4.mediator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import via.sep4.SpringConfiguration;
+import via.sep4.model.Room.Room;
 import via.sep4.model.Sensor.Sensor;
 import via.sep4.model.Sensor.SensorRepository;
+import via.sep4.model.Sensor.SensorType;
 import via.sep4.model.SensorHistory.SensorHistory;
 import via.sep4.model.SensorHistory.SensorHistoryRepository;
 import via.sep4.network.NetworkPackage;
+import via.sep4.network.NetworkType;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -19,7 +22,7 @@ import java.util.Random;
 public class ClientHandler implements Runnable {
     private Socket socket;
     private InputStream inputStream;
-    private OutputStream outputStream;
+    private DataOutputStream outputStream;
     private Gson gson;
     private Random rn = new Random();
 
@@ -35,7 +38,7 @@ public class ClientHandler implements Runnable {
     public ClientHandler(Socket socket) throws IOException {
         this.socket = socket;
         inputStream = this.socket.getInputStream();
-        outputStream = socket.getOutputStream();
+        outputStream = new DataOutputStream(socket.getOutputStream());
         this.gson = new Gson();
         sensorRepository = (SensorRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorRepository");
         sensorHistoryRepository = (SensorHistoryRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("sensorHistoryRepository");
@@ -64,21 +67,19 @@ public class ClientHandler implements Runnable {
                         }.getType();
 
                         ArrayList<SensorHistory> incomingSensorData = gson.fromJson(incoming.getObject().toString(), founderListType);
-                        System.out.println("Privet in server : " + incomingSensorData);
 
                         for (SensorHistory sensorHistory : incomingSensorData) {
                             Sensor sensor = sensorRepository.getOne(sensorHistory.getSensorId());
-                            double value =  sensorHistory.getValue();
+                            double value = sensorHistory.getValue();
                             sensor.setCurrentvalue(value);
                             sensorRepository.save(sensor);
+                            checkIfWithinLimits(sensor);
                             SensorHistory sensorHistoryToBb = new SensorHistory();
                             sensorHistoryToBb.setSensor(sensor);
                             sensorHistoryToBb.setTimestamp(new Timestamp(sensorHistory.getTimestampMillis()));
                             sensorHistoryToBb.setTimestampMillis(sensorHistoryToBb.getTimestamp().getTime());
                             sensorHistoryToBb.setValue(sensorHistory.getValue());
                             sensorHistoryRepository.save(sensorHistoryToBb);
-
-
                         }
                         break;
                     default:
@@ -90,6 +91,20 @@ public class ClientHandler implements Runnable {
                 System.out.println("Client disconnected");
                 e.printStackTrace();
                 break;
+            }
+        }
+    }
+
+    private void checkIfWithinLimits(Sensor sensor) {
+        if (sensor.getSensorType().equals(SensorType.TEMPERATURE)) {
+            if (sensor.getCurrentvalue() > sensor.getMaxValue()) {
+                Integer ventilation = 100;
+                String gsonToServer = gson.toJson(ventilation);
+                try {
+                    sendData(gsonToServer);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         }
     }

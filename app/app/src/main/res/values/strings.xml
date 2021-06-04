@@ -8,7 +8,7 @@
     <string name="title_disabled">Disabled</string>
     <string name="title_theme">Dark theme</string>
     <string name="title_allow_notifications">Allow notifications</string>
-    <string name="title_logout">Log Out</string>
+    <string name="title_logout">Log out</string>
     <string name="sign_in_title">Let\'s sign you in</string>
     <string name="sign_in_subtitle">Welcome back! You’ve been missed</string>
     <string name="email">Email</string>
@@ -40,4 +40,6 @@
         <item>Last Week</item>
         <item>Last Two Weeks</item>
     </string-array>
+    <string name="text">Light Mode</string>
+    <string name="loading">Loading...</string>
 </resources>

@@ -1,10 +1,26 @@
 package com.warehouse.data.Room;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.google.gson.annotations.SerializedName;
+import com.warehouse.adapters.SensorsDataConverter;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
+@Entity(tableName = "rooms")
+@TypeConverters(SensorsDataConverter.class)
 public class Room {
+    @PrimaryKey
+    @NotNull
+    @SerializedName("roomid")
     private String id;
+    @SerializedName("roomname")
     private String name;
+    @SerializedName("listOfSensors")
     private List<Sensor> sensors;
 
     public String getId() {
@@ -30,4 +46,5 @@ public class Room {
     public void setSensors(List<Sensor> sensors) {
         this.sensors = sensors;
     }
+
 }

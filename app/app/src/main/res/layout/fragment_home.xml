@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_900"
+    android:background="?backgroundColor"
     android:paddingHorizontal="20dp"
     android:paddingVertical="40dp">
 
@@ -12,7 +12,10 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/roomsViewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="20dp">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/roomsTabLayout"
@@ -24,7 +27,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tabIndicatorColor="@color/teal_400"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/white_800"/>
+            app:tabGravity="start"
+            app:tabSelectedTextColor="@color/textColor"
+            app:tabTextColor="@color/tabNotSelected" />
     </androidx.viewpager.widget.ViewPager>
 </androidx.constraintlayout.widget.ConstraintLayout>

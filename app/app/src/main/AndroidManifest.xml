@@ -13,18 +13,22 @@
         android:theme="@style/Theme.Warehouse"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.MainActivity.MainActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
-
-        <activity
-            android:name=".ui.LoginActivity.LoginActivity"
-            android:windowSoftInputMode="adjustResize">
+            android:name=".ui.SplashActivity.SplashActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.MainActivity.MainActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+
+        <activity
+            android:name=".ui.LoginActivity.LoginActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
 
         <activity android:name=".ui.BoardingActivity.BoardingActivity" />
 
